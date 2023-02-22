@@ -12,6 +12,7 @@ export const getAllPhotosThunk = () => async dispatch => {
 
   if (response.ok) {
     const photos = await response.json();
+    console.log(photos)
     dispatch(loadPhotosAction(photos))
   }
 }
@@ -27,11 +28,13 @@ const initialState = {allPhotos: {}, onePhoto: {}}
 export default function photosReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_PHOTOS: {
-      const newState = {};
+      console.log('action.photos ----->', action.photos)
+      const newState = {allPhotos: {}, onePhoto: {}};
+      newState.allPhotos = normalize(action.photos.allPhotos)
+      console.log('newState ------->', newState)
       return newState;
     }
     default:
       return state
   }
-
 }
