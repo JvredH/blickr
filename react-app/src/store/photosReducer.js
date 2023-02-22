@@ -1,5 +1,6 @@
 const LOAD_PHOTOS = 'session/LOAD_ALL_PHOTOS'
 const ONE_PHOTO = 'session/ONE_PHOTO'
+const CREATE_PHOTO = 'session/CREATE_PHOTO'
 
 const loadPhotosAction = (photos) => {
   return ({
@@ -12,6 +13,13 @@ const loadOnePhotoAction = (photo) => {
   return ({
     type: ONE_PHOTO,
     photo
+  })
+}
+
+const createPhotoAction = (newPhoto) => {
+  return({
+    type: CREATE_PHOTO,
+    newPhoto
   })
 }
 
@@ -32,6 +40,28 @@ export const getOnePhotoThunk = (photoId) => async dispatch => {
     const photo = await response.json();
     console.log('one photo ------ > ', photo)
     dispatch(loadOnePhotoAction(photo))
+  }
+}
+
+export const createPhotoThunk = (formData) => async dispatch => {
+  const response = await fetch(`/api/photos/`, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(formData)
+  })
+
+  if (response.ok) {
+    const newPhoto = await response.json()
+    console.log('newPhoto -----> ', newPhoto)
+    dispatch(createPhotoAction(newPhoto))
+    return newPhoto
+  } else if (response.status < 500){
+    const data = await response.json()
+    if (data.errors) {
+      return data.errors
+    }
+  } else {
+    return ['An error occurred. Please try again.']
   }
 }
 
@@ -57,6 +87,12 @@ export default function photosReducer(state = initialState, action) {
       newState.onePhoto = action.photo
       console.log('newState after one photo ----> ', newState)
       return newState
+    }
+    case CREATE_PHOTO: {
+      const newState = {...state}
+      // console.log(action.photo)
+      newState.allPhotos[action.newPhoto.id] = action.newPhoto
+      newState.onePhoto = action.newPhoto
     }
     default:
       return state

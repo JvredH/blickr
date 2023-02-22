@@ -1,6 +1,9 @@
 from flask import Blueprint, jsonify, session, request
 from ..models.photos import Photo
-
+from flask_login import login_required
+from ..forms.create_photo import CreatePhotoForm
+from ..models import Photo, db
+from datetime import datetime
 
 photos_routes = Blueprint('photos', __name__)
 
@@ -26,9 +29,34 @@ def all_photos():
 
 @photos_routes.route('/<int:photoId>')
 def one_photo(photoId):
+    """ Route to return and display one photo """
     photo = Photo.query.get(photoId)
     print('PHOTO @@@@@@@@@@@#######', photo)
     if not photo:
         return 'no photo found', 404
 
     return photo.to_dict(), 200
+
+
+@photos_routes.route('/', methods=['POST'])
+@login_required
+def create_photo():
+    """ Route to create a new photo in database and return new photo data """
+    form = CreatePhotoForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    data = form.data
+
+    if form.validate_on_submit():
+        photo = Photo(
+            url = data['url'],
+            name = data['name'],
+            description = data['description'],
+            date = datetime.strptime(str(data['date']), '%Y-%m-%d').date(),
+            user_id = data['user_id']
+        )
+
+        db.session.add(photo)
+        db.session.commit()
+        return photo.to_dict(), 200
+
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
