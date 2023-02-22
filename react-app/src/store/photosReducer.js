@@ -1,4 +1,5 @@
 const LOAD_PHOTOS = 'session/LOAD_ALL_PHOTOS'
+const ONE_PHOTO = 'session/ONE_PHOTO'
 
 const loadPhotosAction = (photos) => {
   return ({
@@ -7,13 +8,30 @@ const loadPhotosAction = (photos) => {
   })
 }
 
+const loadOnePhotoAction = (photo) => {
+  return ({
+    type: ONE_PHOTO,
+    photo
+  })
+}
+
 export const getAllPhotosThunk = () => async dispatch => {
   const response = await fetch(`/api/photos`)
 
   if (response.ok) {
     const photos = await response.json();
-    console.log(photos)
+    console.log('all photos ------ >', photos)
     dispatch(loadPhotosAction(photos))
+  }
+}
+
+export const getOnePhotoThunk = (photoId) => async dispatch => {
+  const response = await fetch(`/api/photos/${photoId}`)
+
+  if (response.ok) {
+    const photo = await response.json();
+    console.log('one photo ------ > ', photo)
+    dispatch(loadOnePhotoAction(photo))
   }
 }
 
@@ -33,6 +51,12 @@ export default function photosReducer(state = initialState, action) {
       newState.allPhotos = normalize(action.photos.allPhotos)
       console.log('newState ------->', newState)
       return newState;
+    }
+    case ONE_PHOTO: {
+      const newState = {...state}
+      newState.onePhoto = action.photo
+      console.log('newState after one photo ----> ', newState)
+      return newState
     }
     default:
       return state

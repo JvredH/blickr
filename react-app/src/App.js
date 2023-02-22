@@ -5,7 +5,8 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
-import AllPhotos from "./components/AllPhotos";
+import AllPhotos from "./components/PhotosAll";
+import PhotoDetails from "./components/PhotoDetails";
 
 function App() {
   const dispatch = useDispatch();
@@ -19,8 +20,11 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route path='/photos'>
+          <Route path='/photos' exact>
             <AllPhotos />
+          </Route>
+          <Route path='/photos/:photoId' exact>
+            <PhotoDetails />
           </Route>
           <Route path="/login" >
             <LoginFormPage />
