@@ -7,6 +7,7 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import AllPhotos from "./components/PhotosAll";
 import PhotoDetails from "./components/PhotoDetails";
+import CreatePhotoForm from "./components/photoCreateForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,6 +23,9 @@ function App() {
         <Switch>
           <Route path='/photos' exact>
             <AllPhotos />
+          </Route>
+          <Route path='/photos/new' exact>
+            <CreatePhotoForm />
           </Route>
           <Route path='/photos/:photoId' exact>
             <PhotoDetails />

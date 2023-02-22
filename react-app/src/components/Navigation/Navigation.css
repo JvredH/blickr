@@ -5,3 +5,13 @@
 .hidden {
   display: none;
 }
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  border: 1px red solid;
+}
+
+.nav-right {
+  display: flex;
+}
