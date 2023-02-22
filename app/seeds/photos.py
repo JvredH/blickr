@@ -12,7 +12,7 @@ def seed_photos():
   photo8 = Photo(url='https://live.staticflickr.com/5015/5474954487_7bd7ffd625_h.jpg' , name='Beach Sunset' , description='Spent the day here today' , date=date(2023, 1, 24) , user_id=2)
   photo9 = Photo(url='https://live.staticflickr.com/1940/44414769345_a4461eb8b2_c.jpg' , name='Pink Flower' , description='Saw this flower today while on a hike, had to take a pic!' , date=date(2022, 4, 15) , user_id=2)
   photo10 = Photo(url='https://live.staticflickr.com/5629/21679873090_b13a944896_h.jpg' , name='Mountains' , description='Hiked up the mountain today, caught a sick view' , date=date(2022, 4, 29) , user_id=2)
-  photo11 = Photo(url='https://live.staticflickr.com/8660/16665269231_6d07d8d3c4_c.jpg' , name='Cloudy' , description='The sky was looking crazy today' , date=(2023, 2, 20) , user_id=2)
+  photo11 = Photo(url='https://live.staticflickr.com/8660/16665269231_6d07d8d3c4_c.jpg' , name='Cloudy' , description='The sky was looking crazy today' , date=date(2023, 2, 20) , user_id=2)
   photo12 = Photo(url='https://live.staticflickr.com/947/40827723115_d10f0e4963_h.jpg' , name='Crazy Rocks' , description='The rocks looked sick today. Come visit.' , date=date(2023, 1, 5) , user_id=2)
   photo13 = Photo(url='https://live.staticflickr.com/5323/30433328130_dfda6f839f_c.jpg' , name='Random Photo' , description='Just going to leave this here' , date=date(2023, 1, 14) , user_id=2)
   photo14 = Photo(url='https://live.staticflickr.com/1524/24023438910_4afc06f30a_c.jpg' , name='Snow Tops' , description='Went on this crazy 8 mile hike, view was so worth it.' , date=date(2023, 1, 12) , user_id=3)
