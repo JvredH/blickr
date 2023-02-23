@@ -56,6 +56,7 @@ export const getOnePhotoThunk = (photoId) => async dispatch => {
     const photo = await response.json();
     console.log('one photo ------ > ', photo)
     dispatch(loadOnePhotoAction(photo))
+    return photo
   }
 }
 

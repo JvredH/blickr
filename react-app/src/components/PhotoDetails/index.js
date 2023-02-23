@@ -9,24 +9,26 @@ const PhotoDetails = () => {
   let { photoId } = useParams();
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  const photo = useSelector(state => state.photos.onePhoto);
+  const [photo, setPhoto] = useState({});
 
   useEffect(() => {
-    dispatch(getOnePhotoThunk(+photoId)).then(() => setIsLoaded(true))
-  }, [dispatch, photoId])
+    dispatch(getOnePhotoThunk(+photoId)).then((data) => setPhoto(data)).then(() => setIsLoaded(true));
+
+    return () => setPhoto({});
+  }, [dispatch, photoId]);
 
   return (
     <>
       {!isLoaded && <p>Loading...</p>}
-      {isLoaded && (
-        <div className='photo-detail-main-container'>
-          <div className='top half'>
-            <img src={photo?.url} alt=''/>
+      {isLoaded && photo && (
+        <div className="photo-detail-main-container">
+          <div className="top half">
+            <img src={photo.url} alt="" />
           </div>
           <div>
-            <div>{`${photo.user?.first_name} ${photo.user?.last_name}`}</div>
-            <div>{photo?.name}</div>
-            <div>{photo?.description}</div>
+            <div>{`${photo.user.first_name} ${photo.user.last_name}`}</div>
+            <div>{photo.name}</div>
+            <div>{photo.description}</div>
           </div>
           <div>
             <NavLink to={`/photos/${+photoId}/edit`}>
@@ -34,12 +36,12 @@ const PhotoDetails = () => {
             </NavLink>
           </div>
           <div>
-            <PhotoDelete photo={photo}/>
+            <PhotoDelete photo={photo} />
           </div>
         </div>
       )}
     </>
   );
-}
+};
 
 export default PhotoDetails;
