@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
 import { getOnePhotoThunk } from "../../store/photosReducer";
-import EditPhotoForm from "../PhotoEditForm";
+// import EditPhotoForm from "../PhotoEditForm";
 
 const PhotoDetails = () => {
   let { photoId } = useParams();

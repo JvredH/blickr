@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { editPhotoThunk } from "../../store/photosReducer";
+import PhotoDelete from "../PhotoDelete";
 
 const EditPhotoForm = () => {
     const dispatch = useDispatch();
@@ -81,6 +82,9 @@ const EditPhotoForm = () => {
         </label>
         <button type='submit'>Add Photo!</button>
       </form>
+      <div>
+        <PhotoDelete photo={photo}/>
+      </div>
     </div>
   )
 }

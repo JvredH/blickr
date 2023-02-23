@@ -82,3 +82,18 @@ def edit_photo(photoId):
         return photo.to_dict(), 200
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+@photos_routes.route('/<int:photoId>', methods=['DELETE'])
+@login_required
+def delete_photo(photoId):
+    print('ROUTE HIT !@#@!%!@$!@#!')
+    """ Route to delete a photo """
+    photo = Photo.query.get(photoId)
+
+    if not photo:
+        return 'No photo found', 404
+
+    db.session.delete(photo)
+    db.session.commit()
+    return 'Photo Successfully Deleted', 200

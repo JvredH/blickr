@@ -2,6 +2,7 @@ const LOAD_PHOTOS = 'session/LOAD_ALL_PHOTOS'
 const ONE_PHOTO = 'session/ONE_PHOTO'
 const CREATE_PHOTO = 'session/CREATE_PHOTO'
 const EDIT_PHOTO = 'session/EDIT_PHOTO'
+const DELETE_PHOTO = 'session/DELETE_PHOTO'
 
 const loadPhotosAction = (photos) => {
   return ({
@@ -28,6 +29,13 @@ const editPhotoAction = (editedPhoto) => {
   return ({
     type: EDIT_PHOTO,
     editedPhoto
+  })
+}
+
+const deletePhotoAction = (photoId) => {
+  return({
+    type: DELETE_PHOTO,
+    photoId
   })
 }
 
@@ -93,6 +101,17 @@ export const editPhotoThunk = (editFormData, photoId) => async dispatch => {
   }
 }
 
+
+export const deletePhotoThunk = (photoId) => async dispatch => {
+  const response = await fetch(`/api/photos/${+photoId}`, {
+    method: 'DELETE'
+  })
+
+  if (response.ok) {
+    dispatch(deletePhotoAction(photoId))
+  }
+}
+
 const normalize = (array) => {
   const obj = {};
   array.forEach(el => {obj[el.id] = el})
@@ -127,6 +146,12 @@ export default function photosReducer(state = initialState, action) {
       const newState = {...state}
       newState.allPhotos[action.editedPhoto.id] = action.editedPhoto
       newState.onePhoto = action.editedPhoto
+      return newState
+    }
+    case DELETE_PHOTO: {
+      const newState = {...state, onePhoto: {}}
+      // console.log('delete thunker hit')
+      delete newState.allPhotos[action.photoId]
       return newState
     }
     default:
