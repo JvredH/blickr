@@ -38,6 +38,30 @@ def one_photo(photoId):
     return photo.to_dict(), 200
 
 
+@photos_routes.route('/<int:photoId>', methods=['PUT'])
+@login_required
+def edit_photo(photoId):
+    """ Route to return and edit a photo """
+    form = CreatePhotoForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    data = form.data
+    photo = Photo.query.get(photoId)
+
+    if not photo:
+        return 'no photo found', 404
+
+    if form.validate_on_submit():
+        photo.url = data['url']
+        photo.name = data['name']
+        photo.description = data['description']
+        photo.date = datetime.strptime(str(data['date']), '%Y-%m-%d').date()
+
+        db.session.commit()
+        return photo.to_dict(), 200
+
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
 @photos_routes.route('/', methods=['POST'])
 @login_required
 def create_photo():

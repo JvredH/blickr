@@ -11,7 +11,7 @@ const CreatePhotoForm = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
-  const [errors, setErrors] = useState([])
+  const [errors, setErrors] = useState([]);
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -30,6 +30,7 @@ const CreatePhotoForm = () => {
       date: convertedDate,
       user_id: sessionUser.id
     }
+
     const data = await dispatch(createPhotoThunk(formData))
     if (Array.isArray(data)) {
       setErrors(data)

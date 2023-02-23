@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import AllPhotos from "./components/PhotosAll";
 import PhotoDetails from "./components/PhotoDetails";
 import CreatePhotoForm from "./components/photoCreateForm";
+import EditPhotoForm from "./components/PhotoEditForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,6 +27,9 @@ function App() {
           </Route>
           <Route path='/photos/new' exact>
             <CreatePhotoForm />
+          </Route>
+          <Route path='/photos/:photoId/edit' exact>
+            <EditPhotoForm />
           </Route>
           <Route path='/photos/:photoId' exact>
             <PhotoDetails />

@@ -1,6 +1,7 @@
 const LOAD_PHOTOS = 'session/LOAD_ALL_PHOTOS'
 const ONE_PHOTO = 'session/ONE_PHOTO'
 const CREATE_PHOTO = 'session/CREATE_PHOTO'
+const EDIT_PHOTO = 'session/EDIT_PHOTO'
 
 const loadPhotosAction = (photos) => {
   return ({
@@ -20,6 +21,13 @@ const createPhotoAction = (newPhoto) => {
   return({
     type: CREATE_PHOTO,
     newPhoto
+  })
+}
+
+const editPhotoAction = (editedPhoto) => {
+  return ({
+    type: EDIT_PHOTO,
+    editedPhoto
   })
 }
 
@@ -65,6 +73,26 @@ export const createPhotoThunk = (formData) => async dispatch => {
   }
 }
 
+export const editPhotoThunk = (editFormData, photoId) => async dispatch => {
+  const response = await fetch(`/api/photos/${photoId}`, {
+    method: 'PUT',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(editFormData)
+  })
+  if (response.ok) {
+    const editedPhoto = await response.json()
+    dispatch(editPhotoAction(editedPhoto))
+    return editedPhoto
+  } else if (response.status < 500){
+    const data = await response.json()
+    if (data.errors) {
+      return data.errors
+    }
+  } else {
+    return ['An error occurred. Please try again.']
+  }
+}
+
 const normalize = (array) => {
   const obj = {};
   array.forEach(el => {obj[el.id] = el})
@@ -93,6 +121,12 @@ export default function photosReducer(state = initialState, action) {
       // console.log(action.photo)
       newState.allPhotos[action.newPhoto.id] = action.newPhoto
       newState.onePhoto = action.newPhoto
+    }
+    case EDIT_PHOTO: {
+      const newState = {...state}
+      newState.allPhotos[action.editedPhoto.id] = action.editedPhoto
+      newState.onePhoto = action.editedPhoto
+      return newState
     }
     default:
       return state
