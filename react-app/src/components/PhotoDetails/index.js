@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
 import { getOnePhotoThunk } from "../../store/photosReducer";
 // import EditPhotoForm from "../PhotoEditForm";
+import PhotoDelete from '../PhotoDelete/index'
 
 const PhotoDetails = () => {
   let { photoId } = useParams();
@@ -20,17 +21,20 @@ const PhotoDetails = () => {
       {isLoaded && (
         <div className='photo-detail-main-container'>
           <div className='top half'>
-            <img src={photo.url} alt=''/>
+            <img src={photo?.url} alt=''/>
           </div>
           <div>
-            <div>{`${photo.user.first_name} ${photo.user.last_name}`}</div>
-            <div>{photo.name}</div>
-            <div>{photo.description}</div>
+            <div>{`${photo.user?.first_name} ${photo.user?.last_name}`}</div>
+            <div>{photo?.name}</div>
+            <div>{photo?.description}</div>
           </div>
           <div>
             <NavLink to={`/photos/${+photoId}/edit`}>
               <button>edit</button>
             </NavLink>
+          </div>
+          <div>
+            <PhotoDelete photo={photo}/>
           </div>
         </div>
       )}
