@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, session, request
 from ..models.photos import Photo
 from flask_login import login_required
 from ..forms.create_photo import CreatePhotoForm
-from ..models import Photo, db
+from ..models import Photo, db, Comment
 from datetime import datetime
 
 photos_routes = Blueprint('photos', __name__)
@@ -97,3 +97,16 @@ def delete_photo(photoId):
     db.session.delete(photo)
     db.session.commit()
     return 'Photo Successfully Deleted', 200
+
+
+@photos_routes.route('/<int:photoId>/comments')
+def get_comments(photoId):
+    """ Route to return comments of a photo """
+    comments = Comment.query.filter(Comment.photo_id == photoId).all()
+
+    if not comments:
+        return 'No comments for this photo', 404
+
+    print('back end comments !#@$@!@!#!@##@!@!#', list(comments))
+
+    return [comment.to_dict() for comment in comments], 200

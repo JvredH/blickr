@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
 import { getOnePhotoThunk } from "../../store/photosReducer";
+import CommentsCards from "../CommetsGet";
 // import EditPhotoForm from "../PhotoEditForm";
 import PhotoDelete from '../PhotoDelete/index'
 
@@ -37,6 +38,9 @@ const PhotoDetails = () => {
           </div>
           <div>
             <PhotoDelete photo={photo} />
+          </div>
+          <div className='comments-container'>
+            <CommentsCards photo={photo}/>
           </div>
         </div>
       )}
