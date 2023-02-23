@@ -74,7 +74,7 @@ export const createPhotoThunk = (formData) => async dispatch => {
 }
 
 export const editPhotoThunk = (editFormData, photoId) => async dispatch => {
-  const response = await fetch(`/api/photos/${photoId}`, {
+  const response = await fetch(`/api/photos/${+photoId}`, {
     method: 'PUT',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(editFormData)
@@ -121,6 +121,7 @@ export default function photosReducer(state = initialState, action) {
       // console.log(action.photo)
       newState.allPhotos[action.newPhoto.id] = action.newPhoto
       newState.onePhoto = action.newPhoto
+      return newState
     }
     case EDIT_PHOTO: {
       const newState = {...state}
