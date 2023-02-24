@@ -5,12 +5,15 @@ import { getOnePhotoThunk } from "../../store/photosReducer";
 import CommentsCards from "../CommetsGet";
 // import EditPhotoForm from "../PhotoEditForm";
 import PhotoDelete from '../PhotoDelete/index'
+import AddCommentForm from "../CommentsAdd";
 
 const PhotoDetails = () => {
   let { photoId } = useParams();
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   const [photo, setPhoto] = useState({});
+  // const comments = useSelector(state => state.comments.photoComments)
+  // // const sessionUser = useSelector(state => state.session.user);
 
   useEffect(() => {
     dispatch(getOnePhotoThunk(+photoId)).then((data) => setPhoto(data)).then(() => setIsLoaded(true));
@@ -41,6 +44,9 @@ const PhotoDetails = () => {
           </div>
           <div className='comments-container'>
             <CommentsCards photo={photo}/>
+          </div>
+          <div>
+            <AddCommentForm photo={photo}/>
           </div>
         </div>
       )}
