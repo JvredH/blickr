@@ -122,10 +122,10 @@ def add_comment(photoId):
     data = form.data
 
     if form.validate_on_submit():
-        date_str = data['date'].strftime('%Y-%m-%d')
+        # date_str = data['date'].strftime('%Y-%m-%d')
         newComment = Comment(
             comment = data['comment'],
-            date = datetime.strptime(date_str, '%Y-%m-%d'),
+            date = datetime.strptime(str(data['date']), '%Y-%m-%d').date(),
             photo_id = +photoId,
             user_id = current_user.id
         )
