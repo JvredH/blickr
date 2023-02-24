@@ -15,3 +15,14 @@ class Comment(db.Model):
 
   photo = db.relationship('Photo', back_populates='comment')
   user = db.relationship('User', back_populates='comment')
+
+  def to_dict(self):
+    return {
+      'id': self.id,
+      'comment': self.comment,
+      'date': self.date,
+      'photo_id': self.photo_id,
+      'user_id': self.user_id,
+
+      'user': {'id': self.user.id, 'first_name': self.user.first_name, 'last_name': self.user.last_name}
+    }

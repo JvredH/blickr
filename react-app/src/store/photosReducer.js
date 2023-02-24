@@ -124,7 +124,6 @@ const initialState = {allPhotos: {}, onePhoto: {}}
 export default function photosReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_PHOTOS: {
-      console.log('action.photos ----->', action.photos)
       const newState = {allPhotos: {}, onePhoto: {}};
       newState.allPhotos = normalize(action.photos.allPhotos)
       console.log('newState ------->', newState)

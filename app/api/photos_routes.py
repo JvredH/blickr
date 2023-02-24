@@ -1,9 +1,10 @@
 from flask import Blueprint, jsonify, session, request
 from ..models.photos import Photo
-from flask_login import login_required
-from ..forms.create_photo import CreatePhotoForm
-from ..models import Photo, db
-from datetime import datetime
+from flask_login import login_required, current_user
+from ..forms import CreatePhotoForm, CreateCommentForm
+
+from ..models import Photo, db, Comment
+from datetime import datetime, date
 
 photos_routes = Blueprint('photos', __name__)
 
@@ -97,3 +98,40 @@ def delete_photo(photoId):
     db.session.delete(photo)
     db.session.commit()
     return 'Photo Successfully Deleted', 200
+
+
+@photos_routes.route('/<int:photoId>/comments')
+def get_comments(photoId):
+    """ Route to return comments of a photo """
+    comments = Comment.query.filter(Comment.photo_id == photoId).all()
+
+    if not comments:
+        return 'No comments for this photo', 404
+
+    print('back end comments !#@$@!@!#!@##@!@!#', list(comments))
+
+    return [comment.to_dict() for comment in comments], 200
+
+
+@photos_routes.route('/<int:photoId>/comments', methods=['POST'])
+@login_required
+def add_comment(photoId):
+    """ Route to create and return comment of a photo """
+    form = CreateCommentForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    data = form.data
+
+    if form.validate_on_submit():
+        # date_str = data['date'].strftime('%Y-%m-%d')
+        newComment = Comment(
+            comment = data['comment'],
+            date = datetime.strptime(str(data['date']), '%Y-%m-%d').date(),
+            photo_id = +photoId,
+            user_id = current_user.id
+        )
+
+        db.session.add(newComment)
+        db.session.commit()
+        return newComment.to_dict(), 200
+    print(form.errors)
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 450
