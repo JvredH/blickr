@@ -12,8 +12,9 @@ const PhotoDetails = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   const [photo, setPhoto] = useState({});
+  // const sessionUser = useSelector
   // const comments = useSelector(state => state.comments.photoComments)
-  // // const sessionUser = useSelector(state => state.session.user);
+  const sessionUser = useSelector(state => state.session.user);
 
   useEffect(() => {
     dispatch(getOnePhotoThunk(+photoId)).then((data) => setPhoto(data)).then(() => setIsLoaded(true));
@@ -43,7 +44,7 @@ const PhotoDetails = () => {
             <PhotoDelete photo={photo} />
           </div>
           <div className='comments-container'>
-            <CommentsCards photo={photo}/>
+            <CommentsCards photo={photo} sessionUser={sessionUser}/>
           </div>
           <div>
             <AddCommentForm photo={photo}/>
