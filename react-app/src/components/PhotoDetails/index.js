@@ -44,6 +44,7 @@ const PhotoDetails = () => {
             <PhotoDelete photo={photo} />
           </div>
           <div className='comments-container'>
+            <h3>Comments</h3>
             <CommentsCards photo={photo} sessionUser={sessionUser}/>
           </div>
           <div>
