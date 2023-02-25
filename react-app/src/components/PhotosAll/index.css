@@ -1,0 +1,7 @@
+.photos-main-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  grid-auto-flow: row;
+  gap: 15px;
+}

@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getAllPhotosThunk } from "../../store/photosReducer";
 import PhotoCards from "../PhotoCards";
+import './index.css'
 
 const AllPhotos = () => {
   const dispatch = useDispatch()
@@ -15,7 +16,7 @@ const AllPhotos = () => {
 
 
   return (
-    <div className='photos-main-div'>
+    <div className='photos-main-container'>
       {photos.map(photo => <PhotoCards photo={photo} key={photo.id}/> )}
     </div>
   )
