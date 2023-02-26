@@ -34,14 +34,18 @@ const PhotoDetails = () => {
             </div>
           </div>
           <div className='bottom-half'>
-            <div>
-              <div>
+            <div className='desc-area'>
+              <div className='left-half-desc'>
                 Profile Pic
               </div>
-              <div>
-                <div>{`${photo.user.first_name} ${photo.user.last_name}`}</div>
-                <div>{photo.name}</div>
-                <div>{photo.description}</div>
+              <div className='right-half-desc'>
+                <div>
+                  <div>{`${photo.user.first_name} ${photo.user.last_name}`}</div>
+                  <div>{photo.name}</div>
+                </div>
+                <div>
+                  {photo.description}
+                </div>
               </div>
             </div>
               {sessionUser && photo.user.id === sessionUser.id ? (
