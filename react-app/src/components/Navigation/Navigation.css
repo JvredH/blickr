@@ -9,8 +9,18 @@
 .nav-container {
   display: flex;
   justify-content: space-between;
-  border: 1px red solid;
+  height: 50px;
+  position: sticky;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 50;
+  background-color: rgba(21,21,23,.95);
+  /* border: 1px red solid; */
+  color: white;
 }
+
+
 
 .nav-right {
   display: flex;

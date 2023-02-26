@@ -1,5 +1,6 @@
 .photo-card-container {
   position: relative;
+  /* margin-top: 50px; */
   border: 1px solid red;
 }
 

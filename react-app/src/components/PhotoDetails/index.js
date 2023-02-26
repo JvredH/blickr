@@ -6,6 +6,7 @@ import CommentsCards from "../CommetsGet";
 // import EditPhotoForm from "../PhotoEditForm";
 import PhotoDelete from '../PhotoDelete/index'
 import AddCommentForm from "../CommentsAdd";
+import './photoDetails.css'
 
 const PhotoDetails = () => {
   let { photoId } = useParams();
@@ -27,28 +28,37 @@ const PhotoDetails = () => {
       {!isLoaded && <p>Loading...</p>}
       {isLoaded && photo && (
         <div className="photo-detail-main-container">
-          <div className="top half">
-            <img src={photo.url} alt="" />
+          <div className="top-half">
+            <div className="image-container">
+              <img className='actual-image' src={photo.url} alt="" />
+            </div>
           </div>
-          <div>
-            <div>{`${photo.user.first_name} ${photo.user.last_name}`}</div>
-            <div>{photo.name}</div>
-            <div>{photo.description}</div>
-          </div>
-          <div>
-            <NavLink to={`/photos/${+photoId}/edit`}>
-              <button>edit</button>
-            </NavLink>
-          </div>
-          <div>
-            <PhotoDelete photo={photo} />
-          </div>
-          <div className='comments-container'>
-            <h3>Comments</h3>
-            <CommentsCards photo={photo} sessionUser={sessionUser}/>
-          </div>
-          <div>
-            <AddCommentForm photo={photo}/>
+          <div className='bottom-half'>
+            <div>
+              <div>
+                Pic
+              </div>
+              <div>
+                <div>{`${photo.user.first_name} ${photo.user.last_name}`}</div>
+                <div>{photo.name}</div>
+                <div>{photo.description}</div>
+              </div>
+            </div>
+            <div>
+              <NavLink to={`/photos/${+photoId}/edit`}>
+                <button>edit</button>
+              </NavLink>
+            </div>
+            <div>
+              <PhotoDelete photo={photo} />
+            </div>
+            <div className='comments-container'>
+              <h3>Comments</h3>
+              <CommentsCards photo={photo} sessionUser={sessionUser}/>
+            </div>
+            <div>
+              <AddCommentForm photo={photo}/>
+            </div>
           </div>
         </div>
       )}
