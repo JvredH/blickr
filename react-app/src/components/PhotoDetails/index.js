@@ -36,7 +36,7 @@ const PhotoDetails = () => {
           <div className='bottom-half'>
             <div>
               <div>
-                Pic
+                Profile Pic
               </div>
               <div>
                 <div>{`${photo.user.first_name} ${photo.user.last_name}`}</div>
@@ -44,14 +44,19 @@ const PhotoDetails = () => {
                 <div>{photo.description}</div>
               </div>
             </div>
-            <div>
-              <NavLink to={`/photos/${+photoId}/edit`}>
-                <button>edit</button>
-              </NavLink>
-            </div>
-            <div>
-              <PhotoDelete photo={photo} />
-            </div>
+              {sessionUser && photo.user.id === sessionUser.id ? (
+                  <div className='crud-btns'>
+                    <div>
+                      <NavLink to={`/photos/${+photoId}/edit`}>
+                        <button>edit</button>
+                      </NavLink>
+                    </div>
+                    <div>
+                      <PhotoDelete photo={photo} />
+                    </div>
+                  </div>
+                ) : null
+              }
             <div className='comments-container'>
               <h3>Comments</h3>
               <CommentsCards photo={photo} sessionUser={sessionUser}/>
