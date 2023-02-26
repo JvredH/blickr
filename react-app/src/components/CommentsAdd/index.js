@@ -18,6 +18,11 @@ const AddCommentForm = ({photo}) => {
     e.preventDefault()
     setErrors([])
 
+    if (!sessionUser) {
+      history.push('/login')
+      return
+    }
+
     const newComment = {
       comment,
       date: currentDate,
@@ -25,10 +30,11 @@ const AddCommentForm = ({photo}) => {
       user_id: sessionUser.id
     }
 
-    await dispatch(addCommentThunk(newComment, +photo.id))
-    await dispatch(loadCommentsThunk(photo.id));
 
-    setComment('')
+      await dispatch(addCommentThunk(newComment, +photo.id))
+      await dispatch(loadCommentsThunk(photo.id));
+
+      setComment('')
 }
 
 // useEffect(() => {

@@ -10,23 +10,23 @@ function Navigation({ isLoaded }){
 	return (
 		<div className='nav-container'>
 			<div className='nav-left'>
-				<NavLink exact to="/">Home</NavLink>
+				<NavLink exact to="/" className='nav-link'>Home</NavLink>
 			</div>
 			<div>
 			{isLoaded && !sessionUser && (
 				<div className='nav-right'>
 					<div>
-						<NavLink to='/login'>Log In</NavLink>
+						<NavLink to='/login' className='nav-link'>Log In</NavLink>
 					</div>
 					<div>
-						<NavLink to='/signup'>Sign up</NavLink>
+						<NavLink to='/signup' className='nav-link'>Sign up</NavLink>
 					</div>
 				</div>
 			)}
 			{isLoaded && sessionUser && (
 				<div className ='nav-right'>
 					<div>
-						<NavLink to='/photos/new'>
+						<NavLink to='/photos/new' className='nav-link'>
 							Upload
 						</NavLink>
 						</div>
