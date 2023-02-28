@@ -23,4 +23,15 @@
   width: 1060px;
   margin-left: auto;
   margin-right: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+
+.desc-area {
+  display: flex;
+}
+
+.crud-btns {
+  display: flex;
 }

@@ -34,39 +34,44 @@ const PhotoDetails = () => {
             </div>
           </div>
           <div className='bottom-half'>
-            <div className='desc-area'>
-              <div className='left-half-desc'>
-                Profile Pic
-              </div>
-              <div className='right-half-desc'>
-                <div>
-                  <div>{`${photo.user.first_name} ${photo.user.last_name}`}</div>
-                  <div>{photo.name}</div>
+            <div className='left-side'>
+              <div className='desc-area'>
+                <div className='left-half-desc'>
+                  Profile Pic
                 </div>
-                <div>
-                  {photo.description}
-                </div>
-              </div>
-            </div>
-              {sessionUser && photo.user.id === sessionUser.id ? (
-                  <div className='crud-btns'>
-                    <div>
-                      <NavLink to={`/photos/${+photoId}/edit`}>
-                        <button>edit</button>
-                      </NavLink>
-                    </div>
-                    <div>
-                      <PhotoDelete photo={photo} />
-                    </div>
+                <div className='right-half-desc'>
+                  <div>
+                    <div>{`${photo.user.first_name} ${photo.user.last_name}`}</div>
+                    <div>{photo.name}</div>
                   </div>
-                ) : null
-              }
-            <div className='comments-container'>
-              <h3>Comments</h3>
-              <CommentsCards photo={photo} sessionUser={sessionUser}/>
+                  <div>
+                    {photo.description}
+                  </div>
+                </div>
+              </div>
+              <div className='comments-container'>
+                <h3>Comments</h3>
+                <CommentsCards photo={photo} sessionUser={sessionUser}/>
+              </div>
+              <div>
+                <AddCommentForm photo={photo}/>
+              </div>
             </div>
-            <div>
-              <AddCommentForm photo={photo}/>
+            <div className='right-side'>
+              <div>Taken On {photo.date}</div>
+                  {sessionUser && photo.user.id === sessionUser.id ? (
+                      <div className='crud-btns'>
+                        <div>
+                          <NavLink to={`/photos/${+photoId}/edit`}>
+                            <button>edit</button>
+                          </NavLink>
+                        </div>
+                        <div>
+                          <PhotoDelete photo={photo} />
+                        </div>
+                      </div>
+                    ) : null
+                  }
             </div>
           </div>
         </div>
