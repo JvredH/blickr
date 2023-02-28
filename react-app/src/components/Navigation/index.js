@@ -10,7 +10,7 @@ function Navigation({ isLoaded }){
 	return (
 		<div className='nav-container'>
 			<div className='nav-left'>
-				<NavLink exact to="/" className='nav-link'>Home</NavLink>
+				<NavLink exact to="/" className='nav-link'>blickr</NavLink>
 			</div>
 			<div>
 			{isLoaded && !sessionUser && (
@@ -27,10 +27,10 @@ function Navigation({ isLoaded }){
 				<div className ='nav-right'>
 					<div>
 						<NavLink to='/photos/new' className='nav-link'>
-							Upload
+							<i className="fa-solid fa-cloud-arrow-up"/>
 						</NavLink>
 						</div>
-					<div>
+					<div className='profile-button'>
 					<ProfileButton user={sessionUser} />
 					</div>
 				</div>
