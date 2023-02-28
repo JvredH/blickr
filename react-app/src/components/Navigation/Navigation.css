@@ -28,6 +28,23 @@
 .nav-link {
   color: white;
   text-decoration: none;
+  margin-left: 15px;
+}
+
+.sign-up {
+  margin-right: 170px;
+  background-color: white;
+  color: black;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 3px;
+  transition: 1s;
+}
+
+.sign-up:hover {
+  color: grey;
 }
 
 .nav-left {

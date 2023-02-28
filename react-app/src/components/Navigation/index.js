@@ -19,7 +19,7 @@ function Navigation({ isLoaded }){
 						<NavLink to='/login' className='nav-link'>Log In</NavLink>
 					</div>
 					<div>
-						<NavLink to='/signup' className='nav-link'>Sign up</NavLink>
+						<NavLink to='/signup' className='nav-link sign-up'>Sign up</NavLink>
 					</div>
 				</div>
 			)}
