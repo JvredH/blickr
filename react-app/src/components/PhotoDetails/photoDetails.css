@@ -2,6 +2,10 @@
   /* margin-top: 50px; */
 }
 
+div {
+  word-break: break-all;
+}
+
 .top-half {
   border: blue solid 1px;
   background-color: #212124;

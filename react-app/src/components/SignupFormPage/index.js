@@ -72,7 +72,7 @@ function SignupFormPage() {
             <label>
               Age
               <input
-                type="text"
+                type="number"
                 value={age}
                 onChange={(e) => setAge(e.target.value)}
                 required

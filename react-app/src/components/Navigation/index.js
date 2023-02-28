@@ -1,16 +1,32 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 
 function Navigation({ isLoaded }){
 	const sessionUser = useSelector(state => state.session.user);
+	const location = useLocation();
+  const [exploreBtn, setExploreBtn] = useState(null);
+
+  useEffect(() => {
+    if (location.pathname.includes('/photos')) {
+      setExploreBtn(
+        <div>
+          <NavLink to='/photos'>Explore</NavLink>
+        </div>
+      );
+    } else {
+      setExploreBtn(null);
+    }
+  }, [location.pathname]);
+
 
 	return (
 		<div className='nav-container'>
 			<div className='nav-left'>
 				<NavLink exact to="/" className='nav-link'>blickr</NavLink>
+				{exploreBtn}
 			</div>
 			<div>
 			{isLoaded && !sessionUser && (
@@ -19,7 +35,7 @@ function Navigation({ isLoaded }){
 						<NavLink to='/login' className='nav-link'>Log In</NavLink>
 					</div>
 					<div>
-						<NavLink to='/signup' className='nav-link'>Sign up</NavLink>
+						<NavLink to='/signup' className='nav-link sign-up'>Sign up</NavLink>
 					</div>
 				</div>
 			)}
