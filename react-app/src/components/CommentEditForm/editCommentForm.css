@@ -1,0 +1,13 @@
+.edit-comment-form {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.crud-btn {
+  border: none;
+  background-color: transparent;
+  text-decoration: underline;
+  font-size: 12px;
+  cursor: pointer;
+}

@@ -1,0 +1,22 @@
+/* .top-comment-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+} */
+.comment-card {
+  margin-bottom: 15px;
+  max-width: 522px;
+}
+
+.comment-card:hover {
+  background-color: white;
+}
+
+.name-crud-btn {
+  display: flex;
+  justify-content: space-between;
+}
+
+.actual-comment {
+  word-break: break-word;
+}
