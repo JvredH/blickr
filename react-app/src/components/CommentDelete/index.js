@@ -16,7 +16,7 @@ const CommentDelete = ({comment, sessionUser, photo}) => {
   }
 
   return canDelete ? (
-    <button onClick={handleClick}>Delete</button>
+    <button className='crud-btn' onClick={handleClick}>Delete</button>
   ) : null;
 
 }

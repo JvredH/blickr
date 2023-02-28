@@ -4,6 +4,7 @@ import { loadCommentsThunk,  } from "../../store/commentsReducer";
 import CommentEditForm from '../CommentEditForm';
 // import { editCommentThunk } from "../../store/commentsReducer";
 import CommentDelete from "../CommentDelete";
+import './commentCard.css'
 
 const CommentsCards = ({ photo, sessionUser }) => {
   const dispatch = useDispatch();
@@ -27,7 +28,17 @@ const CommentsCards = ({ photo, sessionUser }) => {
     return (
       <div key={comment.id} className="comment-card">
         <div>
-          <div>{`${comment.user.first_name} ${comment.user.last_name}`}</div>
+          <div className='name-crud-btn'>{`${comment.user.first_name} ${comment.user.last_name}`}
+          {canEdit && !isEditing && (
+            <div>
+              <button  className='crud-btn' onClick={() => setEditingComment(comment)}>Edit</button>
+              <CommentDelete
+                comment={comment}
+                sessionUser={sessionUser}
+                photo={photo}
+              />
+              </div>
+          )}</div>
         </div>
         {isEditing ? (
           <CommentEditForm
@@ -36,9 +47,9 @@ const CommentsCards = ({ photo, sessionUser }) => {
             setEditingComment={setEditingComment}
           />
         ) : (
-          <div>{comment.comment}</div>
+          <div className="actual-comment">{comment.comment}</div>
         )}
-        {canEdit && !isEditing && (
+        {/* {canEdit && !isEditing && (
           <div>
             <button onClick={() => setEditingComment(comment)}>Edit</button>
             <CommentDelete
@@ -47,7 +58,7 @@ const CommentsCards = ({ photo, sessionUser }) => {
               photo={photo}
             />
           </div>
-        )}
+        )} */}
       </div>
     );
   });

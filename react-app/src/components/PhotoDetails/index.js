@@ -38,7 +38,8 @@ const PhotoDetails = () => {
             <div className='left-side'>
               <div className='desc-area'>
                 <div className='left-half-desc'>
-                  Profile Pic
+                  {/* Profile Pic */}
+                  <i className="fa-solid fa-user"/>
                 </div>
                 <div className='right-half-desc'>
                   <div>

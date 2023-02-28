@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loadCommentsThunk } from "../../store/commentsReducer";
 import { editCommentThunk } from "../../store/commentsReducer";
+import './editCommentForm.css'
 
 const CommentEditForm = ({ comment, photo, setEditingComment }) => {
   const dispatch = useDispatch()
@@ -20,9 +21,9 @@ const CommentEditForm = ({ comment, photo, setEditingComment }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <textarea value={editedComment} onChange={(e) => setEditedComment(e.target.value)} />
-      <button type="submit">Save</button>
+    <form className='edit-comment-form' onSubmit={handleSubmit}>
+      <textarea value={editedComment} onChange={(e) => setEditedComment(e.target.value)} rows='4' cols='50' minLength='1' maxLength='450' required/>
+      <button className='edit button' type="submit">Save</button>
     </form>
   );
 };

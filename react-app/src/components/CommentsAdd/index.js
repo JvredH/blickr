@@ -44,7 +44,20 @@ const AddCommentForm = ({photo}) => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <input type='textarea' placeHolder='Add a comment!' value={comment} onChange={(e) => setComment(e.target.value)}/>
+        <div>
+          {/* <label htmlFor='comment'></label> */}
+          <br />
+          <textarea
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+            rows='4'
+            cols='50'
+            placeHolder='Add a comment!'
+            minLength='1'
+            maxLength='450'
+            // required
+          />
+        </div>
         <button type='submit'>Add Comment</button>
       </form>
     </div>
@@ -60,3 +73,12 @@ export default AddCommentForm;
     // } else {
     //   history.push(`/photos/${photo.id}`)
     // }
+
+    // return (
+    //   <div>
+    //     <form onSubmit={handleSubmit}>
+    //       <input type='textarea' placeHolder='Add a comment!' value={comment} onChange={(e) => setComment(e.target.value)}/>
+    //       <button type='submit'>Add Comment</button>
+    //     </form>
+    //   </div>
+    // );
