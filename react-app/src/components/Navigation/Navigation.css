@@ -49,6 +49,7 @@
 
 .nav-left {
   margin-left: 170px;
+  display: flex;
 }
 
 .nav-right {
