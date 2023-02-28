@@ -41,46 +41,52 @@ const CreatePhotoForm = () => {
   }
 
   return (
-    <div>
-      <h1>Add A Photo</h1>
-      <form onSubmit={handleSubmit}>
-        <ul>
-            {errors.map((error, idx) => (
-              <li key={idx}>{error}</li>
-            ))}
-        </ul>
-        <label>
-          Url:
-          <input
-          type='url'
-          value={url}
-          onChange={e => setUrl(e.target.value)}
-          />
-        </label>
-        <label>
-          Name:
-          <input
-          type='text'
-          value={name}
-          onChange={e => setName(e.target.value)}/>
-        </label>
-        <label>
-          Description:
-          <input
-          type='text'
-          value={description}
-          onChange={e => setDescription(e.target.value)}/>
-        </label>
-        <label>
-          Date Taken:
-          <input
-          type='date'
-          value={date}
-          onChange={e => setDate(e.target.value) }
-          max={new Date().toISOString().split('T')[0]}/>
-        </label>
-        <button type='submit'>Add Photo!</button>
-      </form>
+    <div className='outer-form'>
+      <div className='form-container'>
+        <div>
+          <h1>Add A Photo</h1>
+        </div>
+        <div>
+          <form className='actual-form' onSubmit={handleSubmit}>
+            <ul>
+                {errors.map((error, idx) => (
+                  <li key={idx}>{error}</li>
+                ))}
+            </ul>
+            <label>
+              Url:
+              <input
+              type='url'
+              value={url}
+              onChange={e => setUrl(e.target.value)}
+              />
+            </label>
+            <label>
+              Name:
+              <input
+              type='text'
+              value={name}
+              onChange={e => setName(e.target.value)}/>
+            </label>
+            <label>
+              Description:
+              <input
+              type='text'
+              value={description}
+              onChange={e => setDescription(e.target.value)}/>
+            </label>
+            <label>
+              Date Taken:
+              <input
+              type='date'
+              value={date}
+              onChange={e => setDate(e.target.value) }
+              max={new Date().toISOString().split('T')[0]}/>
+            </label>
+            <button type='submit'>Add Photo!</button>
+          </form>
+        </div>
+      </div>
     </div>
   )
 }
