@@ -1,8 +1,48 @@
-# Flask React Project
+# blickr
 
-This is the starter for the Flask React project.
+blickr is a website clone that is inspired by <a href='https://www.flickr.com/'>flickr</a>. blickr is for individuals looking for a place to share photos to individuals who love the art of photography. It provides a community of photography enthusiasts where they can connect and share their thoughts about any photograph that they think is cool or has a deeper meaning to. Visit blickr by clicking <a href='https://blickr.onrender.com/'>here</a> or visiting this link: https://blickr.onrender.com/.
 
-## Getting started
+## WikiLinks
+- Database Schema: https://github.com/JvredH/blickr/wiki/Database-Schema
+- Feature List: https://github.com/JvredH/blickr/wiki/MVP-Features
+- User Stories: https://github.com/JvredH/blickr/wiki/User-Stories
+- WireFrames: https://github.com/JvredH/blickr/wiki/WireFrames
+
+## Built With
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)
+![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)
+![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
+![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
+![Render](https://img.shields.io/badge/Render-%46E3B7.svg?style=for-the-badge&logo=render&logoColor=white)
+
+
+## Features Directions
+### Home Page/Splash Page
+Upon visiting the link to blickr, you will be directed to the splash page. You can login/sign up by clicking either of the buttons on the top right corner. You can also sign up by clicking the 'Start for free' button located on the center of the screen. To view photos within flickr, you can click the 'Explore' button directly under it.
+
+*** PHOTO COMING SOON ***
+
+### Create a Photo Post
+After signing in, a button with a cloud and an arrow on the top right corner of the page will appear. This will direct you to the new photo form page.
+
+*** PHOTO COMING SOON ***
+
+### Photo Details
+You can view a photos detail page by clicking one of the photos in the feed. After clicking a photo, you will be directed to the photo detail page of that photo. If you are the user that posted the photo you will be able to see Edit and Delete photo buttons under the photo on the right side. Also on this page, you are able to leave comments of photos under below the description of the photos.
+
+*** PHOTO COMING SOON ***
+
+## To Do List for Future Features
+- [ ] Tags
+- [ ] Albums
+- [ ] Search Bar
+- [ ] AWS implementation
+
+## To Get Started Locally
 1. Clone this repository (only this branch)
 
 2. Install dependencies
@@ -39,110 +79,9 @@ This is the starter for the Flask React project.
    flask run
    ```
 
-7. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
+7. In a seperate terminal cd into the react-app directory and run the command ```pipenv install ```
 
+## Contact Information
+Jared Hem - hem.jared@gmail.com
 
-## Deployment through Render.com
-
-First, refer to your Render.com deployment articles for more detailed
-instructions about getting started with [Render.com], creating a production
-database, and deployment debugging tips.
-
-From the [Dashboard], click on the "New +" button in the navigation bar, and
-click on "Web Service" to create the application that will be deployed.
-
-Look for the name of the application you want to deploy, and click the "Connect"
-button to the right of the name.
-
-Now, fill out the form to configure the build and start commands, as well as add
-the environment variables to properly deploy the application.
-
-### Part A: Configure the Start and Build Commands
-
-Start by giving your application a name.
-
-Leave the root directory field blank. By default, Render will run commands from
-the root directory.
-
-Make sure the Environment field is set set to "Python 3", the Region is set to
-the location closest to you, and the Branch is set to "main".
-
-Next, add your Build command. This is a script that should include everything
-that needs to happen _before_ starting the server.
-
-For your Flask project, enter the following command into the Build field, all in
-one line:
-
-```shell
-# build command - enter all in one line
-npm install --prefix react-app &&
-npm run build --prefix react-app &&
-pip install -r requirements.txt &&
-pip install psycopg2 &&
-flask db upgrade &&
-flask seed all
-```
-
-This script will install dependencies for the frontend, and run the build
-command in the __package.json__ file for the frontend, which builds the React
-application. Then, it will install the dependencies needed for the Python
-backend, and run the migration and seed files.
-
-Now, add your start command in the Start field:
-
-```shell
-# start script
-gunicorn app:app
-```
-
-_If you are using websockets, use the following start command instead for increased performance:_
-
-`gunicorn --worker-class eventlet -w 1 app:app`
-
-### Part B: Add the Environment Variables
-
-Click on the "Advanced" button at the bottom of the form to configure the
-environment variables your application needs to access to run properly. In the
-development environment, you have been securing these variables in the __.env__
-file, which has been removed from source control. In this step, you will need to
-input the keys and values for the environment variables you need for production
-into the Render GUI.
-
-Click on "Add Environment Variable" to start adding all of the variables you
-need for the production environment.
-
-Add the following keys and values in the Render GUI form:
-
-- SECRET_KEY (click "Generate" to generate a secure secret for production)
-- FLASK_ENV production
-- FLASK_APP app
-- SCHEMA (your unique schema name, in snake_case)
-- REACT_APP_BASE_URL (use render.com url, located at top of page, similar to
-  https://this-application-name.onrender.com)
-
-In a new tab, navigate to your dashboard and click on your Postgres database
-instance.
-
-Add the following keys and values:
-
-- DATABASE_URL (copy value from Internal Database URL field)
-
-_Note: Add any other keys and values that may be present in your local __.env__
-file. As you work to further develop your project, you may need to add more
-environment variables to your local __.env__ file. Make sure you add these
-environment variables to the Render GUI as well for the next deployment._
-
-Next, choose "Yes" for the Auto-Deploy field. This will re-deploy your
-application every time you push to main.
-
-Now, you are finally ready to deploy! Click "Create Web Service" to deploy your
-project. The deployment process will likely take about 10-15 minutes if
-everything works as expected. You can monitor the logs to see your build and
-start commands being executed, and see any errors in the build process.
-
-When deployment is complete, open your deployed site and check to see if you
-successfully deployed your Flask application to Render! You can find the URL for
-your site just below the name of the Web Service at the top of the page.
-
-[Render.com]: https://render.com/
-[Dashboard]: https://dashboard.render.com/
+Project Link: https://github.com/JvredH/blickr
