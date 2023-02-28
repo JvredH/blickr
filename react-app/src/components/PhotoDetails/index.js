@@ -30,7 +30,7 @@ const PhotoDetails = () => {
         <div className="photo-detail-main-container">
           <div className="top-half">
             <div className="image-container">
-              <img className='actual-image' src={photo.url} alt="" />
+              <img className='actual-image' src={photo.url} alt="" onError={e => {e.currentTarget.src='https://w7.pngwing.com/pngs/349/105/png-transparent-false-error-missing-absent-x-red-cross-letter-circle-gui.png'} } />
             </div>
           </div>
           <div className='bottom-half'>
