@@ -9,6 +9,7 @@ import AllPhotos from "./components/PhotosAll";
 import PhotoDetails from "./components/PhotoDetails";
 import CreatePhotoForm from "./components/photoCreateForm";
 import EditPhotoForm from "./components/PhotoEditForm";
+import SplashPage from "./components/SplashPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,6 +23,9 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+          <Route path='/' exact>
+            <SplashPage />
+          </Route>
           <Route path='/photos' exact>
             <AllPhotos />
           </Route>

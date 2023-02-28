@@ -12,7 +12,7 @@ function Navigation({ isLoaded }){
   useEffect(() => {
     if (location.pathname.includes('/photos')) {
       setExploreBtn(
-        <div>
+        <div className='explore-btn'>
           <NavLink to='/photos'>Explore</NavLink>
         </div>
       );

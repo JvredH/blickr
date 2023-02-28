@@ -52,6 +52,20 @@
   display: flex;
 }
 
+.explore-btn {
+  margin-left: 15px;
+  /* color: white; */
+}
+
+.explore-btn a {
+  text-decoration: none;
+  color: white;
+}
+
+.explore-btn.NavLink {
+  color: white;
+}
+
 .nav-right {
   display: flex;
   align-items: center;

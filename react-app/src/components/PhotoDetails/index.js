@@ -18,11 +18,22 @@ const PhotoDetails = () => {
   // const comments = useSelector(state => state.comments.photoComments)
   const sessionUser = useSelector(state => state.session.user);
 
+  const date = photo.date
+  const dateObj = new Date(date)
+  const formattedDate = dateObj.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    timeZone: 'UTC'
+  })
+
   useEffect(() => {
     dispatch(getOnePhotoThunk(+photoId)).then((data) => setPhoto(data)).then(() => setIsLoaded(true));
 
     return () => setPhoto({});
   }, [dispatch, photoId]);
+
+  console.log(photo.date)
 
   return (
     <>
@@ -60,7 +71,7 @@ const PhotoDetails = () => {
               </div>
             </div>
             <div className='right-side'>
-              <div>Taken On {photo.date}</div>
+              <div>Taken On {formattedDate}</div>
                   {sessionUser && photo.user.id === sessionUser.id ? (
                       <div className='crud-btns'>
                         <div>
