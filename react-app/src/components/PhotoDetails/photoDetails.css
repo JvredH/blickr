@@ -7,7 +7,7 @@ div {
 }
 
 .top-half {
-  border: blue solid 1px;
+  /* border: blue solid 1px; */
   background-color: #212124;
   height: 80vh;
   width: 100%;

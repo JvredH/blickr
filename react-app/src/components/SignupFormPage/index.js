@@ -34,7 +34,7 @@ function SignupFormPage() {
     <div className='outer-form'>
       <div className="form-container">
         <div>
-          <h1>Sign Up</h1>
+          <h1>Sign Up for blickr</h1>
         </div>
         <div>
           <form className='actual-form' onSubmit={handleSubmit}>
@@ -47,7 +47,7 @@ function SignupFormPage() {
                 type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeHolder='Email'
+                // placeHolder='Email'
                 required
               />
             </label>
