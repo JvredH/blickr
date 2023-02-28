@@ -7,6 +7,7 @@ import CommentsCards from "../CommetsGet";
 import PhotoDelete from '../PhotoDelete/index'
 import AddCommentForm from "../CommentsAdd";
 import './photoDetails.css'
+import brokenImage from '../../photos/errorPhoto/brokenUrl.png'
 
 const PhotoDetails = () => {
   let { photoId } = useParams();
@@ -30,7 +31,7 @@ const PhotoDetails = () => {
         <div className="photo-detail-main-container">
           <div className="top-half">
             <div className="image-container">
-              <img className='actual-image' src={photo.url} alt="" onError={e => {e.currentTarget.src='https://w7.pngwing.com/pngs/349/105/png-transparent-false-error-missing-absent-x-red-cross-letter-circle-gui.png'} } />
+              <img className='actual-image' src={photo.url} alt="" onError={e => {e.currentTarget.src=brokenImage} } />
             </div>
           </div>
           <div className='bottom-half'>
