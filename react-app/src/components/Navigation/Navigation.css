@@ -19,6 +19,9 @@
   background-color: rgba(21,21,23,.95);
   /* border: 1px red solid; */
   color: white;
+  /* max-width: 80%; */
+  /* margin-left: auto;
+  margin-right: auto; */
 }
 
 .nav-link {
@@ -26,7 +29,16 @@
   text-decoration: none;
 }
 
+.nav-left {
+  margin-left: 170px;
+}
 
 .nav-right {
   display: flex;
+  align-items: center;
+}
+
+.profile-button {
+  margin-left: 20px;
+  margin-right: 170px;
 }
