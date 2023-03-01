@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { createPhotoThunk } from "../../store/photosReducer";
+import './photoCreateForm.css'
 
 const CreatePhotoForm = () => {
   const dispatch = useDispatch();
@@ -42,23 +43,24 @@ const CreatePhotoForm = () => {
 
   return (
     <div className='outer-form'>
-      <div className='form-container'>
+      <div className='form-container create'>
         <div>
-          <h1>Add A Photo</h1>
+          <div className='create-form-header'>Add A Photo</div>
         </div>
         <div>
           <form className='actual-form' onSubmit={handleSubmit}>
-            <ul>
+            <div className='error-container'>
                 {errors.map((error, idx) => (
-                  <li key={idx}>{error}</li>
+                  <div className='errors' key={idx}>{error}</div>
                 ))}
-            </ul>
+            </div>
             <label>
               Url:
               <input
               type='url'
               value={url}
               onChange={e => setUrl(e.target.value)}
+              required
               />
             </label>
             <label>
@@ -66,14 +68,18 @@ const CreatePhotoForm = () => {
               <input
               type='text'
               value={name}
-              onChange={e => setName(e.target.value)}/>
+              onChange={e => setName(e.target.value)}
+              required
+              />
             </label>
             <label>
               Description:
               <input
               type='text'
               value={description}
-              onChange={e => setDescription(e.target.value)}/>
+              onChange={e => setDescription(e.target.value)}
+              required
+              />
             </label>
             <label>
               Date Taken:
@@ -81,7 +87,9 @@ const CreatePhotoForm = () => {
               type='date'
               value={date}
               onChange={e => setDate(e.target.value) }
-              max={new Date().toISOString().split('T')[0]}/>
+              max={new Date().toISOString().split('T')[0]}
+              required
+              />
             </label>
             <button type='submit'>Add Photo!</button>
           </form>
