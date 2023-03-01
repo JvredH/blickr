@@ -58,7 +58,7 @@ const AddCommentForm = ({photo}) => {
             required
           />
         </div>
-        <button type='submit'>Add Comment</button>
+        <button className='comment-btn' type='submit'>Add Comment</button>
       </form>
     </div>
   );
