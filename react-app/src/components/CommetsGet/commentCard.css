@@ -6,17 +6,26 @@
 .comment-card {
   margin-bottom: 15px;
   max-width: 522px;
+  transition: .3s;
 }
 
 .comment-card:hover {
   background-color: white;
 }
 
+.comment-card:hover .crud-btn{
+  visibility: visible;
+}
+
 .name-crud-btn {
   display: flex;
   justify-content: space-between;
+  font-size: 13px;
+  font-weight: bold;
 }
 
 .actual-comment {
   word-break: break-word;
+  font-size: 12px;
+  margin-top: 5px;
 }

@@ -33,27 +33,26 @@ function SignupFormPage() {
   return (
     <div className='outer-form'>
       <div className="form-container">
-        <div>
-          <h1>Sign Up for blickr</h1>
+        <div className='create-form-header'>
+          Sign up for blickr
         </div>
-        <div>
-          <form className='actual-form' onSubmit={handleSubmit}>
-            <ul>
-              {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-            </ul>
+          <form className='actual-form signup' onSubmit={handleSubmit}>
+            <div>
+              {errors.map((error, idx) => <div className='errors' key={idx}>{error}</div>)}
+            </div>
             <label>
-              Email
               <input
                 type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                // placeHolder='Email'
+                placeHolder='Email'
                 required
               />
             </label>
             <label>
-              First Name
+              {/* First Name */}
               <input
+                placeHolder='First Name'
                 type="text"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
@@ -61,8 +60,9 @@ function SignupFormPage() {
               />
             </label>
             <label>
-              Last Name
+              {/* Last Name */}
               <input
+                placeHolder='Last Name'
                 type="text"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
@@ -70,8 +70,9 @@ function SignupFormPage() {
               />
             </label>
             <label>
-              Age
+              {/* Age */}
               <input
+                placeHolder='Age'
                 type="number"
                 value={age}
                 onChange={(e) => setAge(e.target.value)}
@@ -79,8 +80,9 @@ function SignupFormPage() {
               />
             </label>
             <label>
-              Password
+              {/* Password */}
               <input
+                placeHolder='Password'
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -88,8 +90,9 @@ function SignupFormPage() {
               />
             </label>
             <label>
-              Confirm Password
+              {/* Confirm Password */}
               <input
+                placeHolder='Confirm Password'
                 type="password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
@@ -98,7 +101,8 @@ function SignupFormPage() {
             </label>
             <button type="submit">Sign Up</button>
           </form>
-        </div>
+        <div className='terms'>By signing up, you agree with blickr's Terms of Services and Privacy Policy.</div>
+
       </div>
     </div>
   );

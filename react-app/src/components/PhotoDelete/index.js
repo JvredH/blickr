@@ -14,7 +14,7 @@ const PhotoDelete = ({photo}) => {
 
   return (
     <div>
-      <button onClick={handleClick}>Delete Photo</button>
+      <button className='delete-btn' onClick={handleClick}>Delete Photo</button>
     </div>
   );
 }

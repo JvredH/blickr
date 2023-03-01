@@ -55,7 +55,7 @@ const AddCommentForm = ({photo}) => {
             placeHolder='Add a comment!'
             minLength='1'
             maxLength='450'
-            // required
+            required
           />
         </div>
         <button type='submit'>Add Comment</button>
