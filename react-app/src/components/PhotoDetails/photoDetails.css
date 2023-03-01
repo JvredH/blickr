@@ -84,16 +84,18 @@ div {
 }
 
 .edit-btn {
-  background-color: white;
-  border-width: 1px;
+  background-color: rgb(48, 149, 238);
+  /* border-width: 1px; */
   cursor: pointer;
+  color: white;
+  border: 1px solid rgb(48, 149, 238);
 }
 
 .delete-btn {
   background-color: white;
   border-width: 1px;
   cursor: pointer;
-  margin-left: 5px;
+  margin-left: 5px
 }
 
 textarea {
@@ -105,4 +107,15 @@ textarea {
   padding: 7px;
   border-radius: 30px;
   margin-right: 10px;
+}
+
+.comment-btn {
+  background-color: rgb(48, 149, 238);
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 5px;
+  cursor: pointer;
+  margin-top: 3px;
+  border-radius: 4px;
 }
