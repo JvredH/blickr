@@ -55,30 +55,34 @@ const CreatePhotoForm = () => {
                 ))}
             </div>
             <label>
-              Url:
+              {/* Url: */}
               <input
               type='url'
               value={url}
               onChange={e => setUrl(e.target.value)}
               required
+              placeHolder='Url'
               />
             </label>
             <label>
-              Name:
+              {/* Name: */}
               <input
               type='text'
               value={name}
               onChange={e => setName(e.target.value)}
               required
+              placeHolder='Name'
               />
             </label>
             <label>
-              Description:
+              {/* Description: */}
               <input
+              className='desc-input'
               type='text'
               value={description}
               onChange={e => setDescription(e.target.value)}
               required
+              placeHolder='Description'
               />
             </label>
             <label>
@@ -89,6 +93,7 @@ const CreatePhotoForm = () => {
               onChange={e => setDate(e.target.value) }
               max={new Date().toISOString().split('T')[0]}
               required
+              placeHolder='Date Taken'
               />
             </label>
             <button type='submit'>Add Photo!</button>

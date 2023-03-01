@@ -25,7 +25,7 @@ function Navigation({ isLoaded }){
 	return (
 		<div className='nav-container'>
 			<div className='nav-left'>
-				<NavLink exact to="/" className='nav-link'>blickr</NavLink>
+				<NavLink exact to="/" className='nav-link' id='name'>blickr</NavLink>
 				{exploreBtn}
 			</div>
 			<div>
@@ -43,7 +43,7 @@ function Navigation({ isLoaded }){
 				<div className ='nav-right'>
 					<div>
 						<NavLink to='/photos/new' className='nav-link'>
-							<i className="fa-solid fa-cloud-arrow-up"/>
+							<i className="fa-solid fa-cloud-arrow-up fa-2x"/>
 						</NavLink>
 						</div>
 					<div className='profile-button'>

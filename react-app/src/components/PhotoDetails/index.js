@@ -48,22 +48,22 @@ const PhotoDetails = () => {
           <div className='bottom-half'>
             <div className='left-side'>
               <div className='desc-area'>
-                <div className='left-half-desc'>
-                  {/* Profile Pic */}
+                {/* <div className='left-half-desc'>
+
                   <i className="fa-solid fa-user"/>
-                </div>
+                </div> */}
                 <div className='right-half-desc'>
                   <div>
-                    <div>{`${photo.user.first_name} ${photo.user.last_name}`}</div>
-                    <div>{photo.name}</div>
+                    <div className='name'>{`${photo.user.first_name} ${photo.user.last_name}`}</div>
+                    <div className='photo-name'>{photo.name}</div>
                   </div>
-                  <div>
+                  <div className='photo-desc'>
                     {photo.description}
                   </div>
                 </div>
               </div>
               <div className='comments-container'>
-                <h3>Comments</h3>
+                <h4 className='comment-h3'>Comments</h4>
                 <CommentsCards photo={photo} sessionUser={sessionUser}/>
               </div>
               <div>
@@ -71,12 +71,12 @@ const PhotoDetails = () => {
               </div>
             </div>
             <div className='right-side'>
-              <div>Taken On {formattedDate}</div>
+              <div className='taken-on'>Taken On {formattedDate}</div>
                   {sessionUser && photo.user.id === sessionUser.id ? (
                       <div className='crud-btns'>
                         <div>
                           <NavLink to={`/photos/${+photoId}/edit`}>
-                            <button>edit</button>
+                            <button className='edit-btn'>Edit Photo</button>
                           </NavLink>
                         </div>
                         <div>

@@ -35,21 +35,23 @@ function LoginFormPage() {
               ))}
             </ul>
             <label>
-              Email
+              {/* Email */}
               <input
                 type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                placeHolder='Email'
               />
             </label>
             <label>
-              Password
+              {/* Password */}
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                placeHolder='Password'
               />
             </label>
             <button type="submit">Log In</button>

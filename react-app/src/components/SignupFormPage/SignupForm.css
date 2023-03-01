@@ -25,6 +25,7 @@
   max-height: 90vh;
   background-color: white;
   padding: 24px 36px;
+  border-radius: 4px;
 }
 
 .actual-form{

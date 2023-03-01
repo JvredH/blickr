@@ -1,9 +1,18 @@
-import './splashPage.css'
 import {NavLink} from 'react-router-dom'
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import './splashPage.css'
 
 const SplashPage = () => {
   const [currentPhoto, setCurrentPhoto] = useState(1);
+  const sessionUser = useSelector((state) => state.session.user);
+
+  let check;
+  if (sessionUser) {
+    check = true;
+  } else {
+    check = false;
+  }
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -17,10 +26,10 @@ const SplashPage = () => {
       <h1 className='splash-text'>Find your inspiration.</h1>
       <h3 className='splash-text'>Join the blickr community, home to tens of billions of photos and 2 million groups</h3>
       <NavLink to='/signup'>
-        <button>Start for free</button>
+        <button className='splash-btn' disabled={check}>Start for free</button>
       </NavLink>
       <NavLink to='/photos'>
-        <button>Explore</button>
+        <button className='splash-exp'>Explore</button>
       </NavLink>
     </div>
   )
