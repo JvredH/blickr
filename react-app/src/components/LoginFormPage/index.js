@@ -23,33 +23,35 @@ function LoginFormPage() {
 
   return (
     <div className='outer-form'>
-      <div className='form-container'>
+      <div className='form-container' id='login-form-container'>
         <div>
-          <h1>Log In</h1>
+          <div className='login-form-header'>Log in to blickr</div>
         </div>
         <div>
-          <form className='actual-form' onSubmit={handleSubmit}>
+          <form className='actual-form' id="login" onSubmit={handleSubmit}>
             <ul>
               {errors.map((error, idx) => (
-                <li key={idx}>{error}</li>
+                <li className='errors' key={idx}>{error}</li>
               ))}
             </ul>
             <label>
-              Email
+              {/* Email */}
               <input
                 type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                placeHolder='Email'
               />
             </label>
             <label>
-              Password
+              {/* Password */}
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                placeHolder='Password'
               />
             </label>
             <button type="submit">Log In</button>

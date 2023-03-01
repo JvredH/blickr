@@ -43,17 +43,17 @@ const EditPhotoForm = () => {
 
   return (
     <div className='outer-form'>
-      <div className='form-container'>
+      <div className='form-container create'>
         <div>
-          <h1>Edit Photo</h1>
+          <div className='create-form-header'>Edit Photo</div>
         </div>
         <div>
-          <form onSubmit={handleSubmit}>
-            <ul>
+          <form className='actual-form' onSubmit={handleSubmit}>
+            <div>
                 {errors.map((error, idx) => (
-                  <li key={idx}>{error}</li>
+                  <div key={idx}>{error}</div>
                 ))}
-            </ul>
+            </div>
             <label>
               Url:
               <input
@@ -84,7 +84,7 @@ const EditPhotoForm = () => {
               onChange={e => setDate(e.target.value) }
               max={new Date().toISOString().split('T')[0]}/>
             </label>
-            <button type='submit'>Add Photo!</button>
+            <button type='submit'>Edit Photo!</button>
           </form>
         </div>
       </div>

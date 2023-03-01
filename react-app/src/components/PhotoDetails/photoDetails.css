@@ -40,10 +40,60 @@ div {
 
 .desc-area {
   display: flex;
+  /* width: 100%; */
+  border-bottom: 1px solid grey;
+}
+
+.right-half-desc {
+  width: 100%;
+  /* margin-left: 5px; */
+}
+
+.name{
+  font-weight: 600;
+}
+
+.photo-name {
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 7px;
+}
+
+.photo-desc {
+  font-size: 12px;
+  margin-top: 6px;
+  /* border-bottom: solid 1px grey; */
+  margin-bottom: 5px;
+  line-height: 15px;
+}
+
+.comment-h3 {
+  margin-top: 8px;
+  margin-bottom: 5px;
+}
+
+.taken-on {
+  font-size: 14px;
 }
 
 .crud-btns {
   display: flex;
+  margin-top: 15px;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.edit-btn {
+  background-color: white;
+  border-width: 1px;
+  cursor: pointer;
+}
+
+.delete-btn {
+  background-color: white;
+  border-width: 1px;
+  cursor: pointer;
+  margin-left: 5px;
 }
 
 textarea {
@@ -51,7 +101,7 @@ textarea {
 }
 
 .fa-solid {
-  border: 1px black solid;
+  /* border: 1px black solid; */
   padding: 7px;
   border-radius: 30px;
   margin-right: 10px;
