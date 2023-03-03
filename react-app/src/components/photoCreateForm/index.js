@@ -61,7 +61,7 @@ const CreatePhotoForm = () => {
               value={url}
               onChange={e => setUrl(e.target.value)}
               required
-              placeHolder='Url'
+              placeholder='Url'
               />
             </label>
             <label>
@@ -71,7 +71,7 @@ const CreatePhotoForm = () => {
               value={name}
               onChange={e => setName(e.target.value)}
               required
-              placeHolder='Name'
+              placeholder='Name'
               />
             </label>
             <label>
@@ -82,7 +82,7 @@ const CreatePhotoForm = () => {
               value={description}
               onChange={e => setDescription(e.target.value)}
               required
-              placeHolder='Description'
+              placeholder='Description'
               />
             </label>
             <label>
@@ -93,7 +93,7 @@ const CreatePhotoForm = () => {
               onChange={e => setDate(e.target.value) }
               max={new Date().toISOString().split('T')[0]}
               required
-              placeHolder='Date Taken'
+              placeholder='Date Taken'
               />
             </label>
             <button type='submit'>Add Photo!</button>

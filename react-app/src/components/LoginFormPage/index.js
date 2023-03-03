@@ -41,7 +41,7 @@ function LoginFormPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                placeHolder='Email'
+                placeholder='Email'
               />
             </label>
             <label>
@@ -51,7 +51,7 @@ function LoginFormPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                placeHolder='Password'
+                placeholder='Password'
               />
             </label>
             <button type="submit">Log In</button>
