@@ -75,11 +75,12 @@ div {
 
 .taken-on {
   font-size: 14px;
+  margin-bottom: 15px;
 }
 
 .crud-btns {
   display: flex;
-  margin-top: 15px;
+  /* margin-top: 15px; */
   padding: 4px;
   border-radius: 4px;
 }

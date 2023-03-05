@@ -9,6 +9,7 @@ import AddCommentForm from "../CommentsAdd";
 import './photoDetails.css'
 import brokenImage from '../../photos/errorPhoto/brokenUrl.png'
 import Footer from "../Footer";
+import OpenModalButton from "../OpenModalButton";
 
 const PhotoDetails = () => {
   let { photoId } = useParams();
@@ -81,7 +82,11 @@ const PhotoDetails = () => {
                           </NavLink>
                         </div>
                         <div>
-                          <PhotoDelete photo={photo} />
+                          <OpenModalButton
+                          buttonText='Delete'
+                          modalComponent={<PhotoDelete photo={photo} />}
+                          className='delete-btn'
+                          />
                         </div>
                       </div>
                     ) : null
