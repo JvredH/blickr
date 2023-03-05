@@ -8,6 +8,7 @@ import PhotoDelete from '../PhotoDelete/index'
 import AddCommentForm from "../CommentsAdd";
 import './photoDetails.css'
 import brokenImage from '../../photos/errorPhoto/brokenUrl.png'
+import Footer from "../Footer";
 
 const PhotoDetails = () => {
   let { photoId } = useParams();
@@ -87,6 +88,7 @@ const PhotoDetails = () => {
                   }
             </div>
           </div>
+          <Footer />
         </div>
       )}
     </>

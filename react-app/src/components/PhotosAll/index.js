@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { getAllPhotosThunk } from "../../store/photosReducer";
 import PhotoCards from "../PhotoCards";
 import './index.css'
+import Footer from "../Footer";
 
 const AllPhotos = () => {
   const dispatch = useDispatch()
@@ -16,8 +17,11 @@ const AllPhotos = () => {
 
 
   return (
-    <div className='photos-main-container'>
-      {photos.map(photo => <PhotoCards photo={photo} key={photo.id}/> )}
+    <div>
+      <div className='photos-main-container'>
+        {photos.map(photo => <PhotoCards photo={photo} key={photo.id}/> )}
+      </div>
+      <Footer />
     </div>
   )
 }
