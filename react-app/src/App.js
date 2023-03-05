@@ -10,6 +10,7 @@ import PhotoDetails from "./components/PhotoDetails";
 import CreatePhotoForm from "./components/photoCreateForm";
 import EditPhotoForm from "./components/PhotoEditForm";
 import SplashPage from "./components/SplashPage";
+import Footer from "./components/Footer";
 
 function App() {
   const dispatch = useDispatch();
@@ -46,6 +47,7 @@ function App() {
           </Route>
         </Switch>
       )}
+      <Footer />
     </>
   );
 }

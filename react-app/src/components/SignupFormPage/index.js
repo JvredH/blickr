@@ -16,7 +16,7 @@ function SignupFormPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
-  if (sessionUser) return <Redirect to="/" />;
+  if (sessionUser) return <Redirect to="/photos" />;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,17 +42,17 @@ function SignupFormPage() {
             </div>
             <label>
               <input
-                type="text"
+                type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeHolder='Email'
+                placeholder='Email'
                 required
               />
             </label>
             <label>
               {/* First Name */}
               <input
-                placeHolder='First Name'
+                placeholder='First Name'
                 type="text"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
@@ -62,7 +62,7 @@ function SignupFormPage() {
             <label>
               {/* Last Name */}
               <input
-                placeHolder='Last Name'
+                placeholder='Last Name'
                 type="text"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
@@ -72,7 +72,7 @@ function SignupFormPage() {
             <label>
               {/* Age */}
               <input
-                placeHolder='Age'
+                placeholder='Age'
                 type="number"
                 value={age}
                 onChange={(e) => setAge(e.target.value)}

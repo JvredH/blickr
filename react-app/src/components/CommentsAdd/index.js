@@ -52,7 +52,7 @@ const AddCommentForm = ({photo}) => {
             onChange={(e) => setComment(e.target.value)}
             rows='4'
             cols='50'
-            placeHolder='Add a comment!'
+            placeholder='Add a comment!'
             minLength='1'
             maxLength='450'
             required
