@@ -1,0 +1,18 @@
+.footer-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 56px;
+  /* position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0; */
+  background-color: black;
+  color: grey;
+}
+
+footer a {
+  text-decoration: none;
+  color: grey;
+}
