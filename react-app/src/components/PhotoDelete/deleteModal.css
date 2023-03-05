@@ -1,0 +1,39 @@
+.delete-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+  padding: 10px;
+}
+
+.modal-buttons {
+  margin-top: 15px;
+}
+
+.modal-yes {
+  margin-right: 5px;
+  background-color: rgb(107, 222, 107);
+  border: none;
+  border-radius: 3px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  cursor: pointer;
+}
+
+.modal-no {
+  background-color: rgb(243, 109, 109);
+  border: none;
+  border-radius: 3px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  cursor: pointer;
+}
+
+#modal-content {
+  border-radius: 5px;
+}
