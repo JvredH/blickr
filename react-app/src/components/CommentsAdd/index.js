@@ -48,6 +48,7 @@ const AddCommentForm = ({photo}) => {
           {/* <label htmlFor='comment'></label> */}
           <br />
           <textarea
+            className='add-comment-box'
             value={comment}
             onChange={(e) => setComment(e.target.value)}
             rows='4'

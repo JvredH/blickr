@@ -120,3 +120,7 @@ textarea {
   margin-top: 3px;
   border-radius: 4px;
 }
+
+.add-comment-box {
+  padding: 5px;
+}
