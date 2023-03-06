@@ -105,8 +105,8 @@ def get_comments(photoId):
     """ Route to return comments of a photo """
     comments = Comment.query.filter(Comment.photo_id == photoId).all()
 
-    if not comments:
-        return 'No comments for this photo', 404
+    # if not comments:
+    #     return 'No comments for this photo', 404
 
     print('back end comments !#@$@!@!#!@##@!@!#', list(comments))
 
