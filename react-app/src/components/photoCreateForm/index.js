@@ -36,7 +36,7 @@ const CreatePhotoForm = () => {
     if (Array.isArray(data)) {
       setErrors(data)
     } else {
-      console.log('data ----> ', data)
+      // console.log('data ----> ', data)
       history.push(`/photos/${data.id}`)
     }
   }
