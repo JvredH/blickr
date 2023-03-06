@@ -63,7 +63,7 @@ const EditPhotoForm = () => {
           <form className='actual-form' onSubmit={handleSubmit}>
             <div>
                 {errors.map((error, idx) => (
-                  <div key={idx}>{error}</div>
+                  <div className='errors' key={idx}>{error}</div>
                 ))}
             </div>
             <label>
