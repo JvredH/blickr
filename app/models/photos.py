@@ -17,6 +17,13 @@ class Photo(db.Model):
   user = db.relationship('User', back_populates='photo')
   comment = db.relationship('Comment', back_populates='photo', cascade='all, delete')
 
+  if environment == 'production':
+    __table_args__ = {'schema': SCHEMA}
+
+    tags = db.relationship('Tags', secondary=f'{SCHEMA}.photos_tags', cascade='all, delete')
+  else:
+    tags = db.relationship('Tags', secondary='photos_tags', cascade='all, delete')
+
 
   def to_dict(self):
     return {
@@ -27,5 +34,6 @@ class Photo(db.Model):
       'date': self.date,
       'user_id': self.user_id,
 
-      'user': {'id': self.user.id, 'first_name': self.user.first_name, 'last_name': self.user.last_name}
+      'user': {'id': self.user.id, 'first_name': self.user.first_name, 'last_name': self.user.last_name},
+      'tags': {'id': self.tags.id, 'tag_name': self.tags.tag_name}
     }

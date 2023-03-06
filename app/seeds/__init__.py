@@ -2,6 +2,8 @@ from flask.cli import AppGroup
 from .users import seed_users, undo_users
 from .photos import seed_photos, undo_photos
 from .comments import seed_comments, undo_comments
+from .tags import seed_tags, undo_tags
+from .photos_tags import seed_photos_tags, undo_photos_tags
 
 from app.models.db import db, environment, SCHEMA
 
@@ -21,15 +23,21 @@ def seed():
         undo_users()
         undo_photos()
         undo_comments()
+        undo_tags()
+        undo_photos_tags()
     seed_users()
     # Add other seed functions here
     seed_photos()
     seed_comments()
+    seed_tags()
+    seed_photos_tags()
 
 
 # Creates the `flask seed undo` command
 @seed_commands.command('undo')
 def undo():
+    undo_photos_tags()
+    undo_tags()
     undo_comments()
     undo_photos()
     undo_users()
