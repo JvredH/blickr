@@ -24,17 +24,17 @@ blickr is a website clone that is inspired by <a href='https://www.flickr.com/'>
 ### Home Page/Splash Page
 Upon visiting the link to blickr, you will be directed to the splash page. You can login/sign up by clicking either of the buttons on the top right corner. You can also sign up by clicking the 'Start for free' button located on the center of the screen. To view photos within flickr, you can click the 'Explore' button directly under it.
 
-*** PHOTO COMING SOON ***
+![image](https://user-images.githubusercontent.com/114182094/223020198-e7cfcd7c-5641-4ae5-b4a8-5d4d931e0623.png)
 
 ### Create a Photo Post
 After signing in, a button with a cloud and an arrow on the top right corner of the page will appear. This will direct you to the new photo form page.
 
-*** PHOTO COMING SOON ***
+![image](https://user-images.githubusercontent.com/114182094/223020266-1fbd3fa5-ac11-401c-8e5d-f21440390f78.png)
 
 ### Photo Details
 You can view a photos detail page by clicking one of the photos in the feed. After clicking a photo, you will be directed to the photo detail page of that photo. If you are the user that posted the photo you will be able to see Edit and Delete photo buttons under the photo on the right side. Also on this page, you are able to leave comments of photos under below the description of the photos.
 
-*** PHOTO COMING SOON ***
+![image](https://user-images.githubusercontent.com/114182094/223020349-d5f5f582-1903-4e12-8536-b15dfba7ab3c.png)
 
 ## To Do List for Future Features
 - [ ] Tags
