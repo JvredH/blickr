@@ -40,7 +40,7 @@ const deletePhotoAction = (photoId) => {
 }
 
 export const getAllPhotosThunk = () => async dispatch => {
-  const response = await fetch(`/api/photos`)
+  const response = await fetch(`/api/photos/`)
 
   if (response.ok) {
     const photos = await response.json();
