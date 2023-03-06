@@ -35,7 +35,7 @@ const PhotoDetails = () => {
     return () => setPhoto({});
   }, [dispatch, photoId]);
 
-  console.log(photo.date)
+  console.log('photo data', photo)
 
   return (
     <>
@@ -91,6 +91,8 @@ const PhotoDetails = () => {
                       </div>
                     ) : null
                   }
+              <div>tags</div>
+              <div>{photo.tags[0].tag_name}</div>
             </div>
           </div>
           <Footer />
