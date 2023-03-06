@@ -35,7 +35,7 @@ const PhotoDetails = () => {
     return () => setPhoto({});
   }, [dispatch, photoId]);
 
-  console.log(photo.date)
+  // console.log(photo.date)
 
   return (
     <>

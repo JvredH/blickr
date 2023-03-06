@@ -44,7 +44,7 @@ export const getAllPhotosThunk = () => async dispatch => {
 
   if (response.ok) {
     const photos = await response.json();
-    console.log('all photos ------ >', photos)
+    // console.log('all photos ------ >', photos)
     dispatch(loadPhotosAction(photos))
   }
 }
@@ -54,7 +54,7 @@ export const getOnePhotoThunk = (photoId) => async dispatch => {
 
   if (response.ok) {
     const photo = await response.json();
-    console.log('one photo ------ > ', photo)
+    // console.log('one photo ------ > ', photo)
     dispatch(loadOnePhotoAction(photo))
     return photo
   }
@@ -69,7 +69,7 @@ export const createPhotoThunk = (formData) => async dispatch => {
 
   if (response.ok) {
     const newPhoto = await response.json()
-    console.log('newPhoto -----> ', newPhoto)
+    // console.log('newPhoto -----> ', newPhoto)
     dispatch(createPhotoAction(newPhoto))
     return newPhoto
   } else if (response.status < 500){
@@ -126,13 +126,13 @@ export default function photosReducer(state = initialState, action) {
     case LOAD_PHOTOS: {
       const newState = {allPhotos: {}, onePhoto: {}};
       newState.allPhotos = normalize(action.photos.allPhotos)
-      console.log('newState ------->', newState)
+      // console.log('newState ------->', newState)
       return newState;
     }
     case ONE_PHOTO: {
       const newState = {...state}
       newState.onePhoto = action.photo
-      console.log('newState after one photo ----> ', newState)
+      // console.log('newState after one photo ----> ', newState)
       return newState
     }
     case CREATE_PHOTO: {
