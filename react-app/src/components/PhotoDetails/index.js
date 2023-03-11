@@ -103,7 +103,7 @@ const PhotoDetails = () => {
                   }
               <div>Tags</div>
               <div><TagsGet /></div>
-              {sessionUser && photo.user.id === sessionUser.id ? <TagsAdd /> : null}
+              {sessionUser && photo.user.id === sessionUser.id ? <TagsAdd photo={photo}/> : null}
             </div>
           </div>
           <Footer />

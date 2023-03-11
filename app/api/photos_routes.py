@@ -3,7 +3,7 @@ from ..models.photos import Photo
 from flask_login import login_required, current_user
 from ..forms import CreatePhotoForm, CreateCommentForm
 
-from ..models import Photo, db, Comment
+from ..models import Photo, db, Comment, Tags, PhotosTags
 from datetime import datetime, date
 
 photos_routes = Blueprint('photos', __name__)
@@ -145,3 +145,33 @@ def get_tags(photoId):
         return 'no photo found', 404
 
     return photo.tags_to_dict(), 200
+
+
+@photos_routes.route('/<int:photoId>/tags', methods=['POST'])
+@login_required
+def add_tags(photoId):
+    photo = Photo.query.get(photoId)
+    new_tag_name = request.json.get('tag_name').lower()
+
+    existing_tag = Tags.query.filter_by(tag_name=new_tag_name).first()
+
+    if existing_tag:
+        photo_tag = PhotosTags(photo_id=photo.id, tag_id=existing_tag.id)
+        db.session.add(photo_tag)
+        photo.tags.append(existing_tag)
+        db.session.commit()
+        return existing_tag.to_dict(), 200
+
+    else:
+        new_tag = Tags(tag_name=new_tag_name)
+        db.session.add(new_tag)
+        db.session.commit()
+
+        photo_tag = PhotosTags(photo_id=photo.id, tag_id=new_tag.id)
+        db.session.add(photo_tag)
+        db.session.commit()
+
+        photo.tags.append(new_tag)
+        db.session.commit()
+
+        return new_tag.to_dict(), 200
