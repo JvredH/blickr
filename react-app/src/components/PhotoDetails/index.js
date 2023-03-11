@@ -11,7 +11,7 @@ import brokenImage from '../../photos/errorPhoto/brokenUrl.png'
 import Footer from "../Footer";
 import OpenModalButton from "../OpenModalButton";
 import Error from "../404Page";
-import TagsGet from "../Tags";
+import TagsGet from "../TagsGet";
 import { getPhotoTagsThunk } from "../../store/tagsReducer";
 
 
