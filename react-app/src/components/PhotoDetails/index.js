@@ -12,6 +12,7 @@ import Footer from "../Footer";
 import OpenModalButton from "../OpenModalButton";
 import Error from "../404Page";
 import TagsGet from "../TagsGet";
+import TagsAdd from '../TagsAdd'
 import { getPhotoTagsThunk } from "../../store/tagsReducer";
 
 
@@ -102,6 +103,7 @@ const PhotoDetails = () => {
                   }
               <div>Tags</div>
               <div><TagsGet /></div>
+              {sessionUser && photo.user.id === sessionUser.id ? <TagsAdd /> : null}
             </div>
           </div>
           <Footer />
