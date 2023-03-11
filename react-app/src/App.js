@@ -10,7 +10,8 @@ import PhotoDetails from "./components/PhotoDetails";
 import CreatePhotoForm from "./components/photoCreateForm";
 import EditPhotoForm from "./components/PhotoEditForm";
 import SplashPage from "./components/SplashPage";
-import Footer from "./components/Footer";
+// import Footer from "./components/Footer";
+import Error from "./components/404Page";
 
 function App() {
   const dispatch = useDispatch();
@@ -44,6 +45,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route>
+            <Error />
           </Route>
         </Switch>
       )}

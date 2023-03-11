@@ -10,6 +10,7 @@ import './photoDetails.css'
 import brokenImage from '../../photos/errorPhoto/brokenUrl.png'
 import Footer from "../Footer";
 import OpenModalButton from "../OpenModalButton";
+import Error from "../404Page";
 
 const PhotoDetails = () => {
   let { photoId } = useParams();
@@ -20,7 +21,8 @@ const PhotoDetails = () => {
   // const comments = useSelector(state => state.comments.photoComments)
   const sessionUser = useSelector(state => state.session.user);
 
-  const date = photo.date
+
+  const date = photo?.date
   const dateObj = new Date(date)
   const formattedDate = dateObj.toLocaleDateString('en-US', {
     year: 'numeric',
@@ -35,7 +37,12 @@ const PhotoDetails = () => {
     return () => setPhoto({});
   }, [dispatch, photoId]);
 
+<<<<<<< HEAD
   console.log('photo data', photo)
+=======
+  if (!photo) return <Error />
+  // console.log(photo.date)
+>>>>>>> dev
 
   return (
     <>
@@ -44,7 +51,7 @@ const PhotoDetails = () => {
         <div className="photo-detail-main-container">
           <div className="top-half">
             <div className="image-container">
-              <img className='actual-image' src={photo.url} alt="" onError={e => {e.currentTarget.src=brokenImage} } />
+              <img className='actual-image' src={photo?.url} alt="" onError={e => {e.currentTarget.src=brokenImage} } />
             </div>
           </div>
           <div className='bottom-half'>
@@ -56,8 +63,8 @@ const PhotoDetails = () => {
                 </div> */}
                 <div className='right-half-desc'>
                   <div>
-                    <div className='name'>{`${photo.user.first_name} ${photo.user.last_name}`}</div>
-                    <div className='photo-name'>{photo.name}</div>
+                    <div className='name'>{`${photo?.user?.first_name} ${photo?.user?.last_name}`}</div>
+                    <div className='photo-name'>{photo?.name}</div>
                   </div>
                   <div className='photo-desc'>
                     {photo.description}

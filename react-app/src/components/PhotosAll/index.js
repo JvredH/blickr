@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getAllPhotosThunk } from "../../store/photosReducer";
 import PhotoCards from "../PhotoCards";
 import './index.css'

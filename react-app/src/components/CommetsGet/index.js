@@ -13,14 +13,16 @@ const CommentsCards = ({ photo, sessionUser }) => {
   const [editingComment, setEditingComment] = useState(null);
 
   useEffect(() => {
-    dispatch(loadCommentsThunk(photo.id));
-  }, [dispatch, photo.id]);
+    dispatch(loadCommentsThunk(photo?.id));
+  }, [dispatch, photo?.id]);
 
 
   // const handleEditComment = (comment) => {
   //   // dispatch(editCommentThunk(comment));
   //   setEditingComment(null);
   // };
+
+  if (!commentsArray) return null
 
   const cards = commentsArray.map(comment => {
     const canEdit = sessionUser && comment.user.id === sessionUser.id;
@@ -62,6 +64,8 @@ const CommentsCards = ({ photo, sessionUser }) => {
       </div>
     );
   });
+
+
 
   return <div>{cards}</div>;
 };

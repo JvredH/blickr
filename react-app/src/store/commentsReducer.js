@@ -36,7 +36,7 @@ export const loadCommentsThunk = (photoId) => async dispatch => {
 
   if (response.ok) {
     const comments = await response.json()
-    console.log('comments from thunk ----> ', comments)
+    // console.log('comments from thunk ----> ', comments)
     dispatch(loadCommentsAction(comments))
     return comments
   }
@@ -50,7 +50,7 @@ export const addCommentThunk = (newComment, photoId) => async dispatch => {
   })
   if (response.ok){
     const createdComment = await response.json()
-    console.log('CREATED COMMENT THUNK ---->', createdComment)
+    // console.log('CREATED COMMENT THUNK ---->', createdComment)
     dispatch(addCommentAction(createdComment))
     return createdComment
   } else if (response.status < 500){
@@ -98,15 +98,15 @@ const initialState = {photoComments: {}};
 export default function commentsReducer(state = initialState, action) {
   switch(action.type) {
     case LOAD_COMMENTS: {
-      console.log('action.comments ---> ', action.comments)
+      // console.log('action.comments ---> ', action.comments)
       const newState = {photoComments: {}};
       newState.photoComments = normalize(action.comments)
-      console.log('newState from reducer -----> ', newState)
+      // console.log('newState from reducer -----> ', newState)
       return newState;
     }
     case ADD_COMMENT: {
       const newState = {...state}
-      console.log('ACTION.CREATEDCOMMENT REDUCER  -----> ', action.createdComment)
+      // console.log('ACTION.CREATEDCOMMENT REDUCER  -----> ', action.createdComment)
       newState.photoComments[action.createdComment.id] = action.createdComment
       return newState
     }
