@@ -1,25 +1,62 @@
-const Tags = ({photo}) => {
-  // console.log('from tags component -----> ', photo)
-  const tagsArr = photo.tags
+import { useSelector } from "react-redux";
 
-  // console.log('tagsArr --> ', tagsArr)
+const TagsGet = () => {
+  const photoTags = useSelector(state => state.tags.onePhotoTags)
+  const tagsArr = Object.values(photoTags)
+
+  console.log('tagsArr',tagsArr)
   let tags;
 
   if (tagsArr.length === 0) {
-    tags = (
-      <div>No tags for this photo.</div>
-    )
+    tags = (<div>No tags for this photo</div>)
   } else {
+    console.log ('tagsArr inside else',tagsArr)
     tags = tagsArr.map(tag => {
-      return (
-        <div>{`[${tag.tag_name}]`}</div>
-      )
+      return (<div>{`[${tag.tag_name}]`}</div>)
     })
   }
 
   return (
-    tags
+    <div>{tags}</div>
   )
 }
 
-export default Tags;
+export default TagsGet;
+
+
+//   const tagsArr = photo.tags
+
+//   let tags;
+
+//   if (tagsArr.length === 0) {
+//     tags = (
+//       <div>No tags for this photo.</div>
+//     )
+//   } else {
+//     tags = tagsArr.map(tag => {
+//       return (
+//         <div>{`[${tag.tag_name}]`}</div>
+//       )
+//     })
+//   }
+
+  // const dispatch = useDispatch()
+  // const [photoTags, setPhotoTags] = useState({})
+  // const tagsArr = Object.values(photoTags);
+
+  // useEffect(() => {
+  //   dispatch(getPhotoTagsThunk(photo.id)).then((data)=> setPhotoTags(data))
+  // }, [])
+
+  // console.log('photoTags', photoTags)
+  // let tags;
+
+  // if (!photoTags.tags.length === 0) {
+  //   tags = (<div>There are currently no tags for this photo</div>);
+  // } else {
+  //   tags = tagsArr[0].map(tag => {
+  //     return (
+  //       <div>{`[${tag.tag_name}]`}</div>
+  //     )
+  //   })
+  // }

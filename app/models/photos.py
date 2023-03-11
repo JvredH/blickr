@@ -35,5 +35,11 @@ class Photo(db.Model):
       'user_id': self.user_id,
 
       'user': {'id': self.user.id, 'first_name': self.user.first_name, 'last_name': self.user.last_name},
+      # 'tags': [tag.to_dict() for tag in self.tags]
+    }
+
+
+  def tags_to_dict(self):
+    return {
       'tags': [tag.to_dict() for tag in self.tags]
     }

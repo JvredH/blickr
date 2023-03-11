@@ -11,7 +11,9 @@ import brokenImage from '../../photos/errorPhoto/brokenUrl.png'
 import Footer from "../Footer";
 import OpenModalButton from "../OpenModalButton";
 import Error from "../404Page";
-import Tags from "../Tags";
+import TagsGet from "../Tags";
+import { getPhotoTagsThunk } from "../../store/tagsReducer";
+
 
 const PhotoDetails = () => {
   let { photoId } = useParams();
@@ -21,7 +23,7 @@ const PhotoDetails = () => {
   // const sessionUser = useSelector
   // const comments = useSelector(state => state.comments.photoComments)
   const sessionUser = useSelector(state => state.session.user);
-
+  // const photoTags = useSelector(state => state.tags.onePhotoTags);
 
   const date = photo?.date
   const dateObj = new Date(date)
@@ -33,7 +35,10 @@ const PhotoDetails = () => {
   })
 
   useEffect(() => {
-    dispatch(getOnePhotoThunk(+photoId)).then((data) => setPhoto(data)).then(() => setIsLoaded(true));
+    dispatch(getOnePhotoThunk(+photoId))
+      .then((data) => setPhoto(data))
+      .then(dispatch(getPhotoTagsThunk(+photoId)))
+      .then(() => setIsLoaded(true));
 
     return () => setPhoto({});
   }, [dispatch, photoId]);
@@ -96,7 +101,7 @@ const PhotoDetails = () => {
                     ) : null
                   }
               <div>Tags</div>
-              <div><Tags photo={photo}/></div>
+              <div><TagsGet /></div>
             </div>
           </div>
           <Footer />

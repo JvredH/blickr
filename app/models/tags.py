@@ -1,4 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+# from sqlalchemy.orm import backref
 
 
 class Tags(db.Model):
@@ -9,6 +10,8 @@ class Tags(db.Model):
 
   id = db.Column(db.Integer, primary_key=True)
   tag_name = db.Column(db.String, nullable=False)
+
+  # photos = db.relationship('Photo', secondary = 'photos_tags', backref='tags')
 
   def to_dict(self):
     return {

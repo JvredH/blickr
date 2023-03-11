@@ -135,3 +135,13 @@ def add_comment(photoId):
         return newComment.to_dict(), 200
     print(form.errors)
     return {'errors': validation_errors_to_error_messages(form.errors)}, 450
+
+
+@photos_routes.route('/<int:photoId>/tags')
+def get_tags(photoId):
+    photo = Photo.query.get(photoId)
+
+    if not photo:
+        return 'no photo found', 404
+
+    return photo.tags_to_dict(), 200
