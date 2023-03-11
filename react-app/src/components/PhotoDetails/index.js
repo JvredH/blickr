@@ -11,6 +11,7 @@ import brokenImage from '../../photos/errorPhoto/brokenUrl.png'
 import Footer from "../Footer";
 import OpenModalButton from "../OpenModalButton";
 import Error from "../404Page";
+import Tags from "../Tags";
 
 const PhotoDetails = () => {
   let { photoId } = useParams();
@@ -94,6 +95,8 @@ const PhotoDetails = () => {
                       </div>
                     ) : null
                   }
+              <div>Tags</div>
+              <div><Tags photo={photo}/></div>
             </div>
           </div>
           <Footer />
