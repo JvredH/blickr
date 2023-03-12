@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, session, request
 from ..models.photos import Photo
 from flask_login import login_required, current_user
 from ..forms import CreatePhotoForm, CreateCommentForm
+from sqlalchemy import and_
 
 from ..models import Photo, db, Comment, Tags, PhotosTags
 from datetime import datetime, date
@@ -175,3 +176,23 @@ def add_tags(photoId):
         db.session.commit()
 
         return new_tag.to_dict(), 200
+
+
+@photos_routes.route('/<int:photoId>/tags/<int:tagId>', methods=['DELETE'])
+@login_required
+def photo_tag_delete(photoId, tagId):
+    # photo_tag_entry = PhotosTags.query.filter(and_(PhotosTags.tag_id == tagId, PhotosTags.photo_id == photoId)).first()
+    photo_tag_entry = PhotosTags.query.filter_by(tag_id=tagId, photo_id=photoId).first()
+    print('!@##@!$@!#@!#@!%$@#$@!#@!$@!#@!#231',photo_tag_entry)
+    anyRemainingTags = PhotosTags.query.filter(PhotosTags.tag_id == tagId).all()
+
+    tagTable = Tags.query.get(tagId)
+
+    db.session.delete(photo_tag_entry)
+
+    if not anyRemainingTags:
+        db.session.delete(tagTable)
+
+    db.session.commit()
+
+    return jsonify({'tagId': tagId}), 200

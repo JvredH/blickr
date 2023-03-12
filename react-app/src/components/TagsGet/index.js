@@ -1,16 +1,31 @@
 import { useSelector } from "react-redux";
+import TagsDelete from "../TagsDelete";
 
-const TagsGet = () => {
+const TagsGet = ({sessionUser, photo}) => {
   const photoTags = useSelector(state => state.tags.onePhotoTags)
   const tagsArr = Object.values(photoTags)
+
+  let tags;
 
   if (tagsArr.length === 0) {
     return (<div>No tags for this photo</div>)
   }
 
-  const tags = tagsArr.map(tag => {
-    return (<div key={tag.id}>{`[${tag.tag_name}]`}</div>)
-  })
+
+  if (sessionUser && sessionUser.id === photo.user.id) {
+    tags = tagsArr.map(tag => {
+      console.log('tag', tag)
+      return (<div key={tag.id}>{`${tag.tag_name}`}<span><TagsDelete photo={photo} tag={tag}/></span></div>)
+    })
+  } else {
+    tags = tagsArr.map(tag => {
+      return (<div key={tag.id}>{`[${tag.tag_name}]`}</div>)
+    })
+  }
+
+  // const tags = tagsArr.map(tag => {
+  //   return (<div key={tag.id}>{`[${tag.tag_name}]`}</div>)
+  // })
 
   return (
     <div>{tags}</div>

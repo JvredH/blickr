@@ -1,5 +1,6 @@
 const GET_TAGS = 'session/GET_TAGS'
 const ADD_TAG = 'session/ADD_TAG'
+const DELETE_TAG = 'session/DELETE_TAG'
 
 const getPhotoTagsAction = (tags) => {
   return({
@@ -14,6 +15,14 @@ const addPhotoTagAction = (newTag) => {
     newTag
   })
 }
+
+const deletePhotoTagAction = (tagId) => {
+  return({
+    type: DELETE_TAG,
+    tagId
+  })
+}
+
 
 
 export const getPhotoTagsThunk = (photoId) => async dispatch => {
@@ -39,6 +48,18 @@ export const addPhotoTagThunk = (tagToAdd, photoId) => async dispatch => {
   }
 }
 
+export const deletePhotoTagThunk = (photoId, tagId) => async dispatch => {
+  const response = await fetch(`/api/photos/${photoId}/tags/${tagId}`, {
+    method: 'DELETE'
+  })
+
+  if (response.ok) {
+    // const tagToDelete = await response.json();
+    dispatch(deletePhotoTagAction(tagId))
+
+  }
+}
+
 const normalize = (array) => {
   const obj = {};
   array.forEach(el => {obj[el.id] = el})
@@ -50,15 +71,22 @@ const initialState = {allTags: {}, onePhotoTags: {}}
 const tagsReducer = (state = initialState, action) => {
   switch(action.type) {
     case GET_TAGS: {
-      const newState = {...state}
-      console.log('action.tags', action.tags.tags)
+      const newState = {allTags: {}, onePhotoTags: {}}
+      console.log('before normalize newState get tags', newState)
       newState.onePhotoTags = normalize(action.tags.tags)
+      console.log('newState after normalize', newState)
       return newState
     }
     case ADD_TAG: {
       const newState = {...state};
       newState.onePhotoTags[action.newTag.id] = action.newTag
       // console.log('newState from tags reducer -->',newState)
+      return newState
+    }
+    case DELETE_TAG: {
+      const newState = {...state}
+      console.log('action.tagId from reducer', action.tagId)
+      delete newState.onePhotoTags[action.tagId]
       return newState
     }
     default:
