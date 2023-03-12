@@ -28,9 +28,9 @@ const TagsAdd = ({photo}) => {
     }
 
     await dispatch(addPhotoTagThunk(tagToAdd, +photoId))
-    .then(() => dispatch(getPhotoTagsThunk(+photoId)))
-    .then(() => setNewTag(''))
-    .then(() => setErrors([]))
+      .then(() => dispatch(getPhotoTagsThunk(+photoId)))
+      .then(() => setNewTag(''))
+      .then(() => setErrors([]))
   }
 
   return (

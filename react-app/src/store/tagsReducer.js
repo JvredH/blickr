@@ -57,7 +57,7 @@ const tagsReducer = (state = initialState, action) => {
     }
     case ADD_TAG: {
       const newState = {...state};
-      newState.onePhotoTags = {...newState.onePhotoTags, ...action.newTag}
+      newState.onePhotoTags[action.newTag.id] = action.newTag
       // console.log('newState from tags reducer -->',newState)
       return newState
     }
