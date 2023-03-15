@@ -16,13 +16,16 @@ class Photo(db.Model):
 
   user = db.relationship('User', back_populates='photo')
   comment = db.relationship('Comment', back_populates='photo', cascade='all, delete')
+  album = db.relationship('Albums', secondary='albums_photos', back_populates='photos')
 
   if environment == 'production':
     __table_args__ = {'schema': SCHEMA}
 
     tags = db.relationship('Tags', secondary=f'{SCHEMA}.photos_tags', cascade='all, delete')
+    albums = db.relationship('Albums', secondary=f'{SCHEMA}.albums_photos', back_populates='photos')
   else:
     tags = db.relationship('Tags', secondary='photos_tags', cascade='all, delete')
+    albums = db.relationship('Albums', secondary='albums_photos', back_populates='photos')
 
 
   def to_dict(self):
