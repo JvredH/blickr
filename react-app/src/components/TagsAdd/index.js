@@ -24,6 +24,11 @@ const TagsAdd = ({photo}) => {
       return
     }
 
+    if (newTag.length > 20) {
+      setErrors(['Tags can only be 3 - 20 characters long'])
+      return
+    }
+
     if (actualTags.includes(newTag)) {
       setErrors(['Photo already has this tag'])
       return
@@ -42,7 +47,7 @@ const TagsAdd = ({photo}) => {
   return (
     <div className='tag-form-container'>
       <form className='tag-form' onSubmit={handleSubmit}>
-        <input className='tag-add-input' placeholder='Add a tag' type='text' required value={newTag} onChange={e => setNewTag(e.target.value)} minLength='3' maxLength='20'/>
+        <input className='tag-add-input' placeholder='Add a tag' type='text' required value={newTag} onChange={e => setNewTag(e.target.value)} minLength='3' />
         <button className='tag-add-btn' type='submit'>Add</button>
       </form>
       {errors.map((error, idx) => (
