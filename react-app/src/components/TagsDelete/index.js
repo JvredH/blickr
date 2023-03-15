@@ -13,7 +13,7 @@ const TagsDelete = ({photo, tag}) => {
       .then(() => dispatch(getPhotoTagsThunk(photo.id)))
   }
   return (
-    <button onClick={handleClick}>x</button>
+    <button className='tag-delete' onClick={handleClick}>x</button>
   );
 }
 

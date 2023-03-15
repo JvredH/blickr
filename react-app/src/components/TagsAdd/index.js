@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addPhotoTagThunk, getPhotoTagsThunk } from "../../store/tagsReducer";
+import './tagsAdd.css'
 
 
 const TagsAdd = ({photo}) => {
@@ -18,6 +19,11 @@ const TagsAdd = ({photo}) => {
     e.preventDefault()
     setErrors([])
 
+    if (newTag.includes(' ')) {
+      setErrors(['Tags must not have any spaces'])
+      return
+    }
+
     if (actualTags.includes(newTag)) {
       setErrors(['Photo already has this tag'])
       return
@@ -34,10 +40,10 @@ const TagsAdd = ({photo}) => {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input placeholder='Add a tag' type='text' required value={newTag} onChange={e => setNewTag(e.target.value)} minLength='3' maxLength='20'/>
-        <button type='submit'>Add</button>
+    <div className='tag-form-container'>
+      <form className='tag-form' onSubmit={handleSubmit}>
+        <input className='tag-add-input' placeholder='Add a tag' type='text' required value={newTag} onChange={e => setNewTag(e.target.value)} minLength='3' maxLength='20'/>
+        <button className='tag-add-btn' type='submit'>Add</button>
       </form>
       {errors.map((error, idx) => (
                   <div className='errors' key={idx}>{error}</div>

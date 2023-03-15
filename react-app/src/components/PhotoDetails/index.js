@@ -75,7 +75,7 @@ const PhotoDetails = () => {
                 </div>
               </div>
               <div className='comments-container'>
-                <h4 className='comment-h3'>Comments</h4>
+                <div className='comment-h3'>Comments</div>
                 <CommentsCards photo={photo} sessionUser={sessionUser}/>
               </div>
               <div>
@@ -83,26 +83,28 @@ const PhotoDetails = () => {
               </div>
             </div>
             <div className='right-side'>
-              <div className='taken-on'>Taken On {formattedDate}</div>
-                  {sessionUser && photo.user.id === sessionUser.id ? (
-                      <div className='crud-btns'>
-                        <div>
-                          <NavLink to={`/photos/${+photoId}/edit`}>
-                            <button className='edit-btn'>Edit Photo</button>
-                          </NavLink>
+              <div className='taken-on-crud-btns-container'>
+                <div className='taken-on'>Taken On {formattedDate}.</div>
+                    {sessionUser && photo.user.id === sessionUser.id ? (
+                        <div className='crud-btns'>
+                          <div>
+                            <NavLink to={`/photos/${+photoId}/edit`}>
+                              <button className='edit-btn'>Edit Photo</button>
+                            </NavLink>
+                          </div>
+                          <div>
+                            <OpenModalButton
+                            buttonText='Delete'
+                            modalComponent={<PhotoDelete photo={photo} />}
+                            className='delete-btn'
+                            />
+                          </div>
                         </div>
-                        <div>
-                          <OpenModalButton
-                          buttonText='Delete'
-                          modalComponent={<PhotoDelete photo={photo} />}
-                          className='delete-btn'
-                          />
-                        </div>
-                      </div>
-                    ) : null
-                  }
-              <div>Tags</div>
-              <div><TagsGet sessionUser={sessionUser} photo={photo}/></div>
+                      ) : null
+                    }
+              </div>
+              <div className='tags-title-div'>Tags</div>
+              <div className='tags-container'><TagsGet sessionUser={sessionUser} photo={photo}/></div>
               {sessionUser && photo.user.id === sessionUser.id ? <TagsAdd photo={photo}/> : null}
             </div>
           </div>
