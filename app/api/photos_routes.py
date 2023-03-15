@@ -2,8 +2,9 @@ from flask import Blueprint, jsonify, session, request
 from ..models.photos import Photo
 from flask_login import login_required, current_user
 from ..forms import CreatePhotoForm, CreateCommentForm
+from sqlalchemy import and_
 
-from ..models import Photo, db, Comment
+from ..models import Photo, db, Comment, Tags, PhotosTags
 from datetime import datetime, date
 
 photos_routes = Blueprint('photos', __name__)
@@ -135,3 +136,63 @@ def add_comment(photoId):
         return newComment.to_dict(), 200
     print(form.errors)
     return {'errors': validation_errors_to_error_messages(form.errors)}, 450
+
+
+@photos_routes.route('/<int:photoId>/tags')
+def get_tags(photoId):
+    photo = Photo.query.get(photoId)
+
+    if not photo:
+        return 'no photo found', 404
+
+    return photo.tags_to_dict(), 200
+
+
+@photos_routes.route('/<int:photoId>/tags', methods=['POST'])
+@login_required
+def add_tags(photoId):
+    photo = Photo.query.get(photoId)
+    new_tag_name = request.json.get('tag_name').lower()
+
+    existing_tag = Tags.query.filter_by(tag_name=new_tag_name).first()
+
+    if existing_tag:
+        photo_tag = PhotosTags(photo_id=photo.id, tag_id=existing_tag.id)
+        db.session.add(photo_tag)
+        photo.tags.append(existing_tag)
+        db.session.commit()
+        return existing_tag.to_dict(), 200
+
+    else:
+        new_tag = Tags(tag_name=new_tag_name)
+        db.session.add(new_tag)
+        db.session.commit()
+
+        photo_tag = PhotosTags(photo_id=photo.id, tag_id=new_tag.id)
+        db.session.add(photo_tag)
+        db.session.commit()
+
+        photo.tags.append(new_tag)
+        db.session.commit()
+
+        return new_tag.to_dict(), 200
+
+
+@photos_routes.route('/<int:photoId>/tags/<int:tagId>', methods=['DELETE'])
+@login_required
+def photo_tag_delete(photoId, tagId):
+    # photo_tag_entry = PhotosTags.query.filter(and_(PhotosTags.tag_id == tagId, PhotosTags.photo_id == photoId)).first()
+    photo_tag_entry = PhotosTags.query.filter_by(tag_id=tagId, photo_id=photoId).first()
+    print('!@##@!$@!#@!#@!%$@#$@!#@!$@!#@!#231',photo_tag_entry)
+    anyRemainingTags = PhotosTags.query.filter(PhotosTags.tag_id == tagId).all()
+
+    tagTable = Tags.query.get(tagId)
+
+    db.session.delete(photo_tag_entry)
+
+    if not anyRemainingTags:
+        db.session.delete(tagTable)
+
+    db.session.commit()
+
+    return jsonify({'tagId': tagId}), 200

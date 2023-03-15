@@ -82,7 +82,7 @@ function SignupFormPage() {
             <label>
               {/* Password */}
               <input
-                placeHolder='Password'
+                placeholder='Password'
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -92,7 +92,7 @@ function SignupFormPage() {
             <label>
               {/* Confirm Password */}
               <input
-                placeHolder='Confirm Password'
+                placeholder='Confirm Password'
                 type="password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}

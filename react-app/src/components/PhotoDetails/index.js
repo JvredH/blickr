@@ -11,6 +11,10 @@ import brokenImage from '../../photos/errorPhoto/brokenUrl.png'
 import Footer from "../Footer";
 import OpenModalButton from "../OpenModalButton";
 import Error from "../404Page";
+import TagsGet from "../TagsGet";
+import TagsAdd from '../TagsAdd'
+import { getPhotoTagsThunk } from "../../store/tagsReducer";
+
 
 const PhotoDetails = () => {
   let { photoId } = useParams();
@@ -20,7 +24,7 @@ const PhotoDetails = () => {
   // const sessionUser = useSelector
   // const comments = useSelector(state => state.comments.photoComments)
   const sessionUser = useSelector(state => state.session.user);
-
+  // const photoTags = useSelector(state => state.tags.onePhotoTags);
 
   const date = photo?.date
   const dateObj = new Date(date)
@@ -32,7 +36,10 @@ const PhotoDetails = () => {
   })
 
   useEffect(() => {
-    dispatch(getOnePhotoThunk(+photoId)).then((data) => setPhoto(data)).then(() => setIsLoaded(true));
+    dispatch(getOnePhotoThunk(+photoId))
+      .then((data) => setPhoto(data))
+      .then(dispatch(getPhotoTagsThunk(+photoId)))
+      .then(() => setIsLoaded(true));
 
     return () => setPhoto({});
   }, [dispatch, photoId]);
@@ -68,7 +75,7 @@ const PhotoDetails = () => {
                 </div>
               </div>
               <div className='comments-container'>
-                <h4 className='comment-h3'>Comments</h4>
+                <div className='comment-h3'>Comments</div>
                 <CommentsCards photo={photo} sessionUser={sessionUser}/>
               </div>
               <div>
@@ -76,24 +83,29 @@ const PhotoDetails = () => {
               </div>
             </div>
             <div className='right-side'>
-              <div className='taken-on'>Taken On {formattedDate}</div>
-                  {sessionUser && photo.user.id === sessionUser.id ? (
-                      <div className='crud-btns'>
-                        <div>
-                          <NavLink to={`/photos/${+photoId}/edit`}>
-                            <button className='edit-btn'>Edit Photo</button>
-                          </NavLink>
+              <div className='taken-on-crud-btns-container'>
+                <div className='taken-on'>Taken On {formattedDate}.</div>
+                    {sessionUser && photo.user.id === sessionUser.id ? (
+                        <div className='crud-btns'>
+                          <div>
+                            <NavLink to={`/photos/${+photoId}/edit`}>
+                              <button className='edit-btn'>Edit Photo</button>
+                            </NavLink>
+                          </div>
+                          <div>
+                            <OpenModalButton
+                            buttonText='Delete'
+                            modalComponent={<PhotoDelete photo={photo} />}
+                            className='delete-btn'
+                            />
+                          </div>
                         </div>
-                        <div>
-                          <OpenModalButton
-                          buttonText='Delete'
-                          modalComponent={<PhotoDelete photo={photo} />}
-                          className='delete-btn'
-                          />
-                        </div>
-                      </div>
-                    ) : null
-                  }
+                      ) : null
+                    }
+              </div>
+              <div className='tags-title-div'>Tags</div>
+              <div className='tags-container'><TagsGet sessionUser={sessionUser} photo={photo}/></div>
+              {sessionUser && photo.user.id === sessionUser.id ? <TagsAdd photo={photo}/> : null}
             </div>
           </div>
           <Footer />
