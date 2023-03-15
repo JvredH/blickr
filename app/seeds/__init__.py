@@ -27,8 +27,8 @@ def seed():
         undo_comments()
         undo_tags()
         undo_photos_tags()
-        undo_albums()
-        undo_albums_photos()
+        # undo_albums()
+        # undo_albums_photos()
     seed_users()
     # Add other seed functions here
     seed_photos()
