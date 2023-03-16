@@ -25,15 +25,15 @@ function LoginFormPage() {
     <div className='outer-form'>
       <div className='form-container' id='login-form-container'>
         <div>
-          <div className='login-form-header'>Log in to blickr</div>
+          <div className='create-form-header'>Log in to blickr</div>
         </div>
         <div>
           <form className='actual-form' id="login" onSubmit={handleSubmit}>
-            <ul>
+            <div>
               {errors.map((error, idx) => (
-                <li className='errors' key={idx}>{error}</li>
+                <div className='errors' key={idx}>{error}</div>
               ))}
-            </ul>
+            </div>
             <label>
               {/* Email */}
               <input

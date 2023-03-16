@@ -98,15 +98,12 @@ const initialState = {photoComments: {}};
 export default function commentsReducer(state = initialState, action) {
   switch(action.type) {
     case LOAD_COMMENTS: {
-      // console.log('action.comments ---> ', action.comments)
       const newState = {photoComments: {}};
       newState.photoComments = normalize(action.comments)
-      // console.log('newState from reducer -----> ', newState)
       return newState;
     }
     case ADD_COMMENT: {
       const newState = {...state}
-      // console.log('ACTION.CREATEDCOMMENT REDUCER  -----> ', action.createdComment)
       newState.photoComments[action.createdComment.id] = action.createdComment
       return newState
     }

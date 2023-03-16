@@ -3,7 +3,26 @@
 }
 
 div {
-  word-break: break-all;
+  word-break: break-word;
+}
+
+.loading {
+  height: 100vh;
+  width: 100%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.loading-text {
+  margin-top: 15px;
+  font-weight: bold;
 }
 
 .top-half {
