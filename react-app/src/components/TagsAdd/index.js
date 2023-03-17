@@ -13,7 +13,6 @@ const TagsAdd = ({photo}) => {
   const actualTags = currentPhotoTagsArr.map(tag => tag.tag_name)
   let photoId = photo.id
 
-  console.log('actualTags', actualTags)
 
   const handleSubmit = async e => {
     e.preventDefault()
