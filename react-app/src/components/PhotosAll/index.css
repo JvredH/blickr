@@ -1,12 +1,14 @@
 .photos-main-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(auto, minmax(300px, auto));
-  grid-auto-flow: row;
+  /* grid-template-rows: repeat(auto, minmax(300px, auto)); */
+  grid-auto-rows: 232px;
+  /* grid-auto-flow: row; */
   /* margin-top: 65px; */
   gap: 5px;
   max-width: 80%;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 50px;
+  /* margin-top: 10px; */
 }

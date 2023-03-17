@@ -72,9 +72,7 @@ const tagsReducer = (state = initialState, action) => {
   switch(action.type) {
     case GET_TAGS: {
       const newState = {allTags: {}, onePhotoTags: {}}
-      console.log('before normalize newState get tags', newState)
       newState.onePhotoTags = normalize(action.tags.tags)
-      console.log('newState after normalize', newState)
       return newState
     }
     case ADD_TAG: {
@@ -85,7 +83,6 @@ const tagsReducer = (state = initialState, action) => {
     }
     case DELETE_TAG: {
       const newState = {...state}
-      console.log('action.tagId from reducer', action.tagId)
       delete newState.onePhotoTags[action.tagId]
       return newState
     }

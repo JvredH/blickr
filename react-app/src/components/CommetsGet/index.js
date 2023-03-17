@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadCommentsThunk,  } from "../../store/commentsReducer";
 import CommentEditForm from '../CommentEditForm';
-// import { editCommentThunk } from "../../store/commentsReducer";
 import CommentDelete from "../CommentDelete";
 import './commentCard.css'
 
@@ -17,10 +16,6 @@ const CommentsCards = ({ photo, sessionUser }) => {
   }, [dispatch, photo?.id]);
 
 
-  // const handleEditComment = (comment) => {
-  //   // dispatch(editCommentThunk(comment));
-  //   setEditingComment(null);
-  // };
 
   if (!commentsArray) return null
 
@@ -51,16 +46,6 @@ const CommentsCards = ({ photo, sessionUser }) => {
         ) : (
           <div className="actual-comment">{comment.comment}</div>
         )}
-        {/* {canEdit && !isEditing && (
-          <div>
-            <button onClick={() => setEditingComment(comment)}>Edit</button>
-            <CommentDelete
-              comment={comment}
-              sessionUser={sessionUser}
-              photo={photo}
-            />
-          </div>
-        )} */}
       </div>
     );
   });

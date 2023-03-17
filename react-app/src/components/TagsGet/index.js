@@ -15,7 +15,6 @@ const TagsGet = ({sessionUser, photo}) => {
 
   if (sessionUser && sessionUser.id === photo.user.id) {
     tags = tagsArr.map(tag => {
-      console.log('tag', tag)
       return (<div className='tags' key={tag.id}>{`${tag.tag_name}`}<span><TagsDelete photo={photo} tag={tag}/></span></div>)
     })
   } else {
@@ -23,10 +22,6 @@ const TagsGet = ({sessionUser, photo}) => {
       return (<div className='tags' key={tag.id}>{`${tag.tag_name}`}</div>)
     })
   }
-
-  // const tags = tagsArr.map(tag => {
-  //   return (<div key={tag.id}>{`[${tag.tag_name}]`}</div>)
-  // })
 
   return (
     <div>{tags}</div>

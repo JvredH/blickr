@@ -14,6 +14,7 @@ import Error from "../404Page";
 import TagsGet from "../TagsGet";
 import TagsAdd from '../TagsAdd'
 import { getPhotoTagsThunk } from "../../store/tagsReducer";
+import RingLoader from "react-spinners/RingLoader";
 
 
 const PhotoDetails = () => {
@@ -49,7 +50,22 @@ const PhotoDetails = () => {
 
   return (
     <>
-      {!isLoaded && <p>Loading...</p>}
+      {!isLoaded && (
+      <div className='loading'>
+        <div className='loading-content'>
+          <div>
+            <RingLoader
+              color='purple'
+              size={60}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          </div>
+          <div className='loading-text'>
+            Loading...
+          </div>
+        </div>
+      </div>)}
       {isLoaded && photo && (
         <div className="photo-detail-main-container">
           <div className="top-half">
@@ -94,7 +110,7 @@ const PhotoDetails = () => {
                           </div>
                           <div>
                             <OpenModalButton
-                            buttonText='Delete'
+                            buttonText='Delete Photo'
                             modalComponent={<PhotoDelete photo={photo} />}
                             className='delete-btn'
                             />

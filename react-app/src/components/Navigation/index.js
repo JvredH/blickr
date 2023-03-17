@@ -21,11 +21,18 @@ function Navigation({ isLoaded }){
     }
   }, [location.pathname]);
 
+	let blickrPath;
+	if (!sessionUser) {
+		blickrPath = '/'
+	} else {
+		blickrPath ='/photos'
+	}
+
 
 	return (
 		<div className='nav-container'>
 			<div className='nav-left'>
-				<NavLink exact to="/" className='nav-link' id='name'>blickr</NavLink>
+				<NavLink exact to={blickrPath} className='nav-link' id='name'>blickr</NavLink>
 				{exploreBtn}
 			</div>
 			<div>
@@ -58,7 +65,7 @@ function Navigation({ isLoaded }){
 
 export default Navigation;
 
-{/* <div className='nav-right'>
+/* <div className='nav-right'>
 	<div>
 		<NavLink to='/login'>Log In</NavLink>
 	</div>
@@ -68,7 +75,7 @@ export default Navigation;
 	<div>
 		<ProfileButton user={sessionUser} />
 	</div>
-</div> */}
+</div> */
 
 
 
