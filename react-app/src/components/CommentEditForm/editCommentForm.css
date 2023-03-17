@@ -12,3 +12,7 @@
   cursor: pointer;
   visibility: hidden;
 }
+
+#edit-comment-box {
+  padding: 5px;
+}
