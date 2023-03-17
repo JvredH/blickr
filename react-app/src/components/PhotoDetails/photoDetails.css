@@ -143,6 +143,10 @@ textarea {
   resize: none;
 }
 
+textarea:focus {
+  outline: none;
+}
+
 .fa-solid {
   /* border: 1px black solid; */
   padding: 7px;
@@ -165,3 +169,7 @@ textarea {
   padding: 5px;
   border-radius: 4px;
 }
+
+/* :focus {
+  outline: none;
+} */
