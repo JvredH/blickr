@@ -2,7 +2,7 @@ from app.models import db, PhotosTags, environment, SCHEMA
 
 def seed_photos_tags():
     all_photos_tags = []
-    for photo_id in range(1, 11):
+    for photo_id in range(1, 5):
         for tag_id in range(1, 9):
             photo_tag = PhotosTags(photo_id=photo_id, tag_id=tag_id)
             all_photos_tags.append(photo_tag)
