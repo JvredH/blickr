@@ -9,6 +9,10 @@
   font-size: 12px;
 }
 
+.tag-add-input:focus {
+  outline: none;
+}
+
 .tag-add-btn {
   background-color: rgb(48, 149, 238);
   cursor: pointer;

@@ -22,8 +22,8 @@ const CommentEditForm = ({ comment, photo, setEditingComment }) => {
 
   return (
     <form className='edit-comment-form' onSubmit={handleSubmit}>
-      <textarea value={editedComment} onChange={(e) => setEditedComment(e.target.value)} rows='4' cols='50' minLength='1' maxLength='450' required/>
-      <button className='edit button' type="submit">Save</button>
+      <textarea id='edit-comment-box' value={editedComment} onChange={(e) => setEditedComment(e.target.value)} rows='4' cols='50' minLength='1' maxLength='450' required/>
+      <button className='comment-btn' type="submit">Save</button>
     </form>
   );
 };
