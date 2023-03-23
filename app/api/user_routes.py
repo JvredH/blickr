@@ -23,3 +23,11 @@ def user(id):
     """
     user = User.query.get(id)
     return user.to_dict()
+
+@user_routes.route('/<int:userId>/photos')
+def usersPhotos(userId):
+    """ Query for all photos a user posted """
+
+    user = User.query.get(userId)
+
+    return user.photo_to_dict(), 200
