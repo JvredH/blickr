@@ -12,6 +12,7 @@ import EditPhotoForm from "./components/PhotoEditForm";
 import SplashPage from "./components/SplashPage";
 import Error from "./components/404Page";
 import UserPhotosPage from "./components/UserPhotosPage";
+import UserAlbumsPage from "./components/UserAlbumsPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -42,6 +43,9 @@ function App() {
           </Route>
           <Route path='/user/:userId/photos'>
             <UserPhotosPage />
+          </Route>
+          <Route path='/user/:userId/albums'>
+            <UserAlbumsPage />
           </Route>
           <Route path="/login" >
             <LoginFormPage />

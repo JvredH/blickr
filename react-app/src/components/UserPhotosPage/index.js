@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, NavLink } from "react-router-dom";
 import { getUsersPhotosThunk } from "../../store/photosReducer";
+import UserNav from "../UserNav/index.js";
 
 
 const UserPhotosPage = () => {
@@ -40,12 +41,15 @@ const UserPhotosPage = () => {
   return (
     <>
 
+      <UserNav userId={userId}/>
       {!isLoaded && (<div>Loading...</div>)}
 
       {isLoaded && userPhotos && (
-        <div className='photos-main-container'>
-          {userPhotoCards}
-        </div>
+        <>
+          <div className='photos-main-container'>
+            {userPhotoCards}
+          </div>
+        </>
       )}
 
     </>
