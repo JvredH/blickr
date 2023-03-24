@@ -96,6 +96,11 @@
   color: white;
 }
 
+.explore-btn a:hover, .nav-link:hover {
+  color: grey;
+  transition: 1s ease;
+}
+
 .explore-btn.NavLink {
   color: white;
 }
