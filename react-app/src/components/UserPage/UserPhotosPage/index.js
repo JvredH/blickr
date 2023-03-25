@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, NavLink } from "react-router-dom";
-import { getUsersPhotosThunk } from "../../store/photosReducer";
+import { getUsersPhotosThunk } from "../../../store/photosReducer";
 import UserNav from "../UserNav/index.js";
+import UserPageHeader from "..";
 
 
 const UserPhotosPage = () => {
@@ -12,6 +13,8 @@ const UserPhotosPage = () => {
   const userPhotos = useSelector(state => state.photos.usersPhotos)
   const userPhotosArr = Object.values(userPhotos)
 
+  console.log('checkin',userPhotos)
+
   useEffect (() => {
     dispatch(getUsersPhotosThunk(userId))
       .then(() => setIsLoaded(true))
@@ -19,9 +22,9 @@ const UserPhotosPage = () => {
       return () => setIsLoaded(false)
   }, [dispatch, userId])
 
-  if (!userPhotos) {
-    return <div>user has no photos yet</div>
-  }
+  // if (userPhotosArr.length === 0) {
+  //   return <div>user has no photos yet</div>
+  // }
 
   const userPhotoCards = userPhotosArr.map(photo => {
     console.log('inside for each',photo)
@@ -40,20 +43,39 @@ const UserPhotosPage = () => {
 
   return (
     <>
+      {/* <UserPageHeader userPhotos={userPhotos}/> */}
+      <div className='banner-photo-container'>
+        <div className='banner-content'>
+          <div className='user-profile-photo'></div>
+          <div>
+            <div className='users-name'></div>
+            <div className='users-email'></div>
+          </div>
+        </div>
+      </div>
 
       <UserNav userId={userId}/>
+
       {!isLoaded && (<div>Loading...</div>)}
 
-      {isLoaded && userPhotos && (
-        <>
+      {isLoaded && userPhotosArr.length !== 0 ? (
           <div className='photos-main-container'>
             {userPhotoCards}
           </div>
-        </>
+        ) : (
+          <div>user has no photos yet</div>
       )}
-
     </>
   )
 }
 
 export default UserPhotosPage;
+
+
+      {/* {isLoaded && userPhotos && (
+        <>
+          <div className='photos-main-container'>
+            {userPhotoCards}
+          </div>
+        </> ? : <div>user has no photos yet</div>
+      )} */}

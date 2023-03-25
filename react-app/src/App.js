@@ -11,8 +11,8 @@ import CreatePhotoForm from "./components/photoCreateForm";
 import EditPhotoForm from "./components/PhotoEditForm";
 import SplashPage from "./components/SplashPage";
 import Error from "./components/404Page";
-import UserPhotosPage from "./components/UserPhotosPage";
-import UserAlbumsPage from "./components/UserAlbumsPage";
+import UserPhotosPage from "./components/UserPage/UserPhotosPage";
+import UserAlbumsPage from "./components/UserPage/UserAlbumsPage";
 
 function App() {
   const dispatch = useDispatch();
