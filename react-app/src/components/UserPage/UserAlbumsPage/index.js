@@ -11,7 +11,7 @@ const UserAlbumsPage = () => {
   return (
   <div>
     <UserPageHeader userId={userId}/>
-    <UserNav userId={userId} />
+    {/* <UserNav userId={userId} /> */}
     <div>Hello from Users Albums Page</div>
   </div>
   )

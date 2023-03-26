@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import './userNav.css'
+// import './userNav.css'
 
 const UserNav = ({userId}) => {
   return (

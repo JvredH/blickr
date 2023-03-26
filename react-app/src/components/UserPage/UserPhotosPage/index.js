@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, NavLink } from "react-router-dom";
 import { getUsersPhotosThunk } from "../../../store/photosReducer";
-import UserNav from "../UserNav/index.js";
 import UserPageHeader from "..";
 import {getUsersDataThunk} from "../../../store/usersDataReducer";
 import './userPhotos.css'
@@ -13,9 +12,9 @@ const UserPhotosPage = () => {
   const [isLoaded, setIsLoaded] = useState(false)
   const userPhotos = useSelector(state => state.photos.usersPhotos)
   const userPhotosArr = Object.values(userPhotos)
-  const userData = useSelector(state => state.usersData)
+  // const userData = useSelector(state => state.usersData)
 
-  console.log('USER DATA',userData)
+  // console.log('USER DATA',userData)
 
 
   useEffect (() => {
@@ -49,7 +48,7 @@ const UserPhotosPage = () => {
 
   return (
     <>
-      <div className='banner-photo-container'>
+      {/* <div className='banner-photo-container'>
         <div className='banner-content'>
           <div className='user-profile-photo'></div>
           <div>
@@ -57,10 +56,10 @@ const UserPhotosPage = () => {
             <div className='users-email'>{userData?.email}</div>
           </div>
         </div>
-      </div>
-      {/* <UserPageHeader userPhotos={userPhotos}/> */}
+      </div> */}
+      <UserPageHeader userPhotos={userPhotos} userId={userId}/>
 
-      <UserNav userId={userId}/>
+      {/* <UserNav userId={userId}/> */}
 
 
       {!isLoaded && (<div>Loading...</div>)}
