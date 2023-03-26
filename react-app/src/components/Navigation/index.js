@@ -8,9 +8,10 @@ function Navigation({ isLoaded }){
 	const sessionUser = useSelector(state => state.session.user);
 	const location = useLocation();
   const [exploreBtn, setExploreBtn] = useState(null);
+	const [youBtn, setYouBtn] = useState(null)
 
   useEffect(() => {
-    if (location.pathname.includes('/photos')) {
+    if (location.pathname.includes('/photos') || location.pathname.includes('/albums')) {
       setExploreBtn(
         <div className='explore-btn'>
           <NavLink to='/photos'>Explore</NavLink>
@@ -19,7 +20,18 @@ function Navigation({ isLoaded }){
     } else {
       setExploreBtn(null);
     }
-  }, [location.pathname]);
+
+		if ((location.pathname.includes('/albums') || location.pathname.includes('/photos')) && sessionUser) {
+			setYouBtn(
+				<div className='explore-btn'>
+					<NavLink to={`/user/${sessionUser.id}/photos`}>You</NavLink>
+				</div>
+			)
+		} else {
+			setYouBtn(null)
+		}
+
+  }, [location.pathname, sessionUser]);
 
 	let blickrPath;
 	if (!sessionUser) {
@@ -33,6 +45,7 @@ function Navigation({ isLoaded }){
 		<div className='nav-container'>
 			<div className='nav-left'>
 				<NavLink exact to={blickrPath} className='nav-link' id='name'>blickr</NavLink>
+				{youBtn}
 				{exploreBtn}
 			</div>
 			<div>
