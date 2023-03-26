@@ -11,7 +11,7 @@ function LoginFormPage() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
-  if (sessionUser) return <Redirect to="/photos" />;
+  if (sessionUser) return <Redirect to={`/user/${sessionUser.id}/photos`} />;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,6 +19,7 @@ function LoginFormPage() {
     if (data) {
       setErrors(data);
     }
+
   };
 
   return (

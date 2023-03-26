@@ -3,6 +3,7 @@ const ONE_PHOTO = 'session/ONE_PHOTO'
 const CREATE_PHOTO = 'session/CREATE_PHOTO'
 const EDIT_PHOTO = 'session/EDIT_PHOTO'
 const DELETE_PHOTO = 'session/DELETE_PHOTO'
+const GET_USER_PHOTOS = 'session/GET_USER_PHOTOS'
 
 const loadPhotosAction = (photos) => {
   return ({
@@ -36,6 +37,14 @@ const deletePhotoAction = (photoId) => {
   return({
     type: DELETE_PHOTO,
     photoId
+  })
+}
+
+const getUsersPhotosAction = (userPhotos) => {
+  console.log('from action creator', userPhotos)
+  return ({
+    type: GET_USER_PHOTOS,
+    userPhotos
   })
 }
 
@@ -113,18 +122,29 @@ export const deletePhotoThunk = (photoId) => async dispatch => {
   }
 }
 
+export const getUsersPhotosThunk = (userId) => async dispatch => {
+  const response = await fetch(`/api/users/${userId}/photos`)
+
+  if (response.ok) {
+    const userPhotos = await response.json()
+    console.log('usersphotos --->', userPhotos)
+    dispatch(getUsersPhotosAction(userPhotos))
+    // return userPhotos
+  }
+}
+
 const normalize = (array) => {
   const obj = {};
   array.forEach(el => {obj[el.id] = el})
   return obj
 }
 
-const initialState = {allPhotos: {}, onePhoto: {}}
+const initialState = {allPhotos: {}, onePhoto: {}, usersPhotos: {}}
 
 export default function photosReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_PHOTOS: {
-      const newState = {allPhotos: {}, onePhoto: {}};
+      const newState = {allPhotos: {}, onePhoto: {}, usersPhotos: {}};
       newState.allPhotos = normalize(action.photos.allPhotos)
       // console.log('newState ------->', newState)
       return newState;
@@ -152,6 +172,12 @@ export default function photosReducer(state = initialState, action) {
       const newState = {...state, onePhoto: {}}
       // console.log('delete thunker hit')
       delete newState.allPhotos[action.photoId]
+      return newState
+    }
+    case GET_USER_PHOTOS: {
+      const newState = {...state}
+      console.log('user photos payload --->', action.userPhotos)
+      newState.usersPhotos = normalize(action.userPhotos.photos)
       return newState
     }
     default:

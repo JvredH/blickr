@@ -16,10 +16,18 @@ def users():
 
 
 @user_routes.route('/<int:id>')
-@login_required
+# @login_required
 def user(id):
     """
     Query for a user by id and returns that user in a dictionary
     """
     user = User.query.get(id)
     return user.to_dict()
+
+@user_routes.route('/<int:userId>/photos')
+def usersPhotos(userId):
+    """ Query for all photos a user posted """
+
+    user = User.query.get(userId)
+
+    return user.photo_to_dict(), 200

@@ -4,6 +4,7 @@ import { loadCommentsThunk,  } from "../../store/commentsReducer";
 import CommentEditForm from '../CommentEditForm';
 import CommentDelete from "../CommentDelete";
 import './commentCard.css'
+import { NavLink } from "react-router-dom";
 
 const CommentsCards = ({ photo, sessionUser }) => {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const CommentsCards = ({ photo, sessionUser }) => {
     return (
       <div key={comment.id} className="comment-card">
         <div>
-          <div className='name-crud-btn'>{`${comment.user.first_name} ${comment.user.last_name}`}
+          <div className='name-crud-btn'><NavLink to={`/user/${comment.user.id}/photos`} className='comment-navlink'>{`${comment.user.first_name} ${comment.user.last_name}`}</NavLink>
           {canEdit && !isEditing && (
             <div>
               <button  className='crud-btn' onClick={() => setEditingComment(comment)}>Edit</button>

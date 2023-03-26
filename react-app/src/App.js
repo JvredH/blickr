@@ -10,8 +10,9 @@ import PhotoDetails from "./components/PhotoDetails";
 import CreatePhotoForm from "./components/photoCreateForm";
 import EditPhotoForm from "./components/PhotoEditForm";
 import SplashPage from "./components/SplashPage";
-// import Footer from "./components/Footer";
 import Error from "./components/404Page";
+import UserPhotosPage from "./components/UserPage/UserPhotosPage";
+import UserAlbumsPage from "./components/UserPage/UserAlbumsPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -39,6 +40,12 @@ function App() {
           </Route>
           <Route path='/photos/:photoId' exact>
             <PhotoDetails />
+          </Route>
+          <Route path='/user/:userId/photos'>
+            <UserPhotosPage />
+          </Route>
+          <Route path='/user/:userId/albums'>
+            <UserAlbumsPage />
           </Route>
           <Route path="/login" >
             <LoginFormPage />

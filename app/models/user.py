@@ -38,3 +38,8 @@ class User(db.Model, UserMixin):
             'last_name': self.last_name,
             'email': self.email
         }
+
+    def photo_to_dict(self):
+        return {
+            'photos': [photos.to_dict() for photos in self.photo]
+        }

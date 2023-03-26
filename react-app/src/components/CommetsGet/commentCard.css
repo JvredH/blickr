@@ -3,6 +3,12 @@
   flex-direction: row;
   align-items: center;
 } */
+
+.comment-navlink {
+  text-decoration: none;
+  color: rgb(48, 149, 238);
+}
+
 .comment-card {
   margin-bottom: 15px;
   max-width: 522px;
