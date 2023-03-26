@@ -1,0 +1,17 @@
+.usernav-navlinks {
+  display: flex;
+  height: 50px;
+  align-items: center;
+  margin-left: 175px;
+  border-bottom: 1px solid grey;
+  margin-bottom: 5px;
+}
+
+.user-nav-navlink {
+text-decoration: none;
+color: black;
+}
+
+.albums {
+  margin-left: 10px;
+}
