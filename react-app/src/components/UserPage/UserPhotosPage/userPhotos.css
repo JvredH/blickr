@@ -1,0 +1,35 @@
+.banner-photo-container {
+  background-image: url(https://combo.staticflickr.com/pw/images/coverphoto10_h.jpg.v3);
+  /* height: 250px;
+  width: 100%;
+  background-attachment: scroll;
+  background-position: 50% 50%;
+  background-size: 100%;
+  display: flex;
+  align-items: flex-end; */
+  background-position:center;
+  background-size:cover;
+  height: 200px;
+  margin-bottom: none;
+  display: flex;
+  align-items: flex-end;
+}
+
+.banner-content {
+  color: white;
+  padding-left: 14px;
+  max-width: 1400px;
+  width: 100%;
+  margin-left: 160px;
+  margin-bottom: 30px;
+}
+
+.users-name {
+  font-size: 36px;
+  color: white;
+}
+
+.users-email {
+  margin-top: 5px;
+  font-size: 20px;
+}

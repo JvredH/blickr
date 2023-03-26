@@ -4,7 +4,8 @@ import { useParams, NavLink } from "react-router-dom";
 import { getUsersPhotosThunk } from "../../../store/photosReducer";
 import UserNav from "../UserNav/index.js";
 import UserPageHeader from "..";
-
+import {getUsersDataThunk} from "../../../store/usersDataReducer";
+import './userPhotos.css'
 
 const UserPhotosPage = () => {
   const dispatch = useDispatch()
@@ -12,12 +13,17 @@ const UserPhotosPage = () => {
   const [isLoaded, setIsLoaded] = useState(false)
   const userPhotos = useSelector(state => state.photos.usersPhotos)
   const userPhotosArr = Object.values(userPhotos)
+  const userData = useSelector(state => state.usersData)
 
-  console.log('checkin',userPhotos)
+  console.log('USER DATA',userData)
+
 
   useEffect (() => {
     dispatch(getUsersPhotosThunk(userId))
+      .then(() => dispatch(getUsersDataThunk(userId)))
       .then(() => setIsLoaded(true))
+
+      // dispatch(getUsersDataThunk(userId))
 
       return () => setIsLoaded(false)
   }, [dispatch, userId])
@@ -43,18 +49,19 @@ const UserPhotosPage = () => {
 
   return (
     <>
-      {/* <UserPageHeader userPhotos={userPhotos}/> */}
       <div className='banner-photo-container'>
         <div className='banner-content'>
           <div className='user-profile-photo'></div>
           <div>
-            <div className='users-name'></div>
-            <div className='users-email'></div>
+            <div className='users-name'>{`${userData?.first_name} ${userData?.last_name}`}</div>
+            <div className='users-email'>{userData?.email}</div>
           </div>
         </div>
       </div>
+      {/* <UserPageHeader userPhotos={userPhotos}/> */}
 
       <UserNav userId={userId}/>
+
 
       {!isLoaded && (<div>Loading...</div>)}
 
