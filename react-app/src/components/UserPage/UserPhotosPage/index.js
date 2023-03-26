@@ -5,6 +5,7 @@ import { getUsersPhotosThunk } from "../../../store/photosReducer";
 import UserPageHeader from "..";
 import {getUsersDataThunk} from "../../../store/usersDataReducer";
 import './userPhotos.css'
+import RingLoader from "react-spinners/RingLoader";
 
 const UserPhotosPage = () => {
   const dispatch = useDispatch()
@@ -62,7 +63,23 @@ const UserPhotosPage = () => {
       {/* <UserNav userId={userId}/> */}
 
 
-      {!isLoaded && (<div>Loading...</div>)}
+      {!isLoaded && (
+            <div className='loading'>
+            <div className='loading-content'>
+              <div>
+                <RingLoader
+                  color='purple'
+                  size={60}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                />
+              </div>
+              <div className='loading-text'>
+                Loading...
+              </div>
+            </div>
+          </div>
+      )}
 
       {isLoaded && userPhotosArr.length !== 0 ? (
           <div className='photos-main-container'>
