@@ -13,6 +13,8 @@ import SplashPage from "./components/SplashPage";
 import Error from "./components/404Page";
 import UserPhotosPage from "./components/UserPage/UserPhotosPage";
 import UserAlbumsPage from "./components/UserPage/UserAlbumsPage";
+import AlbumsGetOne from "./components/AlbumsGetOne";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -40,6 +42,9 @@ function App() {
           </Route>
           <Route path='/photos/:photoId' exact>
             <PhotoDetails />
+          </Route>
+          <Route path='/albums/:albumId' exact>
+            <AlbumsGetOne />
           </Route>
           <Route path='/user/:userId/photos'>
             <UserPhotosPage />

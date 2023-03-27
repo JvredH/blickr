@@ -1,0 +1,26 @@
+.album-page-header {
+background-image: url(https://live.staticflickr.com/4184/34331659122_8a45e78e40_b.jpg);
+background-position:center;
+background-size:cover;
+height: 200px;
+margin-left: auto;
+margin-right: auto;
+max-width: 80%;
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+color: white;
+margin-bottom: 5px
+}
+
+.album-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.album-title {
+  font-size: 30px;
+  font-weight: bold;
+}

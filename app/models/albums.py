@@ -30,3 +30,4 @@ class Albums(db.Model):
           "user": {"first_name": self.user.first_name, "last_name": self.user.last_name},
           "photos": [photo.to_dict() for photo in self.photos]
       }
+

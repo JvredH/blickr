@@ -6,8 +6,6 @@ import UserPageHeader from "..";
 import { getUsersAlbumsThunk } from "../../../store/albumsReducer";
 import RingLoader from "react-spinners/RingLoader";
 
-
-
 const UserAlbumsPage = () => {
   const {userId} = useParams();
   const dispatch = useDispatch();
@@ -52,7 +50,7 @@ const UserAlbumsPage = () => {
   return (
   <>
     <UserPageHeader userId={userId}/>
-    
+
     {!isLoaded && (
           <div className='loading'>
             <div className='loading-content'>
