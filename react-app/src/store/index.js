@@ -5,13 +5,15 @@ import photosReducer from './photosReducer';
 import commentsReducer from './commentsReducer';
 import tagsReducer from './tagsReducer';
 import usersDataReducer from './usersDataReducer';
+import albumsReducer from './albumsReducer';
 
 const rootReducer = combineReducers({
   session,
   photos: photosReducer,
   comments: commentsReducer,
   tags: tagsReducer,
-  usersData: usersDataReducer
+  usersData: usersDataReducer,
+  albums: albumsReducer
 });
 
 

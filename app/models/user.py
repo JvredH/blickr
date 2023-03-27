@@ -43,3 +43,8 @@ class User(db.Model, UserMixin):
         return {
             'photos': [photos.to_dict() for photos in self.photo]
         }
+
+    def albums_to_dict(self):
+        return {
+            'albums': [album.to_dict() for album in self.albums]
+        }
