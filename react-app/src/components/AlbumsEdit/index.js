@@ -87,7 +87,7 @@ const AlbumsEditForm = ({albumPhotos, album}) => {
                   ))}
               </div>
             </label>
-            <button className={`create-album-submit ${pickedPhotos.length > 0 ? "" : "grayed-out"}`} type="submit" disabled={pickedPhotos.length === 0}>
+            <button className={`album-submit-btn ${pickedPhotos.length > 0 ? "" : "grayed-out"}`} type="submit" disabled={pickedPhotos.length === 0}>
             Create Album
             </button>
           </div>
