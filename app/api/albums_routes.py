@@ -51,11 +51,45 @@ def create_album():
             photo = Photo.query.get(photo_id)
 
             if photo:
-                album_photo_join = AlbumsPhotos(album_id=album.id, photo_id=photo_id)
+                album_photos = AlbumsPhotos(album_id=album.id, photo_id=photo_id)
                 album.photos.append(photo)
-                db.session.add(album_photo_join)
+                db.session.add(album_photos)
 
         db.session.commit()
 
         return album.to_dict(), 200
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 500
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+
+@albums_routes.route('/<int:albumId>', methods=['PUT'])
+@login_required
+def edit_album(albumId):
+    """ Route to edit a album """
+    album = Albums.query.get(albumId)
+
+    if not album:
+        return 'album cannot be found', 404
+
+    form = CreateAlbumForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    data = request.get_json()
+
+    if form.validate_on_submit():
+        album.name = data['albums_name']
+        album.description = data['description']
+        AlbumsPhotos.query.filter_by(album_id=albumId).delete()
+
+        album.photos.clear()
+
+        for photo_id in data['photo_ids']:
+            photo = Photo.query.get(photo_id)
+
+            if photo:
+                album_photos = AlbumsPhotos(album_id=album.id, photo_id=photo_id)
+                album.photos.append(photo)
+                db.session.add(album_photos)
+
+        db.session.commit()
+
+        return album.to_dict(), 200
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400

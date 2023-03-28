@@ -5,6 +5,8 @@ import { getOneAlbumDetailsThunk } from "../../store/albumsReducer";
 import PhotoCards from "../PhotoCards";
 import RingLoader from "react-spinners/RingLoader";
 import './albumsGetOne.css'
+import OpenModalButton from "../OpenModalButton";
+import AlbumsEditForm from "../AlbumsEdit";
 
 
 const AlbumsGetOne = () => {
@@ -12,12 +14,15 @@ const AlbumsGetOne = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false)
   const album = useSelector(state => state.albums.singleAlbum)
+  const sessionUser = useSelector(state => state.session.user)
   const photosArr = album.photos ? Object.values(album.photos) : [];
 
   useEffect(() => {
     dispatch(getOneAlbumDetailsThunk(albumId))
     .then(() => setIsLoaded(true))
   }, [dispatch, albumId])
+
+
 
 
   let photoCard;
@@ -59,7 +64,15 @@ const AlbumsGetOne = () => {
               <div className='album-title'>{album.name}</div>
               <div className='photo-count'>{`${photosArr.length} photos in this album`}</div>
               <div className='album-creator'>{`Album Created By ${album.user.first_name} ${album.user.last_name}`}</div>
-              <div>add edit and delete album btns here..?</div>
+              <div>
+                {sessionUser && album.user_id === sessionUser.id ?
+                  <OpenModalButton
+                    className="new-album-button"
+                    buttonText={<> <span className="new-album-text">Edit</span></>}
+                    modalComponent={<AlbumsEditForm albumPhotos={photosArr} album={album}/>}
+                  />
+                  : null }
+              </div>
             </div>
           </div>
 
