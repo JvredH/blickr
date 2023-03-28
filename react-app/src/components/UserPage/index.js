@@ -1,9 +1,17 @@
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getUsersDataThunk } from "../../store/usersDataReducer";
 import './userPage.css'
 
 const UserPageHeader = ({userId}) => {
+  const dispatch = useDispatch()
   const userData = useSelector(state => state.usersData)
+
+  useEffect (() => {
+    dispatch(getUsersDataThunk(userId))
+  }, [dispatch, userId])
+
 
 return (
   <div>

@@ -1,0 +1,81 @@
+.album-modal-container {
+  height: 425px;
+  width: 500px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.album-form-container {
+  display: flex;
+  flex-direction: column;
+  height: 14vh;
+}
+
+.edit-label-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.album-form-container input {
+  height: 20px;
+  width: 485px;
+  border-radius: 10px;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.mini-photo-container {
+display: flex;
+flex-wrap: wrap;
+max-height: 250px;
+overflow-y: auto;
+}
+
+.mini-photo-cards {
+display: flex;
+flex-direction: column;
+/* align-items: center; */
+margin: 5px;
+cursor: pointer;
+}
+
+.mini-photo-cards:hover {
+  opacity: 0.7;
+}
+
+.photo-select-label input {
+  display: flex;
+}
+
+.mini-img {
+width: 110px;
+height: 100px;
+object-fit: cover;
+border-radius: 5px;
+}
+
+.mini-photo-cards.selected {
+outline: 3px solid red;
+border-radius: 5px;
+}
+
+.album-submit-btn {
+height: 35px;
+width: 350px;
+color: white;
+font-size: 15px;
+font-weight: bold;
+background-color: #128FDC;
+border: none;
+border-radius: 10px;
+cursor: pointer;
+margin: 10px auto;
+}
+
+.grayed-out {
+background-color: gray;
+}

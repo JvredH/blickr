@@ -31,3 +31,12 @@ def usersPhotos(userId):
     user = User.query.get(userId)
 
     return user.photo_to_dict(), 200
+
+
+@user_routes.route('/<int:userId>/albums')
+def usersAlbums(userId):
+    """ Query for all albums a user has """
+
+    user = User.query.get(userId)
+
+    return user.albums_to_dict(), 200

@@ -19,3 +19,15 @@ class Albums(db.Model):
     photos = db.relationship('Photo', secondary=f'{SCHEMA}.albums_photos', back_populates='albums', cascade='all, delete')
   else:
     photos = db.relationship('Photo', secondary='albums_photos', back_populates='albums', cascade='all, delete')
+
+  def to_dict(self):
+      return {
+          "id": self.id,
+          "user_id": self.user_id,
+          "name" : self.albums_name,
+          "description" : self.description,
+
+          "user": {"first_name": self.user.first_name, "last_name": self.user.last_name},
+          "photos": [photo.to_dict() for photo in self.photos]
+      }
+
