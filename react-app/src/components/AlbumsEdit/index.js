@@ -78,7 +78,7 @@ const AlbumsEditForm = ({albumPhotos, album}) => {
                   <div className="errors-map">Must pick at least one photo.</div>
               )}
             <label>
-              Photos
+              Pick Photos to Add to Album
               <div className="photo-select-container">
                   {usersPhotosArr.map((photo) => (
                   <div key={photo.id} className={`photo-select-label ${isPicked(photo) ? "selected" : ""}`} onClick={() => handlePickedPhotos(photo)}>

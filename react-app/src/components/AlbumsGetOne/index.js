@@ -7,6 +7,8 @@ import RingLoader from "react-spinners/RingLoader";
 import './albumsGetOne.css'
 import OpenModalButton from "../OpenModalButton";
 import AlbumsEditForm from "../AlbumsEdit";
+import AlbumDelete from "../AlbumsDelete";
+
 
 
 const AlbumsGetOne = () => {
@@ -21,8 +23,6 @@ const AlbumsGetOne = () => {
     dispatch(getOneAlbumDetailsThunk(albumId))
     .then(() => setIsLoaded(true))
   }, [dispatch, albumId])
-
-
 
 
   let photoCard;
@@ -61,16 +61,23 @@ const AlbumsGetOne = () => {
         <div>
           <div className='album-page-header'>
             <div className='album-details'>
-              <div className='album-title'>{album.name}</div>
+              <div className='album-title'>{album?.name}</div>
               <div className='photo-count'>{`${photosArr.length} photos in this album`}</div>
-              <div className='album-creator'>{`Album Created By ${album.user.first_name} ${album.user.last_name}`}</div>
+              <div className='album-creator'>{`Album Created By ${album?.user?.first_name} ${album?.user?.last_name}`}</div>
               <div>
-                {sessionUser && album.user_id === sessionUser.id ?
+                {sessionUser && album?.user_id === sessionUser.id ?
+                <div>
                   <OpenModalButton
                     className="new-album-button"
                     buttonText={<> <span className="new-album-text">Edit</span></>}
                     modalComponent={<AlbumsEditForm albumPhotos={photosArr} album={album}/>}
                   />
+                  <OpenModalButton
+                  buttonText='Delete'
+                  modalComponent={<AlbumDelete album={album} />}
+                  className='delete-btn'
+                  />
+                </div>
                   : null }
               </div>
             </div>

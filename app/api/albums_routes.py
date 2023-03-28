@@ -29,6 +29,24 @@ def one_album(albumId):
     return album.to_dict(), 200
 
 
+@albums_routes.route('/<int:albumId>', methods=['DELETE'])
+@login_required
+def delete_album(albumId):
+    """ Route to delete an album """
+    album = Albums.query.get(albumId)
+    albums_photos = AlbumsPhotos.query.filter_by(album_id=albumId).all()
+    print('delete@!#@!#@!#@!#!@#', albums_photos)
+
+
+    for album_photo in albums_photos:
+        db.session.delete(album_photo)
+
+    db.session.delete(album)
+    db.session.commit()
+
+    return 'Album successfully delete', 200
+
+
 @albums_routes.route('/', methods=['POST'])
 @login_required
 def create_album():
@@ -59,6 +77,7 @@ def create_album():
 
         return album.to_dict(), 200
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
 
 
 @albums_routes.route('/<int:albumId>', methods=['PUT'])

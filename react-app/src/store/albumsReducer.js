@@ -2,6 +2,7 @@ const LOAD_USERS_ALBUMS = 'session/LOAD_USER_ALBUMS'
 const GET_ALBUM_DETAILS = 'session/GET_ALBUM_DETAILS'
 const CREATE_ALBUM = 'session/CREATE_ALBUM'
 const EDIT_ALBUM = 'session/EDIT_ALBUM'
+const DELETE_ALBUM = 'session/DELETE_ALBUM'
 
 const loadUsersAlbumsAction = (userAlbums) => {
   return ({
@@ -28,6 +29,13 @@ const editAlbumAction = (updatedAlbum) => {
   return({
     type: EDIT_ALBUM,
     updatedAlbum
+  })
+}
+
+const deleteAlbumsAction = (albumId) => {
+  return({
+    type: DELETE_ALBUM,
+    albumId
   })
 }
 
@@ -74,25 +82,35 @@ export const createAlbumThunk = (newAlbum) => async (dispatch) => {
 }
 
 export const editAlbumThunk = (editedAlbum, albumId, ) => async (dispatch) => {
-    const res = await fetch(`/api/albums/${albumId}`, {
+    const response = await fetch(`/api/albums/${albumId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify(editedAlbum)
     })
 
-    if (res.ok) {
-        const updatedAlbum = await res.json();
+    if (response.ok) {
+        const updatedAlbum = await response.json();
         dispatch(editAlbumAction(updatedAlbum));
         return updatedAlbum;
-    } else if (res.status < 500) {
-        const data = await res.json();
+    } else if (response.status < 500) {
+        const data = await response.json();
         if (data.errors) {
             return data.errors;
         }
     } else {
         return ["An error occurred. Please try again."]
     }
-    return res;
+    return response;
+}
+
+export const deleteAlbumsThunk = (albumId) => async dispatch => {
+  const response = await fetch(`/api/albums/${albumId}`, {
+    method: 'DELETE',
+  })
+
+  if (response.ok) {
+    dispatch(deleteAlbumsAction(albumId))
+  }
 }
 
 
@@ -125,6 +143,11 @@ const albumsReducer = (state = initialState, action) => {
     case EDIT_ALBUM: {
       const newState = {...state};
       newState.singleAlbum[action.updatedAlbum.id] = action.updatedAlbum
+      return newState
+    }
+    case DELETE_ALBUM: {
+      const newState = {...state, singleAlbum: {}}
+      delete newState.usersAlbums[action.albumId]
       return newState
     }
     default:
