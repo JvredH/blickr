@@ -59,7 +59,7 @@ const AlbumsEditForm = ({albumPhotos, album}) => {
 
   return (
     <div className="album-modal-container">
-      <div>Create Album</div>
+      <div>Edit Album</div>
       <form className="album-form-container" onSubmit={handleSubmit}>
         <div className="errors">
           {errors?.length > 0 ? errors.map((error) => <div key={error}>{error}</div>) : null}
@@ -88,7 +88,7 @@ const AlbumsEditForm = ({albumPhotos, album}) => {
               </div>
             </label>
             <button className={`album-submit-btn ${pickedPhotos.length > 0 ? "" : "grayed-out"}`} type="submit" disabled={pickedPhotos.length === 0}>
-            Create Album
+            Submit Edit
             </button>
           </div>
       </form>
