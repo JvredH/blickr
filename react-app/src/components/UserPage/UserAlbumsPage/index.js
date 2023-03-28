@@ -4,17 +4,19 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import UserPageHeader from "..";
 import { getUsersAlbumsThunk } from "../../../store/albumsReducer";
+import OpenModalButton from '../../OpenModalButton'
 import RingLoader from "react-spinners/RingLoader";
+import AlbumsCreateForm from "../../AlbumsCreateForm";
+import {getUsersPhotosThunk} from '../../../store/photosReducer'
+
 
 const UserAlbumsPage = () => {
   const {userId} = useParams();
   const dispatch = useDispatch();
+  const sessionUser = useSelector(state => state.session.user)
   const allUserAlbums = useSelector(state => state.albums.usersAlbums)
   const [isLoaded, setIsLoaded] = useState(false);
   const albumsArr = Object.values(allUserAlbums);
-
-
-  console.log('user albums here fam', albumsArr)
 
   useEffect(() => {
     dispatch(getUsersAlbumsThunk(userId))
@@ -22,6 +24,11 @@ const UserAlbumsPage = () => {
 
       return () => setIsLoaded(false)
   }, [dispatch, userId])
+
+  useEffect(() => {
+    dispatch(getUsersPhotosThunk(userId))
+  }, [])
+
 
   let albumCards;
 
@@ -41,6 +48,7 @@ const UserAlbumsPage = () => {
     </div>)
     })
   }
+
 
 
   // if (!isLoaded) {
@@ -70,8 +78,17 @@ const UserAlbumsPage = () => {
     )}
 
     {isLoaded && albumsArr.length !== 0 ? (
-      <div className='photos-main-container'>
-        {albumCards}
+      <div>
+        {sessionUser && sessionUser.id === +userId ?
+          <OpenModalButton
+            className="new-album-button"
+            buttonText={<> <span className="new-album-text">Create an album</span></>}
+            modalComponent={<AlbumsCreateForm />}
+          />
+          : null }
+        <div className='photos-main-container'>
+          {albumCards}
+        </div>
       </div>
     ) : (
       <div>User has no albums yet.</div>
