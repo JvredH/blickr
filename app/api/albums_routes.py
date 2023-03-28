@@ -94,7 +94,7 @@ def edit_album(albumId):
     data = request.get_json()
 
     if form.validate_on_submit():
-        album.name = data['albums_name']
+        album.albums_name = data['albums_name']
         album.description = data['description']
         AlbumsPhotos.query.filter_by(album_id=albumId).delete()
 
