@@ -80,10 +80,10 @@ const AlbumsCreateForm = () => {
               )}
             <label>
               Pick Photos to Add to Album
-              <div className="photo-select-container">
+              <div className="mini-photo-container">
                   {usersPhotosArr.map((photo) => (
-                  <div key={photo.id} className={`photo-select-label ${isPicked(photo) ? "selected" : ""}`} onClick={() => handlePickedPhotos(photo)}>
-                    <img src={photo.url} alt="" className="select-photo-img" onError={e => {e.currentTarget.src=brokenImage}} />
+                  <div key={photo.id} className={`mini-photo-cards ${isPicked(photo) ? "selected" : ""}`} onClick={() => handlePickedPhotos(photo)}>
+                    <img src={photo.url} alt="" className="mini-img" onError={e => {e.currentTarget.src=brokenImage}} />
                   </div>
                   ))}
               </div>

@@ -82,7 +82,7 @@ const UserAlbumsPage = () => {
         {sessionUser && sessionUser.id === +userId ?
           <OpenModalButton
             className="new-album-button"
-            buttonText={<> <span className="new-album-text">Create an album</span></>}
+            buttonText={<> <span>Create an album</span></>}
             modalComponent={<AlbumsCreateForm />}
           />
           : null }
