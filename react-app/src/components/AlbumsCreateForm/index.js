@@ -62,7 +62,7 @@ const AlbumsCreateForm = () => {
     <div className="album-modal-container">
       <div>Create Album</div>
       <form className="album-form-container" onSubmit={handleSubmit}>
-        <div className="errors-map">
+        <div className="errors">
           {errors?.length > 0 ? errors.map((error) => <div key={error}>{error}</div>) : null}
         </div>
         <div className="edit-label-container">
@@ -76,7 +76,7 @@ const AlbumsCreateForm = () => {
               required />
             </label>
             {pickedPhotos.length === 0 && (
-                  <div className="errors-map">Must pick at least one photo.</div>
+                  <div className="errors">Must pick at least one photo.</div>
               )}
             <label>
               Pick Photos to Add to Album

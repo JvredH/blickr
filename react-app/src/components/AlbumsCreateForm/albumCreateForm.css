@@ -1,15 +1,23 @@
 .album-modal-container {
-  height: 555px;
+  height: 525px;
   width: 500px;
   padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
 }
 
 .album-form-container {
   display: flex;
   flex-direction: column;
-  width: 300px;
   height: 14vh;
+}
+
+.edit-label-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .album-form-container input {
@@ -32,6 +40,11 @@ display: flex;
 flex-direction: column;
 /* align-items: center; */
 margin: 5px;
+cursor: pointer;
+}
+
+.photo-select-label:hover {
+  opacity: 0.7;
 }
 
 .photo-select-label input {
@@ -65,5 +78,4 @@ margin: 10px auto;
 
 .grayed-out {
 background-color: gray;
-cursor: not-allowed;
 }
