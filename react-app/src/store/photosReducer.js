@@ -122,46 +122,46 @@ export const deletePhotoThunk = (photoId) => async dispatch => {
   }
 }
 
-// export const getUsersPhotosThunk = (userId) => async dispatch => {
-//   const response = await fetch(`/api/users/${userId}/photos`)
-
-//   if (response.ok) {
-//     const userPhotos = await response.json()
-//     console.log('usersphotos --->', userPhotos)
-//     dispatch(getUsersPhotosAction(userPhotos))
-//     // return userPhotos
-//   } else if (response.status < 500){
-//     const data = await response.json()
-//     if (data.errors) {
-//       return data.errors
-//     }
-//   } else {
-//     return ['An error occurred. Please try again.']
-//   }
-// }
-
 export const getUsersPhotosThunk = (userId) => async dispatch => {
-  try {
-    const response = await fetch(`/api/users/${userId}/photos`);
+  const response = await fetch(`/api/users/${userId}/photos`)
 
-    if (response.ok) {
-      const userPhotos = await response.json();
-
-      dispatch(getUsersPhotosAction(userPhotos));
-      return userPhotos;
-    } else if (response.status < 500){
-      const data = await response.json();
-      if (data.errors) {
-        return data.errors;
-      }
-    } else {
-      throw new Error('Server error occurred');
+  if (response.ok) {
+    const userPhotos = await response.json()
+    console.log('usersphotos --->', userPhotos)
+    dispatch(getUsersPhotosAction(userPhotos))
+    // return userPhotos
+  } else if (response.status < 500){
+    const data = await response.json()
+    if (data.errors) {
+      return data.errors
     }
-  } catch (error) {
-    console.error('Error fetching user photos:', error);
-    throw error;
+  } else {
+    return ['An error occurred. Please try again.']
   }
 }
+
+// export const getUsersPhotosThunk = (userId) => async dispatch => {
+//   try {
+//     const response = await fetch(`/api/users/${userId}/photos`);
+
+//     if (response.ok) {
+//       const userPhotos = await response.json();
+
+//       dispatch(getUsersPhotosAction(userPhotos));
+//       return userPhotos;
+//     } else if (response.status < 500){
+//       const data = await response.json();
+//       if (data.errors) {
+//         return data.errors;
+//       }
+//     } else {
+//       throw new Error('Server error occurred');
+//     }
+//   } catch (error) {
+//     console.error('Error fetching user photos:', error);
+//     throw error;
+//   }
+// }
 
 
 const normalize = (array) => {
