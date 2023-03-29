@@ -5,41 +5,48 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
 
+.modal-title {
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
 .album-form-container {
   display: flex;
   flex-direction: column;
-  height: 14vh;
+  height: 15vh;
 }
 
-.edit-label-container {
+.labels {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .album-form-container input {
+  border-radius: 5px;
   height: 20px;
   width: 345px;
-  border-radius: 10px;
-  padding: 5px;
   margin-bottom: 10px;
+  padding: 5px;
+}
+
+.pick {
+  text-decoration: underline;
 }
 
 .mini-photo-container {
 display: flex;
-flex-wrap: wrap;
 max-height: 250px;
-overflow-y: auto;
+flex-wrap: wrap;
 width: 360px;
+overflow-y: auto;
 }
 
 .mini-photo-cards {
 display: flex;
 flex-direction: column;
-/* align-items: center; */
 margin: 5px;
 cursor: pointer;
 }
@@ -59,24 +66,25 @@ object-fit: cover;
 border-radius: 5px;
 }
 
+.album-submit-btn {
+height: 35px;
+width: 350px;
+font-weight: bold;
+margin-top: 7px;
+background-color: rgb(48, 149, 238);
+font-size: 14px;
+border: none;
+border-radius: 5px;
+color: white;
+cursor: pointer;
+}
+
 .mini-photo-cards.selected {
 outline: 3px solid red;
 border-radius: 5px;
 }
 
-.album-submit-btn {
-height: 35px;
-width: 350px;
-color: white;
-font-size: 15px;
-font-weight: bold;
-background-color: #128FDC;
-border: none;
-border-radius: 10px;
-cursor: pointer;
-margin: 10px auto;
-}
 
-.grayed-out {
+.disable {
 background-color: gray;
 }

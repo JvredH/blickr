@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, NavLink } from "react-router-dom";
+import { useParams, NavLink, useHistory } from "react-router-dom";
 import { getUsersPhotosThunk } from "../../../store/photosReducer";
 import UserPageHeader from "..";
 // import {getUsersDataThunk} from "../../../store/usersDataReducer";
@@ -8,6 +8,7 @@ import './userPhotos.css'
 import RingLoader from "react-spinners/RingLoader";
 
 const UserPhotosPage = () => {
+  const history = useHistory()
   const dispatch = useDispatch()
   const { userId } = useParams();
   const [isLoaded, setIsLoaded] = useState(false)
@@ -21,6 +22,8 @@ const UserPhotosPage = () => {
   useEffect (() => {
     dispatch(getUsersPhotosThunk(userId))
       .then(() => setIsLoaded(true))
+      .catch(() => history.push('/error'))
+
       // .then(() => dispatch(getUsersDataThunk(userId)))
 
 
@@ -47,19 +50,7 @@ const UserPhotosPage = () => {
 
   return (
     <>
-      {/* <div className='banner-photo-container'>
-        <div className='banner-content'>
-          <div className='user-profile-photo'></div>
-          <div>
-            <div className='users-name'>{`${userData?.first_name} ${userData?.last_name}`}</div>
-            <div className='users-email'>{userData?.email}</div>
-          </div>
-        </div>
-      </div> */}
       <UserPageHeader userPhotos={userPhotos} userId={userId}/>
-
-      {/* <UserNav userId={userId}/> */}
-
 
       {!isLoaded && (
             <div className='loading'>
@@ -84,7 +75,11 @@ const UserPhotosPage = () => {
             {userPhotoCards}
           </div>
         ) : (
-          <div>user has no photos yet</div>
+          <div className='nada'>
+            <div className='nada-content'>
+              <h1>No photos yet.</h1>
+            </div>
+          </div>
       )}
     </>
   )

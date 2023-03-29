@@ -59,12 +59,12 @@ const AlbumsEditForm = ({albumPhotos, album}) => {
 
   return (
     <div className="album-modal-container">
-      <div>Edit Album</div>
+      <div className='modal-title'>Edit Album</div>
       <form className="album-form-container" onSubmit={handleSubmit}>
         <div className="errors">
           {errors?.length > 0 ? errors.map((error) => <div key={error}>{error}</div>) : null}
         </div>
-        <div className="edit-label-container">
+        <div className="labels">
             <label>
               Name
               <input
@@ -77,8 +77,8 @@ const AlbumsEditForm = ({albumPhotos, album}) => {
             {pickedPhotos.length === 0 && (
                   <div className="errors">Must pick at least one photo.</div>
               )}
-            <label>
-              Pick Photos to Add to Album
+            <label className='pick'>
+              Pick Photos to Add or Remove
               <div className="mini-photo-container">
                   {usersPhotosArr.map((photo) => (
                   <div key={photo.id} className={`mini-photo-cards ${isPicked(photo) ? "selected" : ""}`} onClick={() => handlePickedPhotos(photo)}>
@@ -87,7 +87,7 @@ const AlbumsEditForm = ({albumPhotos, album}) => {
                   ))}
               </div>
             </label>
-            <button className={`album-submit-btn ${pickedPhotos.length > 0 ? "" : "grayed-out"}`} type="submit" disabled={pickedPhotos.length === 0}>
+            <button className={`album-submit-btn ${pickedPhotos.length > 0 ? "" : "disable"}`} type="submit" disabled={pickedPhotos.length === 0}>
             Submit Edit
             </button>
           </div>

@@ -39,14 +39,38 @@ const deleteAlbumsAction = (albumId) => {
   })
 }
 
-export const getUsersAlbumsThunk = (userId) => async dispatch => {
-  const response = await fetch(`/api/users/${userId}/albums`)
-  if (response.ok) {
-    const userAlbums = await response.json()
+// export const getUsersAlbumsThunk = (userId) => async dispatch => {
+//   const response = await fetch(`/api/users/${userId}/albums`)
+//   if (response.ok) {
+//     const userAlbums = await response.json()
+//     dispatch(loadUsersAlbumsAction(userAlbums));
+//     return userAlbums
+//   } else if (response.status < 500){
+//     const data = await response.json()
+//     if (data.errors) {
+//       return data.errors
+//     }
+//   } else {
+//     return ['An error occurred. Please try again.']
+//   }
+// }
+
+
+export const getUsersAlbumsThunk = (userId) => async (dispatch) => {
+  try {
+    const response = await fetch(`/api/users/${userId}/albums`);
+    if (!response.ok) {
+      const data = await response.json();
+      throw new Error(data.errors || 'An error occurred. Please try again.');
+    }
+    const userAlbums = await response.json();
     dispatch(loadUsersAlbumsAction(userAlbums));
-    return userAlbums
+    return userAlbums;
+  } catch (error) {
+    console.error(error);
+    throw new Error(error.message);
   }
-}
+};
 
 export const getOneAlbumDetailsThunk = (albumId) => async dispatch => {
   const response = await fetch(`/api/albums/${albumId}`)

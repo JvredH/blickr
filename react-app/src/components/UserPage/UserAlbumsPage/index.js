@@ -1,5 +1,5 @@
 // import UserNav from "../UserNav";
-import { useParams, NavLink } from "react-router-dom";
+import { useParams, NavLink, useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import UserPageHeader from "..";
@@ -12,6 +12,7 @@ import './userAlbumPage.css'
 
 
 const UserAlbumsPage = () => {
+  const history = useHistory()
   const {userId} = useParams();
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user)
@@ -22,6 +23,7 @@ const UserAlbumsPage = () => {
   useEffect(() => {
     dispatch(getUsersAlbumsThunk(userId))
       .then(() => setIsLoaded(true))
+      .catch(() => history.push('/errors'))
 
       return () => setIsLoaded(false)
   }, [dispatch, userId])
@@ -50,11 +52,6 @@ const UserAlbumsPage = () => {
     })
   }
 
-
-
-  // if (!isLoaded) {
-  //   return <div>Loading...</div>;
-  // }
 
   return (
   <>
@@ -94,7 +91,9 @@ const UserAlbumsPage = () => {
         </div>
       </div>
     ) : (
-      <div>User has no albums yet.</div>
+      <div className='nada'>
+        <h1>No albums yet.</h1>
+      </div>
     )}
   </>
   )

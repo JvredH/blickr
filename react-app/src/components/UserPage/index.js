@@ -28,8 +28,8 @@ const UserPageHeader = ({userId}) => {
     </div>
     <div className='user-nav-container'>
     <div className='usernav-navlinks'>
-      <div><NavLink className='user-nav-navlink' to={`/user/${userId}/photos/`} activeClassName='active-nav-link' >Photostream</NavLink></div>
-      <div className='albums'><NavLink className='user-nav-navlink' to={`/user/${userId}/albums/`} activeClassName='active-nav-link' >Albums</NavLink></div>
+      <div><NavLink className='user-nav-navlink' to={`/user/${userId}/photos`} activeClassName='active-nav-link' >Photostream</NavLink></div>
+      <div className='albums'><NavLink className='user-nav-navlink' to={`/user/${userId}/albums`} activeClassName='active-nav-link' >Albums</NavLink></div>
     </div>
     </div>
   </div>
