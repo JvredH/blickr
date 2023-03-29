@@ -122,16 +122,47 @@ export const deletePhotoThunk = (photoId) => async dispatch => {
   }
 }
 
-export const getUsersPhotosThunk = (userId) => async dispatch => {
-  const response = await fetch(`/api/users/${userId}/photos`)
+// export const getUsersPhotosThunk = (userId) => async dispatch => {
+//   const response = await fetch(`/api/users/${userId}/photos`)
 
-  if (response.ok) {
-    const userPhotos = await response.json()
-    console.log('usersphotos --->', userPhotos)
-    dispatch(getUsersPhotosAction(userPhotos))
-    // return userPhotos
+//   if (response.ok) {
+//     const userPhotos = await response.json()
+//     console.log('usersphotos --->', userPhotos)
+//     dispatch(getUsersPhotosAction(userPhotos))
+//     // return userPhotos
+//   } else if (response.status < 500){
+//     const data = await response.json()
+//     if (data.errors) {
+//       return data.errors
+//     }
+//   } else {
+//     return ['An error occurred. Please try again.']
+//   }
+// }
+
+export const getUsersPhotosThunk = (userId) => async dispatch => {
+  try {
+    const response = await fetch(`/api/users/${userId}/photos`);
+
+    if (response.ok) {
+      const userPhotos = await response.json();
+
+      dispatch(getUsersPhotosAction(userPhotos));
+      return userPhotos;
+    } else if (response.status < 500){
+      const data = await response.json();
+      if (data.errors) {
+        return data.errors;
+      }
+    } else {
+      throw new Error('Server error occurred');
+    }
+  } catch (error) {
+    console.error('Error fetching user photos:', error);
+    throw error;
   }
 }
+
 
 const normalize = (array) => {
   const obj = {};
@@ -146,18 +177,15 @@ export default function photosReducer(state = initialState, action) {
     case LOAD_PHOTOS: {
       const newState = {allPhotos: {}, onePhoto: {}, usersPhotos: {}};
       newState.allPhotos = normalize(action.photos.allPhotos)
-      // console.log('newState ------->', newState)
       return newState;
     }
     case ONE_PHOTO: {
       const newState = {...state}
       newState.onePhoto = action.photo
-      // console.log('newState after one photo ----> ', newState)
       return newState
     }
     case CREATE_PHOTO: {
       const newState = {...state}
-      // console.log(action.photo)
       newState.allPhotos[action.newPhoto.id] = action.newPhoto
       newState.onePhoto = action.newPhoto
       return newState
@@ -170,13 +198,11 @@ export default function photosReducer(state = initialState, action) {
     }
     case DELETE_PHOTO: {
       const newState = {...state, onePhoto: {}}
-      // console.log('delete thunker hit')
       delete newState.allPhotos[action.photoId]
       return newState
     }
     case GET_USER_PHOTOS: {
       const newState = {...state}
-      console.log('user photos payload --->', action.userPhotos)
       newState.usersPhotos = normalize(action.userPhotos.photos)
       return newState
     }
