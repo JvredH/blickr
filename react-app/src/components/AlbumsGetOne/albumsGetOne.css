@@ -22,3 +22,42 @@ margin-bottom: 5px
   font-size: 30px;
   font-weight: bold;
 }
+
+.edit-album-btn {
+  margin-top: 10px;
+  color: white;
+  background-color: rgb(48, 149, 238);
+  cursor: pointer;
+  margin-right: 5px;
+  padding: 3px 5px 3px 5px;
+  border: none;
+  border-radius: 4px;
+  transition: .5s ease;
+}
+
+.delete-album-btn {
+  margin-top: 10px;
+  color: white;
+  background-color: rgb(235, 129, 129);
+  cursor: pointer;
+  padding: 3px 5px 3px 5px;
+  border: none;
+  border-radius: 4px;
+  transition: .5s ease;
+}
+
+.delete-album-btn:hover, .edit-album-btn:hover {
+  background-color: grey;
+}
+
+.back-to-alb {
+  position: absolute;
+  top: 60px;
+  left: 20px;
+}
+
+.back-to-alb-link {
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+}

@@ -1,6 +1,6 @@
 .album-modal-container {
   height: 425px;
-  width: 500px;
+  width: 375px;
   padding: 30px;
   display: flex;
   flex-direction: column;
@@ -22,7 +22,7 @@
 
 .album-form-container input {
   height: 20px;
-  width: 485px;
+  width: 345px;
   border-radius: 10px;
   padding: 5px;
   margin-bottom: 10px;
@@ -33,6 +33,7 @@ display: flex;
 flex-wrap: wrap;
 max-height: 250px;
 overflow-y: auto;
+width: 360px;
 }
 
 .mini-photo-cards {

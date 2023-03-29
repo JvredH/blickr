@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, NavLink } from "react-router-dom";
 import { getOneAlbumDetailsThunk } from "../../store/albumsReducer";
 import PhotoCards from "../PhotoCards";
 import RingLoader from "react-spinners/RingLoader";
@@ -8,6 +8,7 @@ import './albumsGetOne.css'
 import OpenModalButton from "../OpenModalButton";
 import AlbumsEditForm from "../AlbumsEdit";
 import AlbumDelete from "../AlbumsDelete";
+import { getUsersPhotosThunk } from "../../store/photosReducer";
 
 
 
@@ -24,6 +25,9 @@ const AlbumsGetOne = () => {
     .then(() => setIsLoaded(true))
   }, [dispatch, albumId])
 
+  useEffect(() => {
+    dispatch(getUsersPhotosThunk(album?.user_id))
+  },[])
 
   let photoCard;
 
@@ -61,6 +65,7 @@ const AlbumsGetOne = () => {
         <div>
           <div className='album-page-header'>
             <div className='album-details'>
+              <div className='back-to-alb'><NavLink className='back-to-alb-link' to={`/user/${album?.user?.id}/albums`}>back to albums</NavLink></div>
               <div className='album-title'>{album?.name}</div>
               <div className='photo-count'>{`${photosArr.length} photos in this album`}</div>
               <div className='album-creator'>{`Album Created By ${album?.user?.first_name} ${album?.user?.last_name}`}</div>
@@ -68,14 +73,14 @@ const AlbumsGetOne = () => {
                 {sessionUser && album?.user_id === sessionUser.id ?
                 <div>
                   <OpenModalButton
-                    className="new-album-button"
-                    buttonText={<> <span className="new-album-text">Edit</span></>}
+                    className="edit-album-btn"
+                    buttonText='Edit'
                     modalComponent={<AlbumsEditForm albumPhotos={photosArr} album={album}/>}
                   />
                   <OpenModalButton
                   buttonText='Delete'
                   modalComponent={<AlbumDelete album={album} />}
-                  className='delete-btn'
+                  className='delete-album-btn'
                   />
                 </div>
                   : null }

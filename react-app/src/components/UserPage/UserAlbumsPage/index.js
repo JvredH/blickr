@@ -8,6 +8,7 @@ import OpenModalButton from '../../OpenModalButton'
 import RingLoader from "react-spinners/RingLoader";
 import AlbumsCreateForm from "../../AlbumsCreateForm";
 import {getUsersPhotosThunk} from '../../../store/photosReducer'
+import './userAlbumPage.css'
 
 
 const UserAlbumsPage = () => {
@@ -80,11 +81,13 @@ const UserAlbumsPage = () => {
     {isLoaded && albumsArr.length !== 0 ? (
       <div>
         {sessionUser && sessionUser.id === +userId ?
-          <OpenModalButton
-            className="new-album-button"
-            buttonText={<> <span>Create an album</span></>}
-            modalComponent={<AlbumsCreateForm />}
-          />
+          <div className='add-album-btn-container'>
+            <OpenModalButton
+              className="new-album-button"
+              buttonText={<> <span>Create an album</span></>}
+              modalComponent={<AlbumsCreateForm />}
+            />
+          </div>
           : null }
         <div className='photos-main-container'>
           {albumCards}

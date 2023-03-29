@@ -46,11 +46,11 @@ function App() {
           <Route path='/albums/:albumId' exact>
             <AlbumsGetOne />
           </Route>
-          <Route path='/user/:userId/photos'>
-            <UserPhotosPage />
-          </Route>
-          <Route path='/user/:userId/albums'>
+          <Route path='/user/:userId/albums' exact>
             <UserAlbumsPage />
+          </Route>
+          <Route path='/user/:userId/photos' exact>
+            <UserPhotosPage />
           </Route>
           <Route path="/login" >
             <LoginFormPage />
