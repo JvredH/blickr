@@ -11,3 +11,9 @@
 .desc-input {
   overflow: auto;
 }
+
+
+#upload-btn {
+  padding-left: 0;
+  padding-top: 8px;
+}

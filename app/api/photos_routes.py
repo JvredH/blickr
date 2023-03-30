@@ -3,6 +3,9 @@ from ..models.photos import Photo
 from flask_login import login_required, current_user
 from ..forms import CreatePhotoForm, CreateCommentForm
 from sqlalchemy import and_
+from app.aws_s3 import (
+    upload_file_to_s3, allowed_file, get_unique_filename
+)
 
 from ..models import Photo, db, Comment, Tags, PhotosTags
 from datetime import datetime, date
@@ -51,11 +54,33 @@ def create_photo():
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
+
+@photos_routes.route('/upload', methods=['POST'])
+@login_required
+def upload_image():
+    if "image" not in request.files:
+        return {"errors": "image required"}, 400
+
+    image = request.files["image"]
+
+    if not allowed_file(image.filename):
+        return {"errors": "file type not permitted"}, 400
+
+    image.filename = get_unique_filename(image.filename)
+
+    upload = upload_file_to_s3(image)
+
+    if "url" not in upload:
+        return upload, 400
+
+    url = upload["url"]
+    return {"url": url}
+
+
 @photos_routes.route('/<int:photoId>')
 def one_photo(photoId):
     """ Route to return and display one photo """
     photo = Photo.query.get(photoId)
-    print('PHOTO @@@@@@@@@@@#######', photo)
     if not photo:
         return 'no photo found', 404
 
@@ -108,8 +133,6 @@ def get_comments(photoId):
 
     # if not comments:
     #     return 'No comments for this photo', 404
-
-    print('back end comments !#@$@!@!#!@##@!@!#', list(comments))
 
     return [comment.to_dict() for comment in comments], 200
 
