@@ -27,7 +27,7 @@ const AlbumsGetOne = () => {
 
   useEffect(() => {
     dispatch(getUsersPhotosThunk(album?.user_id))
-  },[])
+  },[dispatch, album])
 
   let photoCard;
 
