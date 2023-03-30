@@ -3,6 +3,9 @@ from ..models.photos import Photo
 from flask_login import login_required, current_user
 from ..forms import CreatePhotoForm, CreateCommentForm
 from sqlalchemy import and_
+from app.aws_s3 import (
+    upload_file_to_s3, allowed_file, get_unique_filename
+)
 
 from ..models import Photo, db, Comment, Tags, PhotosTags
 from datetime import datetime, date
@@ -50,6 +53,36 @@ def create_photo():
         return photo.to_dict(), 200
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+@photos_routes.route('/upload', methods=['POST'])
+@login_required
+def upload_image():
+    if "image" not in request.files:
+        return {"errors": "image required"}, 400
+
+    image = request.files["image"]
+
+    if not allowed_file(image.filename):
+        return {"errors": "file type not permitted"}, 400
+
+    image.filename = get_unique_filename(image.filename)
+
+    upload = upload_file_to_s3(image)
+
+    if "url" not in upload:
+        # if the dictionary doesn't have a url key
+        # it means that there was an error when we tried to upload
+        # so we send back that error message
+        return upload, 400
+
+    url = upload["url"]
+    # flask_login allows us to get the current user from the request
+    # new_image = Image(user=current_user, url=url)
+    # db.session.add(new_image)
+    # db.session.commit()
+    return {"url": url}
+
 
 @photos_routes.route('/<int:photoId>')
 def one_photo(photoId):
