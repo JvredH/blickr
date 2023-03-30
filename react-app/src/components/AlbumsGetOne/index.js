@@ -65,7 +65,7 @@ const AlbumsGetOne = () => {
         <div>
           <div className='album-page-header'>
             <div className='album-details'>
-              <div className='back-to-alb'><NavLink className='back-to-alb-link' to={`/user/${album?.user?.id}/albums`}>back to albums</NavLink></div>
+              <div className='back-to-alb'><NavLink className='back-to-alb-link' to={`/user/${album?.user_id}/albums`}>back to albums</NavLink></div>
               <div className='album-title'>{album?.name}</div>
               <div className='photo-count'>{`${photosArr.length} photos in this album`}</div>
               <div className='album-creator'>{`Album Created By ${album?.user?.first_name} ${album?.user?.last_name}`}</div>
