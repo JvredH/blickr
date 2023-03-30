@@ -14,11 +14,11 @@ const EditPhotoForm = () => {
     const [url, setUrl] = useState(photo.url || localStorage.getItem('editPhotoFormUrl'));
     const [name, setName] = useState(photo.name || localStorage.getItem('editPhotoFormName'));
     const [description, setDescription] = useState(photo.description || localStorage.getItem('editPhotoFormDescription'));
-    // const [date, setDate] = useState(new Date(photo.date).toISOString().split('T')[0]);
     const [date, setDate] = useState(photo.date ? new Date(photo.date).toISOString().split('T')[0] : localStorage.getItem('editPhotoFormDate') ?? new Date().toISOString().split('T')[0]);
     const [errors, setErrors] = useState([])
-
-    // console.log('date --->', date)
+    const [image, setImage] = useState(null);
+    const [imageLoading, setImageLoading] = useState(false);
+    let uploadImage;
 
     useEffect(() => {
       localStorage.setItem('editPhotoFormUrl', url);
@@ -31,18 +31,45 @@ const EditPhotoForm = () => {
       e.preventDefault();
       setErrors([]);
 
+
+      console.log('url before everything ', url)
+      if (image) {
+        const imageData = new FormData();
+        imageData.append('image', image);
+
+        setImageLoading(true);
+
+        const res = await fetch('/api/photos/upload', {
+          method: 'POST',
+          body: imageData
+        });
+
+        if (res.ok) {
+          const newImage = await res.json()
+          uploadImage = newImage.url
+          console.log('right at reassignment', uploadImage)
+        } else {
+          setImageLoading(false);
+          setErrors('error with image upload')
+        }
+      }
+
+      if (!uploadImage) {
+        uploadImage = url;
+      }
+
+      console.log('after', uploadImage)
+
       const convertedDate = new Date(date).toISOString().slice(0, 10);
 
       const editFormData = {
         id: photoId,
-        url,
+        url: uploadImage,
         name,
         description,
         date: convertedDate,
         user_id: sessionUser.id
       }
-
-      // console.log('photo.id ====> ', +photoId)
 
       const data = await dispatch(editPhotoThunk(editFormData, +photoId))
       if (Array.isArray(data)) {
@@ -50,6 +77,11 @@ const EditPhotoForm = () => {
       } else {
         history.push(`/photos/${+photoId}`)
       }
+    }
+
+    const updateImage = e => {
+      const file = e.target.files[0];
+      setImage(file)
     }
 
 
@@ -66,14 +98,19 @@ const EditPhotoForm = () => {
                   <div className='errors' key={idx}>{error}</div>
                 ))}
             </div>
-            <label>
-              Url:
-              <input
-              type='url'
-              value={url}
-              onChange={e => setUrl(e.target.value)}
-              />
-            </label>
+            {imageLoading && <span>Loading...</span>}
+            {!imageLoading && (
+              <label>
+                Change photo? Upload Below:
+                <input
+                type='file'
+                accept='image/*'
+                // value={url}
+                onChange={updateImage}
+                id='upload-btn'
+                />
+              </label>
+            )}
             <label>
               Name:
               <input

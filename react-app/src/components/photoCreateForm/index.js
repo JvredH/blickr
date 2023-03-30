@@ -8,7 +8,7 @@ const CreatePhotoForm = () => {
   const dispatch = useDispatch();
   const history = useHistory()
   const sessionUser = useSelector(state => state.session.user);
-  const [url, setUrl] = useState('');
+  // const [url, setUrl] = useState('');
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
@@ -30,13 +30,12 @@ const CreatePhotoForm = () => {
       method: 'POST',
       body: imageData
     })
-    console.log('res', res)
 
     if (res.ok) {
-      const image = await res.json();
+      const newImage = await res.json();
       setImageLoading(false);
-      uploadUrl = image.url
-      console.log('freshly created from s3', image)
+      uploadUrl = newImage.url
+      // console.log('freshly created from s3', image)
     } else {
       setImageLoading(false);
       setErrors('error with image upload')
@@ -82,14 +81,16 @@ const CreatePhotoForm = () => {
                 ))}
             </div>
             <label>
-              {/* Url: */}
-              <input
-              type='file'
-              accept="image/*"
-              // value={url}
-              onChange={updateImage}
-              placeholder='Url'
-              />
+              Upload Here:
+              {imageLoading && <span>Loading...</span>}
+              {!imageLoading && (
+                <input
+                id='upload-btn'
+                type='file'
+                accept="image/*"
+                onChange={updateImage}
+                />
+              )}
             </label>
             <label>
               {/* Name: */}

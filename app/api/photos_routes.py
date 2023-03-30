@@ -71,16 +71,9 @@ def upload_image():
     upload = upload_file_to_s3(image)
 
     if "url" not in upload:
-        # if the dictionary doesn't have a url key
-        # it means that there was an error when we tried to upload
-        # so we send back that error message
         return upload, 400
 
     url = upload["url"]
-    # flask_login allows us to get the current user from the request
-    # new_image = Image(user=current_user, url=url)
-    # db.session.add(new_image)
-    # db.session.commit()
     return {"url": url}
 
 
@@ -88,7 +81,6 @@ def upload_image():
 def one_photo(photoId):
     """ Route to return and display one photo """
     photo = Photo.query.get(photoId)
-    print('PHOTO @@@@@@@@@@@#######', photo)
     if not photo:
         return 'no photo found', 404
 
@@ -141,8 +133,6 @@ def get_comments(photoId):
 
     # if not comments:
     #     return 'No comments for this photo', 404
-
-    print('back end comments !#@$@!@!#!@##@!@!#', list(comments))
 
     return [comment.to_dict() for comment in comments], 200
 
