@@ -37,10 +37,10 @@ You can view a photos detail page by clicking one of the photos in the feed. Aft
 ![image](https://user-images.githubusercontent.com/114182094/223020349-d5f5f582-1903-4e12-8536-b15dfba7ab3c.png)
 
 ## To Do List for Future Features
-- [ ] Tags
-- [ ] Albums
+- [x] Tags
+- [x] Albums
+- [x] AWS implementation
 - [ ] Search Bar
-- [ ] AWS implementation
 
 ## To Get Started Locally
 1. Clone this repository (only this branch)
