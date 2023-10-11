@@ -40,9 +40,10 @@ function Navigation({ isLoaded }){
 		blickrPath ='/photos'
 	}
 
-
+	const isSplashOrLogin = location.pathname === '/' || location.pathname === '/login' || location.pathname === '/signup'
+	console.log('isSplashOrLogin ===>',isSplashOrLogin)
 	return (
-		<div className='nav-container'>
+		<div className={`${isSplashOrLogin ? 'nav-splash-container' : 'nav-container'}`}>
 			<div className='nav-left'>
 				<NavLink exact to={blickrPath} className='nav-link' id='name'>blickr</NavLink>
 				{youBtn}
