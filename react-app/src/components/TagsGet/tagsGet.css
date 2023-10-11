@@ -18,10 +18,6 @@
   font-size: 11px;
   align-self: center;
   cursor: pointer;
-
-  /* visibility: visible;
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out; */
 }
 
 .no-tags {
@@ -29,6 +25,3 @@
   margin-top: 5px;
 }
 
-/* .tag-delete:hover {
-  opacity: 1;
-} */

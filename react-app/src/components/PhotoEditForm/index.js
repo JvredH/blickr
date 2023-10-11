@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { editPhotoThunk } from "../../store/photosReducer";
-// import PhotoDelete from "../PhotoDelete";
 import { useParams } from "react-router-dom";
 
 const EditPhotoForm = () => {
@@ -31,8 +30,6 @@ const EditPhotoForm = () => {
       e.preventDefault();
       setErrors([]);
 
-
-      console.log('url before everything ', url)
       if (image) {
         const imageData = new FormData();
         imageData.append('image', image);
@@ -47,7 +44,6 @@ const EditPhotoForm = () => {
         if (res.ok) {
           const newImage = await res.json()
           uploadImage = newImage.url
-          console.log('right at reassignment', uploadImage)
         } else {
           setImageLoading(false);
           setErrors('error with image upload')
@@ -58,7 +54,6 @@ const EditPhotoForm = () => {
         uploadImage = url;
       }
 
-      console.log('after', uploadImage)
 
       const convertedDate = new Date(date).toISOString().slice(0, 10);
 
@@ -142,94 +137,3 @@ const EditPhotoForm = () => {
 }
 
 export default EditPhotoForm;
-
-// const EditPhotoForm = () => {
-//   const dispatch = useDispatch();
-//   const history = useHistory();
-//   const photo = useSelector(state => state.photos.onePhoto)
-//   const sessionUser = useSelector(state => state.session.user);
-//   const [url, setUrl] = useState(photo.url);
-//   const [name, setName] = useState(photo.name);
-//   const [description, setDescription] = useState(photo.description);
-//   // const [date, setDate] = useState(new Date(photo.date).toISOString().split('T')[0]);
-//   const [date, setDate] = useState(new Date(photo.date ?? new Date()).toISOString().split('T')[0]);
-//   const [errors, setErrors] = useState([])
-
-//   console.log('date --->', date)
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setErrors([]);
-
-//     const convertedDate = new Date(date).toISOString().slice(0, 10);
-
-//     const editFormData = {
-//       id: photo.id,
-//       url,
-//       name,
-//       description,
-//       date: convertedDate,
-//       user_id: sessionUser.id
-//     }
-
-//     const data = await dispatch(editPhotoThunk(editFormData, photo.id))
-//     if (Array.isArray(data)) {
-//       setErrors(data)
-//     } else {
-//       history.push(`/photos/${photo.id}`)
-//     }
-//   }
-
-
-// return (
-//   <div className='outer-form'>
-//     <div className='form-container create'>
-//       <div>
-//         <div className='create-form-header'>Edit Photo</div>
-//       </div>
-//       <div>
-//         <form className='actual-form' onSubmit={handleSubmit}>
-//           <div>
-//               {errors.map((error, idx) => (
-//                 <div key={idx}>{error}</div>
-//               ))}
-//           </div>
-//           <label>
-//             Url:
-//             <input
-//             type='url'
-//             value={url}
-//             onChange={e => setUrl(e.target.value)}
-//             />
-//           </label>
-//           <label>
-//             Name:
-//             <input
-//             type='text'
-//             value={name}
-//             onChange={e => setName(e.target.value)}/>
-//           </label>
-//           <label>
-//             Description:
-//             <input
-//             type='text'
-//             value={description}
-//             onChange={e => setDescription(e.target.value)}/>
-//           </label>
-//           <label>
-//             Date Taken:
-//             <input
-//             type='date'
-//             value={date}
-//             onChange={e => setDate(e.target.value) }
-//             max={new Date().toISOString().split('T')[0]}/>
-//           </label>
-//           <button type='submit'>Edit Photo!</button>
-//         </form>
-//       </div>
-//     </div>
-//   </div>
-// )
-// }
-
-// export default EditPhotoForm;

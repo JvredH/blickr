@@ -37,7 +37,6 @@ class Photo(db.Model):
       'user_id': self.user_id,
 
       'user': {'id': self.user.id, 'first_name': self.user.first_name, 'last_name': self.user.last_name, 'email': self.user.email},
-      # 'tags': [tag.to_dict() for tag in self.tags]
     }
 
 

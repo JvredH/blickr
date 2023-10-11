@@ -55,23 +55,6 @@ export const getUsersAlbumsThunk = (userId) => async dispatch => {
   }
 }
 
-
-// export const getUsersAlbumsThunk = (userId) => async (dispatch) => {
-//   try {
-//     const response = await fetch(`/api/users/${userId}/albums`);
-//     if (!response.ok) {
-//       const data = await response.json();
-//       throw new Error(data.errors || 'An error occurred. Please try again.');
-//     }
-//     const userAlbums = await response.json();
-//     dispatch(loadUsersAlbumsAction(userAlbums));
-//     return userAlbums;
-//   } catch (error) {
-//     console.error(error);
-//     throw new Error(error.message);
-//   }
-// };
-
 export const getOneAlbumDetailsThunk = (albumId) => async dispatch => {
   const response = await fetch(`/api/albums/${albumId}`)
 

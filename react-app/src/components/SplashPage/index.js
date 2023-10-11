@@ -40,19 +40,3 @@ const SplashPage = () => {
 }
 
 export default SplashPage;
-
-
-// const SplashPage = () => {
-//   return (
-//     <div className='splash-container'>
-//       <h1>Find your inspiration.</h1>
-//       <h3>Join the blickr community, home to tens of billions of photos and 2 million groups</h3>
-//       <NavLink to='/signup'>
-//         <button>Start for free</button>
-//       </NavLink>
-//       <NavLink to='/photos'>
-//         <button>Explore</button>
-//       </NavLink>
-//     </div>
-//   )
-// }

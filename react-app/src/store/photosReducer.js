@@ -53,7 +53,6 @@ export const getAllPhotosThunk = () => async dispatch => {
 
   if (response.ok) {
     const photos = await response.json();
-    // console.log('all photos ------ >', photos)
     dispatch(loadPhotosAction(photos))
   }
 }
@@ -63,7 +62,6 @@ export const getOnePhotoThunk = (photoId) => async dispatch => {
 
   if (response.ok) {
     const photo = await response.json();
-    // console.log('one photo ------ > ', photo)
     dispatch(loadOnePhotoAction(photo))
     return photo
   }
@@ -78,7 +76,6 @@ export const createPhotoThunk = (formData) => async dispatch => {
 
   if (response.ok) {
     const newPhoto = await response.json()
-    // console.log('newPhoto -----> ', newPhoto)
     dispatch(createPhotoAction(newPhoto))
     return newPhoto
   } else if (response.status < 500){
@@ -129,7 +126,6 @@ export const getUsersPhotosThunk = (userId) => async dispatch => {
     const userPhotos = await response.json()
     console.log('usersphotos --->', userPhotos)
     dispatch(getUsersPhotosAction(userPhotos))
-    // return userPhotos
   } else if (response.status < 500){
     const data = await response.json()
     if (data.errors) {
@@ -139,29 +135,6 @@ export const getUsersPhotosThunk = (userId) => async dispatch => {
     return ['An error occurred. Please try again.']
   }
 }
-
-// export const getUsersPhotosThunk = (userId) => async dispatch => {
-//   try {
-//     const response = await fetch(`/api/users/${userId}/photos`);
-
-//     if (response.ok) {
-//       const userPhotos = await response.json();
-
-//       dispatch(getUsersPhotosAction(userPhotos));
-//       return userPhotos;
-//     } else if (response.status < 500){
-//       const data = await response.json();
-//       if (data.errors) {
-//         return data.errors;
-//       }
-//     } else {
-//       throw new Error('Server error occurred');
-//     }
-//   } catch (error) {
-//     console.error('Error fetching user photos:', error);
-//     throw error;
-//   }
-// }
 
 
 const normalize = (array) => {

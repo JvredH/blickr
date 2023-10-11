@@ -35,7 +35,6 @@ def edit_comment(commentId):
 
     db.session.commit()
     return commentToEdit.to_dict(), 200
-  # return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 @comments_routes.route('/<int:commentId>', methods=['DELETE'])

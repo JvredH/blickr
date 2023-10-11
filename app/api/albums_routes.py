@@ -2,7 +2,6 @@ from flask import Blueprint, jsonify, session, request
 from flask_login import login_required, current_user
 
 from ..models import Albums, AlbumsPhotos, db, Photo
-# from ..forms import CreateAlbumForm
 from app.forms.create_album import CreateAlbumForm
 
 albums_routes = Blueprint('albums', __name__)

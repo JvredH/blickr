@@ -131,9 +131,6 @@ def get_comments(photoId):
     """ Route to return comments of a photo """
     comments = Comment.query.filter(Comment.photo_id == photoId).all()
 
-    # if not comments:
-    #     return 'No comments for this photo', 404
-
     return [comment.to_dict() for comment in comments], 200
 
 
@@ -157,7 +154,6 @@ def add_comment(photoId):
         db.session.add(newComment)
         db.session.commit()
         return newComment.to_dict(), 200
-    print(form.errors)
     return {'errors': validation_errors_to_error_messages(form.errors)}, 450
 
 
@@ -204,9 +200,7 @@ def add_tags(photoId):
 @photos_routes.route('/<int:photoId>/tags/<int:tagId>', methods=['DELETE'])
 @login_required
 def photo_tag_delete(photoId, tagId):
-    # photo_tag_entry = PhotosTags.query.filter(and_(PhotosTags.tag_id == tagId, PhotosTags.photo_id == photoId)).first()
     photo_tag_entry = PhotosTags.query.filter_by(tag_id=tagId, photo_id=photoId).first()
-    print('!@##@!$@!#@!#@!%$@#$@!#@!$@!#@!#231',photo_tag_entry)
     anyRemainingTags = PhotosTags.query.filter(PhotosTags.tag_id == tagId).all()
 
     tagTable = Tags.query.get(tagId)

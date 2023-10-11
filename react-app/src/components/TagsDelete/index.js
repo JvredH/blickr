@@ -4,8 +4,6 @@ import { deletePhotoTagThunk, getPhotoTagsThunk } from '../../store/tagsReducer'
 const TagsDelete = ({photo, tag}) => {
   const dispatch = useDispatch();
 
-  // console.log(tag.Id)
-
   const handleClick = async (e) => {
     e.preventDefault();
 
