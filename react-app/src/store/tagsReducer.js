@@ -54,7 +54,6 @@ export const deletePhotoTagThunk = (photoId, tagId) => async dispatch => {
   })
 
   if (response.ok) {
-    // const tagToDelete = await response.json();
     dispatch(deletePhotoTagAction(tagId))
 
   }
@@ -78,7 +77,6 @@ const tagsReducer = (state = initialState, action) => {
     case ADD_TAG: {
       const newState = {...state};
       newState.onePhotoTags[action.newTag.id] = action.newTag
-      // console.log('newState from tags reducer -->',newState)
       return newState
     }
     case DELETE_TAG: {

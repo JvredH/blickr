@@ -36,7 +36,6 @@ function LoginFormPage() {
               ))}
             </div>
             <label>
-              {/* Email */}
               <input
                 type="text"
                 value={email}
@@ -46,7 +45,6 @@ function LoginFormPage() {
               />
             </label>
             <label>
-              {/* Password */}
               <input
                 type="password"
                 value={password}

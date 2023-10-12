@@ -36,7 +36,6 @@ export const loadCommentsThunk = (photoId) => async dispatch => {
 
   if (response.ok) {
     const comments = await response.json()
-    // console.log('comments from thunk ----> ', comments)
     dispatch(loadCommentsAction(comments))
     return comments
   }
@@ -50,7 +49,6 @@ export const addCommentThunk = (newComment, photoId) => async dispatch => {
   })
   if (response.ok){
     const createdComment = await response.json()
-    // console.log('CREATED COMMENT THUNK ---->', createdComment)
     dispatch(addCommentAction(createdComment))
     return createdComment
   } else if (response.status < 500){

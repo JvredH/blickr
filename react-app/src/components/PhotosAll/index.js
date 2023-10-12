@@ -13,7 +13,6 @@ const AllPhotos = () => {
   let photos = Object.values(allPhotosObj)
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // const [photos, setPhotos] = useState(allPhotos)
 
   useEffect (() => {
     dispatch(getAllPhotosThunk())

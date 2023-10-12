@@ -37,9 +37,6 @@ const AddCommentForm = ({photo}) => {
       setComment('')
 }
 
-// useEffect(() => {
-//   dispatch(loadCommentsThunk(photo.id))
-// }, [dispatch, photo.id])
 
   return (
     <div>
@@ -68,18 +65,3 @@ const AddCommentForm = ({photo}) => {
 export default AddCommentForm;
 
 
-    // const data = await dispatch(addCommentThunk(newComment, +photo.id))
-    // if (Array.isArray(data)) {
-    //   setErrors(data)
-    // } else {
-    //   history.push(`/photos/${photo.id}`)
-    // }
-
-    // return (
-    //   <div>
-    //     <form onSubmit={handleSubmit}>
-    //       <input type='textarea' placeHolder='Add a comment!' value={comment} onChange={(e) => setComment(e.target.value)}/>
-    //       <button type='submit'>Add Comment</button>
-    //     </form>
-    //   </div>
-    // );

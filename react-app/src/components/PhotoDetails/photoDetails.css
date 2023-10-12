@@ -26,7 +26,6 @@ div {
 }
 
 .top-half {
-  /* border: blue solid 1px; */
   background-color: #212124;
   height: 80vh;
   width: 100%;
@@ -60,13 +59,11 @@ div {
 
 .desc-area {
   display: flex;
-  /* width: 100%; */
   border-bottom: 1px solid grey;
 }
 
 .right-half-desc {
   width: 100%;
-  /* margin-left: 5px; */
 }
 
 .name{
@@ -76,14 +73,12 @@ div {
 
 .photo-name {
   font-size: 14px;
-  /* font-weight: 600; */
   margin-top: 7px;
 }
 
 .photo-desc {
   font-size: 12px;
   margin-top: 6px;
-  /* border-bottom: solid 1px grey; */
   margin-bottom: 10px;
   line-height: 15px;
 }
@@ -105,9 +100,6 @@ div {
 
 .taken-on {
   font-size: 16px;
-  /* margin-bottom: 15px; */
-  /* border-bottom: 1px solid grey; */
-  /* padding-bottom: 5px; */
 }
 
 .crud-btns {
@@ -148,7 +140,6 @@ textarea:focus {
 }
 
 .fa-solid {
-  /* border: 1px black solid; */
   padding: 7px;
   border-radius: 30px;
   margin-right: 10px;
@@ -170,6 +161,4 @@ textarea:focus {
   border-radius: 4px;
 }
 
-/* :focus {
-  outline: none;
-} */
+

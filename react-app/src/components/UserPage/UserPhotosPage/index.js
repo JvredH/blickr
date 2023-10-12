@@ -15,9 +15,6 @@ const UserPhotosPage = () => {
   const [isLoaded, setIsLoaded] = useState(false)
   const userPhotos = useSelector(state => state.photos.usersPhotos)
   const userPhotosArr = Object.values(userPhotos)
-  // const userData = useSelector(state => state.usersData)
-
-  // console.log('USER DATA',userData)
 
 
   useEffect (() => {
@@ -25,15 +22,9 @@ const UserPhotosPage = () => {
       .then(() => setIsLoaded(true))
       .catch(() => history.push('/error'))
 
-      // .then(() => dispatch(getUsersDataThunk(userId)))
-
-
       return () => setIsLoaded(false)
   }, [dispatch, userId])
 
-  // if (userPhotosArr.length === 0) {
-  //   return <div>user has no photos yet</div>
-  // }
 
   const userPhotoCards = userPhotosArr.map(photo => {
     return (
@@ -88,11 +79,3 @@ const UserPhotosPage = () => {
 
 export default UserPhotosPage;
 
-
-      {/* {isLoaded && userPhotos && (
-        <>
-          <div className='photos-main-container'>
-            {userPhotoCards}
-          </div>
-        </> ? : <div>user has no photos yet</div>
-      )} */}

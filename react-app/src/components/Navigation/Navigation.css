@@ -40,7 +40,7 @@
   justify-content: space-between;
   align-items: center;
   height: 50px;
-  position: fixed; /* switch this to fixed to get full header background color*/
+  position: fixed;
   top: 0px;
   left: 0px;
   right: 0px;
@@ -54,7 +54,7 @@
   justify-content: space-between;
   align-items: center;
   height: 50px;
-  position: sticky; /* switch this to fixed to get full header background color*/
+  position: sticky; 
   top: 0px;
   left: 0px;
   right: 0px;

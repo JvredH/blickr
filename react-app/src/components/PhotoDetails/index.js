@@ -22,10 +22,7 @@ const PhotoDetails = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   const [photo, setPhoto] = useState({});
-  // const sessionUser = useSelector
-  // const comments = useSelector(state => state.comments.photoComments)
   const sessionUser = useSelector(state => state.session.user);
-  // const photoTags = useSelector(state => state.tags.onePhotoTags);
 
   const date = photo?.date
   const dateObj = new Date(date)
@@ -46,7 +43,6 @@ const PhotoDetails = () => {
   }, [dispatch, photoId]);
 
   if (!photo) return <Error />
-  // console.log(photo.date)
 
   return (
     <>
@@ -76,10 +72,6 @@ const PhotoDetails = () => {
           <div className='bottom-half'>
             <div className='left-side'>
               <div className='desc-area'>
-                {/* <div className='left-half-desc'>
-
-                  <i className="fa-solid fa-user"/>
-                </div> */}
                 <div className='right-half-desc'>
                   <div>
                     <div className='name'>{`${photo?.user?.first_name} ${photo?.user?.last_name}`}</div>
