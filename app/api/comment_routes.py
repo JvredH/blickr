@@ -22,13 +22,13 @@ def validation_errors_to_error_messages(validation_errors):
 @login_required
 def edit_comment(commentId):
   form = EditCommentForm()
+  # csrf token from cookie added to form to prevent csrf attack
   form['csrf_token'].data = request.cookies['csrf_token']
   data = form.data
   commentToEdit = Comment.query.get(commentId)
-  print('commentToEdit @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@----->', commentToEdit)
 
   if not commentToEdit:
-      return 'comment not found', 404
+    return 'comment not found', 404
 
   if form.validate_on_submit():
     commentToEdit.comment = data['comment']

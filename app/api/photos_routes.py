@@ -28,22 +28,25 @@ def validation_errors_to_error_messages(validation_errors):
 def all_photos():
   """ Route to return and display all the photos """
   all_photos = Photo.query.all() # returns back an array of the data
-  print('all_photos from back end @@@@@@@@@',all_photos)
   return {'allPhotos': [photo.to_dict() for photo in all_photos]}, 200
+
 
 @photos_routes.route('/', methods=['POST'])
 @login_required
 def create_photo():
     """ Route to create a new photo in database and return new photo data """
     form = CreatePhotoForm()
+    # csrf token from cookie added to form to prevent csrf attack
     form['csrf_token'].data = request.cookies['csrf_token']
     data = form.data
 
+    # validate data from req is good
     if form.validate_on_submit():
         photo = Photo(
             url = data['url'],
             name = data['name'],
             description = data['description'],
+            # method used to store data in db with proper format
             date = datetime.strptime(str(data['date']), '%Y-%m-%d').date(),
             user_id = data['user_id']
         )
@@ -58,21 +61,29 @@ def create_photo():
 @photos_routes.route('/upload', methods=['POST'])
 @login_required
 def upload_image():
+    """ Route used to upload images to AWS bucket """
+    # checks if req contains file named image
     if "image" not in request.files:
         return {"errors": "image required"}, 400
 
+    # if image is present, store in image variable
     image = request.files["image"]
 
+    # checks file if file type is allowed
     if not allowed_file(image.filename):
         return {"errors": "file type not permitted"}, 400
 
+    # function used to get a unique file name to prevent duplicates
     image.filename = get_unique_filename(image.filename)
 
+    # upload file to bucket
     upload = upload_file_to_s3(image)
 
+    # if url not present, an error has occurred from bucket
     if "url" not in upload:
         return upload, 400
 
+    # return url as json back to bucket
     url = upload["url"]
     return {"url": url}
 
@@ -92,6 +103,8 @@ def one_photo(photoId):
 def edit_photo(photoId):
     """ Route to return and edit a photo """
     form = CreatePhotoForm()
+
+    # csrf token from cookie added to form to prevent csrf attack
     form['csrf_token'].data = request.cookies['csrf_token']
     data = form.data
     photo = Photo.query.get(photoId)
@@ -114,7 +127,6 @@ def edit_photo(photoId):
 @photos_routes.route('/<int:photoId>', methods=['DELETE'])
 @login_required
 def delete_photo(photoId):
-    print('ROUTE HIT !@#@!%!@$!@#!')
     """ Route to delete a photo """
     photo = Photo.query.get(photoId)
 
@@ -139,11 +151,13 @@ def get_comments(photoId):
 def add_comment(photoId):
     """ Route to create and return comment of a photo """
     form = CreateCommentForm()
+
+    # csrf token from cookie added to form to prevent csrf attack
     form['csrf_token'].data = request.cookies['csrf_token']
     data = form.data
 
+    # create new comment obj if data within is valid
     if form.validate_on_submit():
-        # date_str = data['date'].strftime('%Y-%m-%d')
         newComment = Comment(
             comment = data['comment'],
             date = datetime.strptime(str(data['date']), '%Y-%m-%d').date(),
@@ -159,6 +173,7 @@ def add_comment(photoId):
 
 @photos_routes.route('/<int:photoId>/tags')
 def get_tags(photoId):
+    """ Route to get a photos tags """
     photo = Photo.query.get(photoId)
 
     if not photo:
@@ -170,11 +185,16 @@ def get_tags(photoId):
 @photos_routes.route('/<int:photoId>/tags', methods=['POST'])
 @login_required
 def add_tags(photoId):
+    """ Route to create new tags for photos """
     photo = Photo.query.get(photoId)
+
+    # get tag from req body
     new_tag_name = request.json.get('tag_name').lower()
 
+    # check if tag already exists
     existing_tag = Tags.query.filter_by(tag_name=new_tag_name).first()
 
+    # if it does, create new entry in PhotoTags table
     if existing_tag:
         photo_tag = PhotosTags(photo_id=photo.id, tag_id=existing_tag.id)
         db.session.add(photo_tag)
@@ -182,6 +202,7 @@ def add_tags(photoId):
         db.session.commit()
         return existing_tag.to_dict(), 200
 
+    # if it does not, create a new tag entry in Tag table & PhotosTags table
     else:
         new_tag = Tags(tag_name=new_tag_name)
         db.session.add(new_tag)
@@ -200,13 +221,20 @@ def add_tags(photoId):
 @photos_routes.route('/<int:photoId>/tags/<int:tagId>', methods=['DELETE'])
 @login_required
 def photo_tag_delete(photoId, tagId):
+    """ Route to delete tags from photos """
+    # query PhotosTags table for entry
     photo_tag_entry = PhotosTags.query.filter_by(tag_id=tagId, photo_id=photoId).first()
+
+    # query PhotosTags table to see if any entry exists
     anyRemainingTags = PhotosTags.query.filter(PhotosTags.tag_id == tagId).all()
 
+    # query tag Tags table to retrieve tag with ID
     tagTable = Tags.query.get(tagId)
+
 
     db.session.delete(photo_tag_entry)
 
+    # if no more entries remain, delete tag entirely
     if not anyRemainingTags:
         db.session.delete(tagTable)
 

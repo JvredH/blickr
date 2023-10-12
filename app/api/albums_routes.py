@@ -34,7 +34,6 @@ def delete_album(albumId):
     """ Route to delete an album """
     album = Albums.query.get(albumId)
     albums_photos = AlbumsPhotos.query.filter_by(album_id=albumId).all()
-    print('delete@!#@!#@!#@!#!@#', albums_photos)
 
 
     for album_photo in albums_photos:
@@ -51,10 +50,11 @@ def delete_album(albumId):
 def create_album():
     """ Route to create albums """
     form = CreateAlbumForm()
+    # csrf token from cookie added to form to prevent csrf attack
     form['csrf_token'].data = request.cookies['csrf_token']
     data = request.get_json()
-    print('DATA !@#!@$$!#@!#@!#!@#',data)
 
+    # checks if data from req is valid, if so, new instance of album is created and added to db
     if form.validate_on_submit():
         album = Albums(
             albums_name = data['albums_name'],
@@ -64,9 +64,10 @@ def create_album():
 
         db.session.add(album)
 
+        # loop through all photos in req body and checks if it exists in db
         for photo_id in data['photo_ids']:
             photo = Photo.query.get(photo_id)
-
+            # if photo is valid, add to join table
             if photo:
                 album_photos = AlbumsPhotos(album_id=album.id, photo_id=photo_id)
                 album.photos.append(photo)
@@ -89,16 +90,21 @@ def edit_album(albumId):
         return 'album cannot be found', 404
 
     form = CreateAlbumForm()
+    # csrf token from cookie added to form to prevent csrf attack
     form['csrf_token'].data = request.cookies['csrf_token']
     data = request.get_json()
 
+    # validate if json data from request is valid based on form rules
     if form.validate_on_submit():
         album.albums_name = data['albums_name']
         album.description = data['description']
-        AlbumsPhotos.query.filter_by(album_id=albumId).delete()
 
+        # delete the album
+        AlbumsPhotos.query.filter_by(album_id=albumId).delete()
+        # clear all photos associated with album
         album.photos.clear()
 
+        # associates album with new photos based on photo id from req
         for photo_id in data['photo_ids']:
             photo = Photo.query.get(photo_id)
 
